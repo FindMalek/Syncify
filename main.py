@@ -56,8 +56,10 @@ def RefreshPlaylist(Spotipy_Session):
         Pl_url = Result["external_urls"]["spotify"]
 
         nPl.append(
-            {Pl_Name : {"Image": Pl_image,
-                                    "Links":
+            {
+                Pl_Name : {
+                    "Image": Pl_image,
+                    "Links":
                                         {"URL": Pl_url,
                                                 "ID": Pl_id
                                         }
