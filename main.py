@@ -60,12 +60,13 @@ def RefreshPlaylist(Spotipy_Session):
                 Pl_Name : {
                     "Image": Pl_image,
                     "Links":
-                                        {"URL": Pl_url,
-                                                "ID": Pl_id
-                                        }
-                        }
+                    {
+                        "URL": Pl_url,
+                        "ID": Pl_id
                     }
-                )
+                        }
+            }
+        )
         
     Playlists["Playlists"] = nPl
     with open(setting_path, 'w') as outfile:
