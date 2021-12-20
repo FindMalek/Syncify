@@ -1,12 +1,9 @@
 {
-    "Savify Session": {
-        "SPOTIPY_CLIENT_ID": "",
-        "SPOTIPY_CLIENT_SECRET": ""
-    },
+    "System Os": "",
     "Settings": {
         "Quality": "BEST",
         "Format": "MP3",
-        "Locations": {
+        "Paths": {
             "Downloads": "",
             "Playlist": "",
             "Outdated Playlists": ""

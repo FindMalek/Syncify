@@ -1,76 +1,51 @@
+#importing Savify
 from savify import Savify
 from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
+
+#importing Spotipy
 import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
+
+#importing systemFunctions
 import logging, json, shutil, os, fnmatch
 from datetime import datetime
+from systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
+from systemFunctions import convertPath
+
+#Importing playlistHandeling
+from playlistHandeling import getPlaylistInformation, SpotipySession
 
 
-setting_path = "Resources\Settings.json"
-playlist_path = "Resources\Playlist links.json"
+setting_path = "Settings.json"
+playlist_path = "Playlist links.json"
 
-#read any file
-def ReadFILE(path, filetype):
-    if(filetype.lower() == "txt"):
-        with open(path, "r") as file:
-            return file.readlines()
-    elif(filetype.lower() == "json"):
-        with open(path, 'r') as file:
-            return json.load(file)
-
-#Set outdated path
-def SetPaths():
-    Settings = ReadFILE(setting_path, "json")
-    outdatedPL_path = Settings["Settings"]["Locations"]["Playlist"] + "\\Outdated Playlists"
-    Settings["Settings"]["Locations"]["Outdated Playlists"] = outdatedPL_path
-    with open(setting_path, 'w') as outfile:
-        json.dump(Settings, outfile, indent=4)
-
-#Opens Savify Client
-def SavifyClient(option=""):
-    SavifySession = ReadFILE(setting_path, "json")["Savify Session"]
-    if (option == "Client ID"):
-        return SavifySession["SPOTIPY_CLIENT_ID"]
+#Updates and Add Playlists from the Playlist JSON file
+def RefreshPlaylistFile(Spotipy_Session):
+    SyncifySettings = getDataJSON(setting_path, "Settings")
     
-    elif (option == "Client Secret"):
-        return SavifySession["SPOTIPY_CLIENT_SECRET"]
+    playlistFile = ReadFILE(playlist_path)
+    playlist_list = []
+    for link in playlistFile["Playlists links"]:
+        playlist_ID = getPlaylistInformation("ID", link)
+        playlist_Name = getPlaylistInformation("Name", link)
+        playlist_Image = getPlaylistInformation("Image URL", link)
+        playlist_URL = getPlaylistInformation("Playlist URL", link)
 
-#Log in Spotipy_Session
-def SpotipySession():
-    client_credentials_manager = SpotifyClientCredentials()#Spotify Client
-    return spotipy.Spotify(client_credentials_manager = client_credentials_manager)
-
-#Playlist adder/ refresh / update
-def RefreshPlaylist(Spotipy_Session):
-    SyncifySettings = ReadFILE(setting_path, "json")["Settings"]
-    Pl = ReadFILE(playlist_path, "json")
-    
-    Playlists = ReadFILE(setting_path, "json")
-    nPl = []
-    for element in Pl["Playlists links"]:
-        Pl_id = "spotify:playlist:" + element[element.find("playlist/") + len("playlist/"):]
-        Result = Spotipy_Session.playlist(Pl_id)
-        Pl_Name = Result["name"]
-        Pl_image = Result["images"][0]["url"]
-        Pl_url = Result["external_urls"]["spotify"]
-
-        nPl.append(
+        playlist_list.append(
             {
-                Pl_Name : {
-                    "Image": Pl_image,
-                    "Links":
-                    {
-                        "URL": Pl_url,
-                        "ID": Pl_id
-                    }
+                playlist_Name : {
+                    "Image": playlist_Image,
+                    "Links": {
+                        "URL": playlist_URL,
+                        "ID": playlist_ID
                         }
+                    }
             }
         )
-        
-    Playlists["Playlists"] = nPl
-    with open(setting_path, 'w') as outfile:
-        json.dump(Playlists, outfile, indent=4)
+    
+    Playlists = ReadFILE(setting_path)
+    Playlists["Playlists"] = playlist_list
+    WriteJSON(setting_path, Playlists, 'w')
 
 #Move songs from Music to Newly added music <Coming soon>
 def NewlyMusic():
@@ -79,29 +54,33 @@ def NewlyMusic():
 #Downloader
 def Downloads():
     #Get time before downloading the music and then compare every
-    # music that its created time is later than that time and move it to
-    #newly downloaded music
-    Playlists = ReadFILE(setting_path, "json")["Playlists"]
-    SyncifySettings = ReadFILE(setting_path, "json")["Settings"]
-    counter = 0
+    #music that its created time is later than that time and move it to
+    #newly downloaded music  <Coming Soon>
+    
+    Playlists = getDataJSON(setting_path, "Playlists")
+    downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
+    
+    counterPlaylist = 0
     for element in Playlists:
-        print("\n\nDownloading from :", str(list(element.keys())[0]))
-        Quality = DownloadSettings(Savify)[0]
+        playlist_Name = str(list(element.keys())[0])
+        print("\n\nDownloading from :", playlist_Name)
+        
+        quality_type = DownloadSettings(Savify)[0]
         download_format = DownloadSettings(Savify)[1]
-        PlaylistName = SyncifySettings["Locations"]["Downloads"]
-        Session = Savify(quality=Quality,
+        
+        Session = Savify(quality=quality_type,
                          download_format=download_format,
-                         path_holder=PathHolder(downloads_path=PlaylistName))
-        Session.download(Playlists[counter][str(list(element.keys())[0])]["Links"]["URL"])
-        counter += 1
+                         path_holder=PathHolder(downloads_path=downloadPath))
+        Session.download(Playlists[counterPlaylist][playlist_Name]["Links"]["URL"])
+        counterPlaylist += 1
     print("\n>Download is finished! All songs are downloaded.")
 
-#Get the name of the playlist and the discription
-def InfoPlaylist(link, Spotipy_Session):
-    idPL = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
-    Result = Spotipy_Session.playlist(idPL)
+#print the name of the playlist and the discription
+def printPlaylist(link, Spotipy_Session):
+    playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
+    Result = Spotipy_Session.playlist(playlist_ID)
 
-    print("\n-"+ Result["name"]
+    print("\n\t"+ Result["name"]
             + "\n.Description: " + Result["description"]
             + "\n.Number of tracks: " + str(len(Result["tracks"]["items"]))
             + "\n.Owner: " + Result["owner"]["display_name"]
@@ -109,13 +88,12 @@ def InfoPlaylist(link, Spotipy_Session):
 
 #Add playlist link in the json file playlist links.json
 def AddLink(list):
-    playlistLinks = ReadFILE(playlist_path, "json")
+    playlistLinks = ReadFILE(playlist_path)
     for link in list:
         if(link in playlistLinks["Playlists links"]) == False:
             playlistLinks["Playlists links"].append(link)
 
-    with open(playlist_path, 'w') as f:
-        json.dump(playlistLinks, f, indent=4)
+    WriteJSON(playlist_path, playlistLinks, 'w')
 
 #Add playlists to the settings.json "Playlists"
 def AddPlaylist(Spotipy_Session):
@@ -124,7 +102,7 @@ def AddPlaylist(Spotipy_Session):
         link = input("\n.Enter playlist link: ")
         if(link != ""):
             #Print the name of the playlist and the description
-            InfoPlaylist(link, Spotipy_Session)
+            printPlaylist(link, Spotipy_Session)
             listPL.append(link[:link.find("?")])
         else:
             print(">No playlist have been entered!")
@@ -132,21 +110,20 @@ def AddPlaylist(Spotipy_Session):
 
 #Create the playlist
 def CreatePlaylist(order):
-    SavifySettings = ReadFILE(setting_path, "json")["Settings"]
-    playlistLocation = SavifySettings["Locations"]["Playlist"]
+    SavifySettings = getDataJSON(setting_path, "Settings")
+    playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
     
-    pl_name = playlistLocation + "\\" + order["Name"] + ".m3u"
-    with open(pl_name, "w") as playlistm3a:
+    fileName = convertPath(playlistLocation + "-" + order["Name"] + ".m3u")
+    with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n")
         for line in order["Order"]:
             playlistm3a.write(line + "\n")
     
-        
 #Manage .m3u playlists
-def PlaylistManager(Spotipy_Session, pl_id):
-    SavifySettings = ReadFILE(setting_path, "json")["Settings"]
-    downloadLocation = SavifySettings["Locations"]["Downloads"]
-    playlist = Spotipy_Session.playlist(pl_id)
+def PlaylistManager(Spotipy_Session, playlist_id):
+    SavifySettings = getDataJSON(setting_path, "Settings")
+    downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
+    playlist = Spotipy_Session.playlist(playlist_id)
     
     pl_order = {"Name": playlist["name"], "Order": []}
     for i in range(0, len(playlist["tracks"]["items"])):
@@ -155,9 +132,9 @@ def PlaylistManager(Spotipy_Session, pl_id):
           
 #Store the old playlists in a folder with a date in it
 def PlaylistMove():
-    SavifySettings = ReadFILE(setting_path, "json")["Settings"]
-    plsLocation = SavifySettings["Locations"]["Playlist"]
-    folderLocation = SavifySettings["Locations"]["Outdated Playlists"] + "\\" +datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")
+    SavifySettings = ReadFILE(setting_path)["Settings"]
+    plsLocation = SavifySettings["Paths"]["Playlist"]
+    folderLocation = SavifySettings["Paths"]["Outdated Playlists"] + "\\" +datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")
 
     for file in os.listdir(plsLocation):
         if((file == "desktop.ini") or (file == "Outdated Playlists")) == False:
@@ -170,7 +147,7 @@ def PlaylistMove():
 #updating the playlists
 def PlaylistUpdate():  
     PlaylistMove()  
-    SavifyPlaylists = ReadFILE(setting_path, "json")["Playlists"]
+    SavifyPlaylists = ReadFILE(setting_path)["Playlists"]
     pl_ids = []
     for playlist in SavifyPlaylists:
         for key in playlist.keys():
@@ -183,40 +160,33 @@ def PlaylistUpdate():
 
 #Print the load text, load the savify client
 def Load(Spotipy_Session):
-    loadText, lines = ReadFILE("Resources\loadtext.txt", "txt"), ""
+    loadText, lines = ReadFILE("loadtext.txt"), ""
     for line in loadText[:18]:
         lines += line
     print(lines)
 
-    SavifyFile = ReadFILE(setting_path, "json")
-    playlists = ReadFILE(playlist_path, "json")
+    SavifyFile = ReadFILE(setting_path)
 
-    if(SavifyFile["Savify Session"]["SPOTIPY_CLIENT_ID"] == "") or (SavifyFile["Savify Session"]["SPOTIPY_CLIENT_SECRET"] == ""):
-        clientID = input(".Enter your Spotify Client ID: ")
-        clientSecret = input(".Enter your Spotify Client Secret: ")
-
-        SavifyFile["Savify Session"]["SPOTIPY_CLIENT_ID"] = clientID
-        SavifyFile["Savify Session"]["SPOTIPY_CLIENT_SECRET"] = clientSecret 
-
-    if(SavifyFile["Settings"]["Locations"]["Downloads"] == ""):
+    if(SavifyFile["Settings"]["Paths"]["Downloads"] == ""):
         downloadPath = input(".Enter a path where to store downloaded music: ")
-        SavifyFile["Settings"]["Locations"]["Downloads"] = downloadPath
+        SavifyFile["Settings"]["Paths"]["Downloads"] = downloadPath
 
-    if(SavifyFile["Settings"]["Locations"]["Playlist"] == ""):
+    if(SavifyFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
-        SavifyFile["Settings"]["Locations"]["Playlist"] = playlistPath
+        SavifyFile["Settings"]["Paths"]["Playlist"] = playlistPath
 
     if(SavifyFile["Playlists"] == []):
         AddPlaylist(Spotipy_Session)
+        
+    SavifyFile = SetOutdatedPath(SavifyFile)
     
     with open(setting_path, 'w') as outfile:
         json.dump(SavifyFile, outfile, indent=4)
     
-    SetPaths()
 
 #Settings
 def DownloadSettings(Savify):
-    SavifySettings = ReadFILE(setting_path, "json")["Settings"]
+    SavifySettings = ReadFILE(setting_path)["Settings"]
     
     if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
     elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
@@ -238,35 +208,30 @@ def DownloadSettings(Savify):
     return qual, download_format
 
 #Select which action the user wants
-def SelectCommand(Spotipy_Session):
-    lines, loadText = "", ReadFILE("Resources\loadtext.txt", "txt")
-    for line in loadText[19:]:
-        lines += line
-    print(lines)
+def SelectCommand(Spotipy_Session): 
+    printLoad(0, 19)
+    
     answer = input("Choose the number of the command: ")
 
     if(answer == "1"):
         AddPlaylist(Spotipy_Session)
 
     elif(answer == "2"):
-        RefreshPlaylist(Spotipy_Session)
+        RefreshPlaylistFile(Spotipy_Session)
         Downloads()  
         PlaylistUpdate()
 
     elif(answer == "3"):
-        SavifyPlaylists = ReadFILE(setting_path, "json")["Playlists"]
+        SavifyPlaylists = ReadFILE(setting_path)["Playlists"]
         for playlist in SavifyPlaylists:
-            InfoPlaylist(playlist[list(playlist.keys())[0]]["Links"]["URL"], Spotipy_Session)
+            printPlaylist(playlist[list(playlist.keys())[0]]["Links"]["URL"], Spotipy_Session)
             pause = input("Next playlist (Press <Enter>)")
 
     elif(answer == "4"):
-        lines = ""
-        for line in loadText[29:38]:
-            lines += line
-        print(lines)
+        printLoad(29, 38)
 
         ans4 = input("Choose the number of the command: ")
-        Settings = ReadFILE(setting_path, "json")
+        Settings = ReadFILE(setting_path)
         if(ans4 == "1"):
             print("\nCurrently the download quality is: " + Settings["Settings"]["Quality"] + "\nAvailable qualities: BEST, 320K, 256K, 192K, 128K, 96K, 32K, WORST")
             quality, qualities = "", ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
@@ -288,22 +253,22 @@ def SelectCommand(Spotipy_Session):
                 json.dump(Settings, file, indent=4)
 
         elif(ans4 == "3"):
-            if(Settings["Locations"]["Downloads"] == ""):
+            if(Settings["Paths"]["Downloads"] == ""):
                 downloadPath = input("\nCurrently the download path is empty, please enter a path: ")
-                Settings["Locations"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+                Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
             else:
-                downloadPath = input("\nCurrently the download path is: ", (Settings["Locations"]["Downloads"].replace("\\", r"\"")).replace('"', ''), "\nNew download path (Press <Enter>, If you don't wish to change the path): ")
-                Settings["Locations"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+                downloadPath = input("\nCurrently the download path is: ", (Settings["Paths"]["Downloads"].replace("\\", r"\"")).replace('"', ''), "\nNew download path (Press <Enter>, If you don't wish to change the path): ")
+                Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
             with open(setting_path, 'w') as file:
                 json.dump(Settings, file, indent=4)
 
         elif(ans4 == "4"):
-            if(Settings["Locations"]["Playlist"] == ""):
+            if(Settings["Paths"]["Playlist"] == ""):
                 PlaylistPath = input("\nCurrently the Playlist path is empty, please enter a path: ")
-                Settings["Locations"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
+                Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
             else:
-                PlaylistPath = input("\nCurrently the Playlist path is: ", (Settings["Locations"]["Playlist"].replace("\\", r"\"")).replace('"', ''), "\nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
-                Settings["Locations"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
+                PlaylistPath = input("\nCurrently the Playlist path is: ", (Settings["Paths"]["Playlist"].replace("\\", r"\"")).replace('"', ''), "\nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
+                Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
             with open(setting_path, 'w') as file:
                 json.dump(Settings, file, indent=4)
 
