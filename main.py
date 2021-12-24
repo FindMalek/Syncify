@@ -9,11 +9,11 @@ import spotipy
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
 from datetime import datetime
-from systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
-from systemFunctions import convertPath
+from Resources.systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
+from Resources.systemFunctions import convertPath, SetOutdatedPath, isFilePlaylist
 
 #Importing playlistHandeling
-from playlistHandeling import getPlaylistInformation, SpotipySession
+from Resources.playlistHandeling import getPlaylistInformation, SpotipySession
 
 
 setting_path = "Settings.json"
@@ -26,10 +26,10 @@ def RefreshPlaylistFile(Spotipy_Session):
     playlistFile = ReadFILE(playlist_path)
     playlist_list = []
     for link in playlistFile["Playlists links"]:
-        playlist_ID = getPlaylistInformation("ID", link)
-        playlist_Name = getPlaylistInformation("Name", link)
-        playlist_Image = getPlaylistInformation("Image URL", link)
-        playlist_URL = getPlaylistInformation("Playlist URL", link)
+        playlist_ID = getPlaylistInformation(Spotipy_Session, "ID", link)
+        playlist_Name = getPlaylistInformation(Spotipy_Session, "Name", link, playlist_ID)
+        playlist_Image = getPlaylistInformation(Spotipy_Session, "Image URL", link, playlist_ID)
+        playlist_URL = getPlaylistInformation(Spotipy_Session, "Playlist URL", link, playlist_ID)
 
         playlist_list.append(
             {
@@ -113,7 +113,7 @@ def CreatePlaylist(order):
     SavifySettings = getDataJSON(setting_path, "Settings")
     playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
     
-    fileName = convertPath(playlistLocation + "-" + order["Name"] + ".m3u")
+    fileName = convertPath(playlistLocation + "à@à" + order["Name"] + ".m3u")
     with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n")
         for line in order["Order"]:
@@ -127,63 +127,65 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     
     pl_order = {"Name": playlist["name"], "Order": []}
     for i in range(0, len(playlist["tracks"]["items"])):
-        pl_order["Order"].append(str(downloadLocation)+ "\\" + playlist["tracks"]["items"][i]["track"]["artists"][0]["name"] + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] + '.' + SavifySettings["Format"].lower())
+        songLocation = convertPath(str(downloadLocation)+ "à@à"
+                                 + playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
+                                 + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] +
+                                 '.' + SavifySettings["Format"].lower())
+        pl_order["Order"].append(songLocation)
     return pl_order     
           
 #Store the old playlists in a folder with a date in it
-def PlaylistMove():
-    SavifySettings = ReadFILE(setting_path)["Settings"]
-    plsLocation = SavifySettings["Paths"]["Playlist"]
-    folderLocation = SavifySettings["Paths"]["Outdated Playlists"] + "\\" +datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")
-
-    for file in os.listdir(plsLocation):
-        if((file == "desktop.ini") or (file == "Outdated Playlists")) == False:
-            try:
-                os.makedirs(folderLocation)    
-            except FileExistsError:
-                pass 
-            shutil.move(plsLocation + "\\" + file, folderLocation + "\\" + file)
+def movePlaylists():
+    playlist_path = getDataJSON(setting_path, "Settings/Paths/Playlist")
+    odFolder_path = convertPath(getDataJSON(setting_path, "Settings/Paths/Outdated Playlists") + "à@à" + datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")) 
+    
+    sysos = getDataJSON(setting_path, "System Os")
+    files = [f for f in os.listdir(playlist_path) if (os.path.isfile(f) and (isFilePlaylist(f) == True))]
+    for file in files:
+        try:
+            os.makedirs(odFolder_path)    
+        except FileExistsError:
+            pass 
+        #move the old playlist to the outdated folder
+        pl_path = convertPath(playlist_path + "à@à" + file)
+        odPl_path = convertPath(odFolder_path + "à@à" + file)
+        shutil.move(pl_path, odPl_path)
 
 #updating the playlists
 def PlaylistUpdate():  
-    PlaylistMove()  
-    SavifyPlaylists = ReadFILE(setting_path)["Playlists"]
-    pl_ids = []
-    for playlist in SavifyPlaylists:
+    #move the old playlists to the outdated folder
+    movePlaylists()  
+    
+    playlist_list = getDataJSON(setting_path, "Playlists")
+    playlistID_list = []
+    for playlist in playlist_list:
         for key in playlist.keys():
-            pl_ids.append(playlist[key]["Links"]["ID"])
+            playlistID_list.append(playlist[key]["Links"]["ID"])
             
-    for pl_id in pl_ids:
+    for pl_id in playlistID_list:
         pl_order = PlaylistManager(Spotipy_Session, pl_id)
         CreatePlaylist(pl_order)
     print("\n>All playlist files are created.")
 
 #Print the load text, load the savify client
 def Load(Spotipy_Session):
-    loadText, lines = ReadFILE("loadtext.txt"), ""
-    for line in loadText[:18]:
-        lines += line
-    print(lines)
+    printLoad(0, 18)
 
-    SavifyFile = ReadFILE(setting_path)
-
-    if(SavifyFile["Settings"]["Paths"]["Downloads"] == ""):
+    settingFile = ReadFILE(setting_path)
+    if(settingFile["Settings"]["Paths"]["Downloads"] == ""):
         downloadPath = input(".Enter a path where to store downloaded music: ")
-        SavifyFile["Settings"]["Paths"]["Downloads"] = downloadPath
+        settingFile["Settings"]["Paths"]["Downloads"] = downloadPath
 
-    if(SavifyFile["Settings"]["Paths"]["Playlist"] == ""):
+    if(settingFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
-        SavifyFile["Settings"]["Paths"]["Playlist"] = playlistPath
+        settingFile["Settings"]["Paths"]["Playlist"] = playlistPath
 
-    if(SavifyFile["Playlists"] == []):
+    if(settingFile["Playlists"] == []):
         AddPlaylist(Spotipy_Session)
         
-    SavifyFile = SetOutdatedPath(SavifyFile)
+    settingFile = SetOutdatedPath(settingFile)
+    WriteJSON(setting_path, settingFile, 'w')
     
-    with open(setting_path, 'w') as outfile:
-        json.dump(SavifyFile, outfile, indent=4)
-    
-
 #Settings
 def DownloadSettings(Savify):
     SavifySettings = ReadFILE(setting_path)["Settings"]
@@ -209,7 +211,7 @@ def DownloadSettings(Savify):
 
 #Select which action the user wants
 def SelectCommand(Spotipy_Session): 
-    printLoad(0, 19)
+    printLoad(19, 42)
     
     answer = input("Choose the number of the command: ")
 
@@ -232,15 +234,18 @@ def SelectCommand(Spotipy_Session):
 
         ans4 = input("Choose the number of the command: ")
         Settings = ReadFILE(setting_path)
+        sysOs = getDataJSON(setting_path, "System Os")
+        
         if(ans4 == "1"):
             print("\nCurrently the download quality is: " + Settings["Settings"]["Quality"] + "\nAvailable qualities: BEST, 320K, 256K, 192K, 128K, 96K, 32K, WORST")
+            
             quality, qualities = "", ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
             while((quality in qualities) == False):
                 quality = input("Quality chosen (Press <Enter>, If you don't wish to change the quality): ")
             if(quality != ""):
                 Settings["Settings"]["Quality"] = quality
-            with open(setting_path, 'w') as file:
-                json.dump(Settings, file, indent=4)
+            
+            WriteJSON(setting_path, Settings, 'w')
 
         elif(ans4 == "2"):
             print("\nCurrently the download format is: " + Settings["Settings"]["Format"] + "\nAvailable formats: WAV, VORBIS, OPUS, M4A, FLAC, AAC, MP3")
@@ -249,28 +254,44 @@ def SelectCommand(Spotipy_Session):
                 formate = input("Format chosen (Press <Enter>, If you don't wish to change the format): ")
             if(formate != ""):
                 Settings["Settings"]["Format"] = formate
-            with open(setting_path, 'w') as file:
-                json.dump(Settings, file, indent=4)
+            
+            WriteJSON(setting_path, Settings, 'w')
 
         elif(ans4 == "3"):
             if(Settings["Paths"]["Downloads"] == ""):
                 downloadPath = input("\nCurrently the download path is empty, please enter a path: ")
-                Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+                
+                if(sysOs != "Linux"):
+                    Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+                else:
+                    Settings["Paths"]["Downloads"] = downloadPath
             else:
                 downloadPath = input("\nCurrently the download path is: ", (Settings["Paths"]["Downloads"].replace("\\", r"\"")).replace('"', ''), "\nNew download path (Press <Enter>, If you don't wish to change the path): ")
-                Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
-            with open(setting_path, 'w') as file:
-                json.dump(Settings, file, indent=4)
+                
+                if(sysOs != "Linux"):
+                    Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+                else:
+                    Settings["Paths"]["Downloads"] = downloadPath
+                    
+            WriteJSON(setting_path, Settings, 'w')
 
         elif(ans4 == "4"):
             if(Settings["Paths"]["Playlist"] == ""):
                 PlaylistPath = input("\nCurrently the Playlist path is empty, please enter a path: ")
-                Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
+                
+                if(sysOs != "Linux"):
+                    Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
+                else:
+                    Settings["Paths"]["Playlist"] = PlaylistPath
             else:
                 PlaylistPath = input("\nCurrently the Playlist path is: ", (Settings["Paths"]["Playlist"].replace("\\", r"\"")).replace('"', ''), "\nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
-                Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
-            with open(setting_path, 'w') as file:
-                json.dump(Settings, file, indent=4)
+                
+                if(sysOs != "Linux"):
+                    Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
+                else:
+                    Settings["Paths"]["Playlist"] = PlaylistPath
+                    
+            WriteJSON(setting_path, Settings, 'w')
 
     elif(answer == "5"):
         print("<This command is coming in the next updates...>")

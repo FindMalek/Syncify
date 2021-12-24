@@ -13,7 +13,7 @@
     Welcome to Syncify!
     Here is a little introduction about this project.
     Syncify is an Application created by FindMalek, since 2020 April.
-    Using this app, you can download your Spotifiy playlist and listen to it offline.
+    Using this app, you can download your Spotify playlist and listen to it offline.
     For more questions about how the Application works, contact me at:
     Malekgarahellalbus@gmail.com
     
@@ -39,3 +39,4 @@
         Use this command when you download a song but it dosen't match the version in the Spotify.
         <This command is coming in the next updates...>
     6. Exit.
+    

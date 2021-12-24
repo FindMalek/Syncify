@@ -20,28 +20,35 @@ def getDataJSON(filePath, jsonPath):
     return file
       
 #Handle the windows path and Linux path
-#still in progress <Coming soon>
 def convertPath(path):
     sysos = getDataJSON(setting_path, "System Os")
     if(sysos == 'Linux'):
-        return path.replace('-', '/')
+        return path.replace('à@à', '/')
     else:
-        return path.replace('-', '\\')
+        return path.replace('à@à', '\\')
 
-#Set outdated path
-def SetOutdatedPath(SavifyFile):
-    outdatedPL_path = SavifyFile["Settings"]["Locations"]["Playlist"] + "\\Outdated Playlists"
-    SavifyFile["Settings"]["Locations"]["Outdated Playlists"] = outdatedPL_path
-    with open(setting_path, 'w') as outfile:
-        json.dump(SavifyFile, outfile, indent=4)
-
-#Print loadtext.txt
-def printLoad(start, end):
-    loadText = ReadFILE("loadtext.txt")[start:end]
-    for line in loadText:
-        print(line[:-1])
-        
 #Write on JSON files
 def WriteJSON(filePath, toWrite, mode):
     with open(filePath, mode) as outfile:
-        json.dump(toWrite, outfile, ident=4)
+        json.dump(toWrite, outfile, indent=4)
+
+#Set outdated path
+def SetOutdatedPath(settingFile):
+    odPlaylist_path = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + 'à@àOutdated Playlists')
+    settingFile["Settings"]["Paths"]["Outdated Playlists"] = odPlaylist_path
+    return settingFile
+
+#Print loadtext.txt
+def printLoad(start, end): 
+    loadText = ReadFILE(convertPath("Resourcesà@àloadtext.txt"))[start:end]
+    for line in loadText:
+        print(line[:-1])
+        
+#Checks if the file is a song or not from these formats
+#["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
+#<Coming soon>
+def isFilePlaylist(file):
+    if(file[-3:] == "m3a"):
+        return True
+    else:
+        return False

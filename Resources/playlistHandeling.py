@@ -10,7 +10,7 @@ def SpotipySession():
 Spotipy_Session = SpotipySession()
 
 #get the needed informations to fill up the Playlist JSON file
-def getPlaylistInformation(toGet, link, playlist_ID=""):
+def getPlaylistInformation(Spotipy_Session, toGet, link, playlist_ID=""):
     if(toGet == "ID"):
         return "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
     
