@@ -2,6 +2,7 @@
 from savify import Savify
 from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
+from savify.logger import Logger
 
 #importing Spotipy
 import spotipy
@@ -9,47 +10,17 @@ import spotipy
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
 from datetime import datetime
-from Resources.systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
-from Resources.systemFunctions import convertPath, SetOutdatedPath, isFilePlaylist
+from Functions.systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
+from Functions.systemFunctions import convertPath, SetOutdatedPath, isFilePlaylist, movePlaylists
+from Functions.systemFunctions import DownloadSettings
 
 #Importing playlistHandeling
-from Resources.playlistHandeling import getPlaylistInformation, SpotipySession
+from Functions.playlistHandeling import getPlaylistInformation, SpotipySession, RefreshPlaylistFile
+from Functions.playlistHandeling import CreatePlaylist, PlaylistManager
 
 
 setting_path = "Settings.json"
 playlist_path = "Playlist links.json"
-
-#Updates and Add Playlists from the Playlist JSON file
-def RefreshPlaylistFile(Spotipy_Session):
-    SyncifySettings = getDataJSON(setting_path, "Settings")
-    
-    playlistFile = ReadFILE(playlist_path)
-    playlist_list = []
-    for link in playlistFile["Playlists links"]:
-        playlist_ID = getPlaylistInformation(Spotipy_Session, "ID", link)
-        playlist_Name = getPlaylistInformation(Spotipy_Session, "Name", link, playlist_ID)
-        playlist_Image = getPlaylistInformation(Spotipy_Session, "Image URL", link, playlist_ID)
-        playlist_URL = getPlaylistInformation(Spotipy_Session, "Playlist URL", link, playlist_ID)
-
-        playlist_list.append(
-            {
-                playlist_Name : {
-                    "Image": playlist_Image,
-                    "Links": {
-                        "URL": playlist_URL,
-                        "ID": playlist_ID
-                        }
-                    }
-            }
-        )
-    
-    Playlists = ReadFILE(setting_path)
-    Playlists["Playlists"] = playlist_list
-    WriteJSON(setting_path, Playlists, 'w')
-
-#Move songs from Music to Newly added music <Coming soon>
-def NewlyMusic():
-    pass
 
 #Downloader
 def Downloads():
@@ -63,12 +34,14 @@ def Downloads():
     counterPlaylist = 0
     for element in Playlists:
         playlist_Name = str(list(element.keys())[0])
-        print("\n\nDownloading from :", playlist_Name)
+        print("\n\n\tDownloading from :", playlist_Name)
         
         quality_type = DownloadSettings(Savify)[0]
         download_format = DownloadSettings(Savify)[1]
         
-        Session = Savify(quality=quality_type,
+        logger = Logger(log_location='logs/', log_level=None)
+        Session = Savify(logger=logger,
+                         quality=quality_type,
                          download_format=download_format,
                          path_holder=PathHolder(downloads_path=downloadPath))
         Session.download(Playlists[counterPlaylist][playlist_Name]["Links"]["URL"])
@@ -108,49 +81,6 @@ def AddPlaylist(Spotipy_Session):
             print(">No playlist have been entered!")
     AddLink(listPL)
 
-#Create the playlist
-def CreatePlaylist(order):
-    SavifySettings = getDataJSON(setting_path, "Settings")
-    playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
-    
-    fileName = convertPath(playlistLocation + "à@à" + order["Name"] + ".m3u")
-    with open(fileName, "w") as playlistm3a:
-        playlistm3a.write("#EXTM3U\n")
-        for line in order["Order"]:
-            playlistm3a.write(line + "\n")
-    
-#Manage .m3u playlists
-def PlaylistManager(Spotipy_Session, playlist_id):
-    SavifySettings = getDataJSON(setting_path, "Settings")
-    downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
-    playlist = Spotipy_Session.playlist(playlist_id)
-    
-    pl_order = {"Name": playlist["name"], "Order": []}
-    for i in range(0, len(playlist["tracks"]["items"])):
-        songLocation = convertPath(str(downloadLocation)+ "à@à"
-                                 + playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
-                                 + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] +
-                                 '.' + SavifySettings["Format"].lower())
-        pl_order["Order"].append(songLocation)
-    return pl_order     
-          
-#Store the old playlists in a folder with a date in it
-def movePlaylists():
-    playlist_path = getDataJSON(setting_path, "Settings/Paths/Playlist")
-    odFolder_path = convertPath(getDataJSON(setting_path, "Settings/Paths/Outdated Playlists") + "à@à" + datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")) 
-    
-    sysos = getDataJSON(setting_path, "System Os")
-    files = [f for f in os.listdir(playlist_path) if (os.path.isfile(f) and (isFilePlaylist(f) == True))]
-    for file in files:
-        try:
-            os.makedirs(odFolder_path)    
-        except FileExistsError:
-            pass 
-        #move the old playlist to the outdated folder
-        pl_path = convertPath(playlist_path + "à@à" + file)
-        odPl_path = convertPath(odFolder_path + "à@à" + file)
-        shutil.move(pl_path, odPl_path)
-
 #updating the playlists
 def PlaylistUpdate():  
     #move the old playlists to the outdated folder
@@ -185,29 +115,6 @@ def Load(Spotipy_Session):
         
     settingFile = SetOutdatedPath(settingFile)
     WriteJSON(setting_path, settingFile, 'w')
-    
-#Settings
-def DownloadSettings(Savify):
-    SavifySettings = ReadFILE(setting_path)["Settings"]
-    
-    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
-    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
-    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
-    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
-    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
-    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
-    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
-    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
-    
-    if(SavifySettings["Format"] == "WAV"):      download_format=Format.WAV
-    elif(SavifySettings["Format"] == "VORBIS"): download_format=Format.VORBIS
-    elif(SavifySettings["Format"] == "OPUS"):   download_format=Format.OPUS
-    elif(SavifySettings["Format"] == "M4A"):    download_format=Format.M4A 
-    elif(SavifySettings["Format"] == "FLAC"):   download_format=Format.FLAC 
-    elif(SavifySettings["Format"] == "AAC"):    download_format=Format.AAC
-    elif(SavifySettings["Format"] == "MP3"):    download_format=Format.MP3 
-    
-    return qual, download_format
 
 #Select which action the user wants
 def SelectCommand(Spotipy_Session): 
@@ -230,7 +137,7 @@ def SelectCommand(Spotipy_Session):
             pause = input("Next playlist (Press <Enter>)")
 
     elif(answer == "4"):
-        printLoad(29, 38)
+        printLoad(29, 37)
 
         ans4 = input("Choose the number of the command: ")
         Settings = ReadFILE(setting_path)
@@ -240,7 +147,7 @@ def SelectCommand(Spotipy_Session):
             print("\nCurrently the download quality is: " + Settings["Settings"]["Quality"] + "\nAvailable qualities: BEST, 320K, 256K, 192K, 128K, 96K, 32K, WORST")
             
             quality, qualities = "", ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
-            while((quality in qualities) == False):
+            while(((quality in qualities) == False) or (quality == '')):
                 quality = input("Quality chosen (Press <Enter>, If you don't wish to change the quality): ")
             if(quality != ""):
                 Settings["Settings"]["Quality"] = quality
