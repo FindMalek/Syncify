@@ -9,10 +9,8 @@ import spotipy
 
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
-from datetime import datetime
 from Functions.systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
 from Functions.systemFunctions import convertPath, SetOutdatedPath, isFilePlaylist, movePlaylists
-from Functions.systemFunctions import DownloadSettings
 
 #Importing playlistHandeling
 from Functions.playlistHandeling import getPlaylistInformation, SpotipySession, RefreshPlaylistFile
@@ -20,7 +18,7 @@ from Functions.playlistHandeling import CreatePlaylist, PlaylistManager
 
 
 setting_path = "Settings.json"
-playlist_path = "Playlist links.json"
+playlist_path = convertPath("Data/Playlist links.json")
 
 #Downloader
 def Downloads():
@@ -28,7 +26,7 @@ def Downloads():
     #music that its created time is later than that time and move it to
     #newly downloaded music  <Coming Soon>
     
-    Playlists = getDataJSON(setting_path, "Playlists")
+    Playlists = getDataJSON(playlist_path, "Playlists Informations")
     downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
     counterPlaylist = 0
@@ -68,7 +66,7 @@ def AddLink(list):
 
     WriteJSON(playlist_path, playlistLinks, 'w')
 
-#Add playlists to the settings.json "Playlists"
+#Add playlists to the settings.json "Playlists Informations"
 def AddPlaylist(Spotipy_Session):
     link, listPL = ".", []
     while(link != ""):
@@ -86,7 +84,7 @@ def PlaylistUpdate():
     #move the old playlists to the outdated folder
     movePlaylists()  
     
-    playlist_list = getDataJSON(setting_path, "Playlists")
+    playlist_list = getDataJSON(playlist_path, "Playlists Informations")
     playlistID_list = []
     for playlist in playlist_list:
         for key in playlist.keys():
@@ -109,12 +107,36 @@ def Load(Spotipy_Session):
     if(settingFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
         settingFile["Settings"]["Paths"]["Playlist"] = playlistPath
-
-    if(settingFile["Playlists"] == []):
-        AddPlaylist(Spotipy_Session)
         
     settingFile = SetOutdatedPath(settingFile)
     WriteJSON(setting_path, settingFile, 'w')
+
+    playlistFile = getDataJSON(playlist_path, "Playlists Informations")
+    if(playlistFile == []):
+        AddPlaylist(Spotipy_Session)
+
+#download ettings
+def DownloadSettings(Savify):
+    SavifySettings = ReadFILE(setting_path)["Settings"]
+    
+    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
+    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
+    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
+    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
+    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
+    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
+    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
+    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
+    
+    if(SavifySettings["Format"] == "WAV"):      download_format=Format.WAV
+    elif(SavifySettings["Format"] == "VORBIS"): download_format=Format.VORBIS
+    elif(SavifySettings["Format"] == "OPUS"):   download_format=Format.OPUS
+    elif(SavifySettings["Format"] == "M4A"):    download_format=Format.M4A 
+    elif(SavifySettings["Format"] == "FLAC"):   download_format=Format.FLAC 
+    elif(SavifySettings["Format"] == "AAC"):    download_format=Format.AAC
+    elif(SavifySettings["Format"] == "MP3"):    download_format=Format.MP3 
+    
+    return qual, download_format
 
 #Select which action the user wants
 def SelectCommand(Spotipy_Session): 
@@ -131,7 +153,7 @@ def SelectCommand(Spotipy_Session):
         PlaylistUpdate()
 
     elif(answer == "3"):
-        SavifyPlaylists = ReadFILE(setting_path)["Playlists"]
+        SavifyPlaylists = ReadFILE(setting_path)["Playlists Informations"]
         for playlist in SavifyPlaylists:
             printPlaylist(playlist[list(playlist.keys())[0]]["Links"]["URL"], Spotipy_Session)
             pause = input("Next playlist (Press <Enter>)")

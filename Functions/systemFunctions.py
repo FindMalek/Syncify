@@ -1,4 +1,5 @@
 import json, os, shutil
+from datetime import datetime
 
 setting_path = "Settings.json"
 
@@ -23,9 +24,9 @@ def getDataJSON(filePath, jsonPath):
 def convertPath(path):
     sysos = getDataJSON(setting_path, "System Os")
     if(sysos == 'Linux'):
-        return path.replace('à@à', '/')
+        return path.replace('/', '/')
     else:
-        return path.replace('à@à', '\\')
+        return path.replace('/', '\\')
 
 #Write on JSON files
 def WriteJSON(filePath, toWrite, mode):
@@ -34,13 +35,13 @@ def WriteJSON(filePath, toWrite, mode):
 
 #Set outdated path
 def SetOutdatedPath(settingFile):
-    odPlaylist_path = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + 'à@àOutdated Playlists')
+    odPlaylist_path = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + '/Outdated Playlists')
     settingFile["Settings"]["Paths"]["Outdated Playlists"] = odPlaylist_path
     return settingFile
 
 #Print loadtext.txt
 def printLoad(start, end): 
-    loadText = ReadFILE(convertPath("Resourcesà@àloadtext.txt"))[start:end]
+    loadText = ReadFILE(convertPath("Data/loadtext.txt"))[start:end]
     for line in loadText:
         print(line[:-1])
         
@@ -56,7 +57,7 @@ def isFilePlaylist(file):
 #Store the old playlists in a folder with a date in it
 def movePlaylists():
     playlist_path = getDataJSON(setting_path, "Settings/Paths/Playlist")
-    odFolder_path = convertPath(getDataJSON(setting_path, "Settings/Paths/Outdated Playlists") + "à@à" + datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")) 
+    odFolder_path = convertPath(getDataJSON(setting_path, "Settings/Paths/Outdated Playlists") + "/" + datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")) 
     
     sysos = getDataJSON(setting_path, "System Os")
     files = [f for f in os.listdir(playlist_path) if (os.path.isfile(f) and (isFilePlaylist(f) == True))]
@@ -66,29 +67,6 @@ def movePlaylists():
         except FileExistsError:
             pass 
         #move the old playlist to the outdated folder
-        pl_path = convertPath(playlist_path + "à@à" + file)
-        odPl_path = convertPath(odFolder_path + "à@à" + file)
+        pl_path = convertPath(playlist_path + "/" + file)
+        odPl_path = convertPath(odFolder_path + "/" + file)
         shutil.move(pl_path, odPl_path)
-
-#download ettings
-def DownloadSettings(Savify):
-    SavifySettings = ReadFILE(setting_path)["Settings"]
-    
-    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
-    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
-    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
-    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
-    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
-    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
-    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
-    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
-    
-    if(SavifySettings["Format"] == "WAV"):      download_format=Format.WAV
-    elif(SavifySettings["Format"] == "VORBIS"): download_format=Format.VORBIS
-    elif(SavifySettings["Format"] == "OPUS"):   download_format=Format.OPUS
-    elif(SavifySettings["Format"] == "M4A"):    download_format=Format.M4A 
-    elif(SavifySettings["Format"] == "FLAC"):   download_format=Format.FLAC 
-    elif(SavifySettings["Format"] == "AAC"):    download_format=Format.AAC
-    elif(SavifySettings["Format"] == "MP3"):    download_format=Format.MP3 
-    
-    return qual, download_format

@@ -2,10 +2,11 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
-from Resources.systemFunctions import getDataJSON, ReadFILE, WriteJSON
+#importing systemFunctions
+from Functions.systemFunctions import getDataJSON, ReadFILE, WriteJSON, convertPath
 
 setting_path = "Settings.json"
-playlist_path = "Playlist links.json"
+playlist_path = convertPath("Data/Playlist links.json")
 
 #Log in Spotipy_Session
 def SpotipySession():
@@ -51,16 +52,16 @@ def RefreshPlaylistFile(Spotipy_Session):
             }
         )
     
-    Playlists = ReadFILE(setting_path)
-    Playlists["Playlists"] = playlist_list
-    WriteJSON(setting_path, Playlists, 'w')
+    Playlists = ReadFILE(playlist_path)
+    Playlists["Playlists Informations"] = playlist_list
+    WriteJSON(playlist_path, Playlists, 'w')
 
 #Create the playlist
 def CreatePlaylist(order):
     SavifySettings = getDataJSON(setting_path, "Settings")
     playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
     
-    fileName = convertPath(playlistPath + "à@à" + order["Name"] + ".m3u")
+    fileName = convertPath(playlistPath + "/" + order["Name"] + ".m3u")
     with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n")
         for line in order["Order"]:
@@ -75,7 +76,7 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     
     pl_order = {"Name": playlist["name"], "Order": []}
     for i in range(0, len(playlist["tracks"]["items"])):
-        songLocation = convertPath(str(downloadLocation)+ "à@à"
+        songLocation = convertPath(str(downloadLocation)+ "/"
                                  + playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
                                  + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] +
                                  '.' + SavifySettings["Format"].lower())

@@ -1,4 +1,240 @@
 {
+    "Playlists Informations": [
+        {
+            "heavy chill": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2735d48e2f56d691f9a4e4b0bdfab67616d0000b273a7e4d2b8e3514866dd34720bab67616d0000b273d6eb84f2391f9206d00f0660ab67616d0000b273fbe365a8274438e49764bba3",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
+                    "ID": "spotify:playlist:4uau55EZrUw4hrQf4La32i"
+                }
+            }
+        },
+        {
+            "late nights mood": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737bb3a4dd85841c3133af079bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273ad2af428ccc52bc175bab64b",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/5ZKp6FwxfFlnLnq62qy4tW",
+                    "ID": "spotify:playlist:5ZKp6FwxfFlnLnq62qy4tW"
+                }
+            }
+        },
+        {
+            "just the mood to be sad": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730bed9affdad909c9c4baf35dab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b27367291695d95d55b5504156f1ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
+                    "ID": "spotify:playlist:2kPyOGqApBFu5CuuJBsRfA"
+                }
+            }
+        },
+        {
+            "A mixed mood": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273066d0a5c0b2603ac06da7feaab67616d0000b27353f6fa0d2589c6a7174f4b81ab67616d0000b2737983ced300f3b01f99b01350ab67616d0000b273a7e4d2b8e3514866dd34720b",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/7sZPLbpT69BVVilpYe5p6O",
+                    "ID": "spotify:playlist:7sZPLbpT69BVVilpYe5p6O"
+                }
+            }
+        },
+        {
+            "One More Rep": {
+                "Image": "https://i.scdn.co/image/ab67706f0000000382894e9aedb86fd9f2f724db",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/37i9dQZF1DX5OUjSS1OMgV",
+                    "ID": "spotify:playlist:37i9dQZF1DX5OUjSS1OMgV"
+                }
+            }
+        },
+        {
+            "energy pill": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730ea1ecb2d5271c2db402b0c2ab67616d0000b2731e76eaa664f5b71699066c72ab67616d0000b2738443a724ced4e3bef303fb7aab67616d0000b273eac82ebeb9b4db218a8dbece",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4uhe84j6DaY22GObugBSwE",
+                    "ID": "spotify:playlist:4uhe84j6DaY22GObugBSwE"
+                }
+            }
+        },
+        {
+            "BERSERK": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb629e78f147374acf9bf8a748",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/62lE4LViAuBykovM5yq2zY",
+                    "ID": "spotify:playlist:62lE4LViAuBykovM5yq2zY"
+                }
+            }
+        },
+        {
+            "Anger.": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb717519cbb235eaadbd1de867",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3TK5Tq4L9Q5P6YkFz70DiE",
+                    "ID": "spotify:playlist:3TK5Tq4L9Q5P6YkFz70DiE"
+                }
+            }
+        },
+        {
+            "Feel my rage.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27302add2c77fb6999e311a3248ab67616d0000b2734eaa6b95827dced309afbe04ab67616d0000b27373334683c071cfa000319c53ab67616d0000b273b5836f92f626bb4fe05b016a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
+                    "ID": "spotify:playlist:4eBoEZ89xY9nqcVigCBoaU"
+                }
+            }
+        },
+        {
+            "the holy": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730c100c40bdedea776770e7aaab67616d0000b27346c550081a2f5674e2cf608dab67616d0000b27355a21bacb7082eff509ed279ab67616d0000b273b37a2bb117c7ae30ee77b6bd",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/2lbgWON6x5EVK2kI5v6FQv",
+                    "ID": "spotify:playlist:2lbgWON6x5EVK2kI5v6FQv"
+                }
+            }
+        },
+        {
+            "Rage.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27368780bf3f5a4af94f2c953c6ab67616d0000b27382298636c94b8167c4793db2ab67616d0000b273b695c1245015022c2ca5900aab67616d0000b273e2614e5ffdedb55a3816946c",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/6T5C4irGIAg0WpH5eb3aYQ",
+                    "ID": "spotify:playlist:6T5C4irGIAg0WpH5eb3aYQ"
+                }
+            }
+        },
+        {
+            "a workout mix": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb0a2d723528b0c7c75c4fd2bf",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/1hRFW8th6zBKKqSh7Lf7dE",
+                    "ID": "spotify:playlist:1hRFW8th6zBKKqSh7Lf7dE"
+                }
+            }
+        },
+        {
+            "unleash the god within": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27302add2c77fb6999e311a3248ab67616d0000b2734eaa6b95827dced309afbe04ab67616d0000b27373334683c071cfa000319c53ab67616d0000b27396b4163add6c85325f8961fd",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3HyxE55XuaORFtL4SLKA7U",
+                    "ID": "spotify:playlist:3HyxE55XuaORFtL4SLKA7U"
+                }
+            }
+        },
+        {
+            "Coding playlist": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730856770dd28cc929d052bcd3ab67616d0000b27398708da71a3cb39d6297a033ab67616d0000b273bc475d512ed99639f005bd8cab67616d0000b273d62dc29c6bf16a9059fd56e5",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/0fLFlZ3RPQPl72TuFBEXbg",
+                    "ID": "spotify:playlist:0fLFlZ3RPQPl72TuFBEXbg"
+                }
+            }
+        },
+        {
+            "Morning": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbf9d47a5e3cb4c0878e2f5f69",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3ro0toqvurx4RPt2SEFiCC",
+                    "ID": "spotify:playlist:3ro0toqvurx4RPt2SEFiCC"
+                }
+            }
+        },
+        {
+            "Chilly": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb645842b5b185d9093e1da53b",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/7tPgYk2j4G67c9azyn3gxN",
+                    "ID": "spotify:playlist:7tPgYk2j4G67c9azyn3gxN"
+                }
+            }
+        },
+        {
+            "Felt sad": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b2734627b6aa3c28314c2479c17bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4295WQ4KvsUAtp3vAzC9NN",
+                    "ID": "spotify:playlist:4295WQ4KvsUAtp3vAzC9NN"
+                }
+            }
+        },
+        {
+            "The love mood.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27336b8b20d156605c4d5d1ee68ab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273f894be72a77b1488292672c7",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/43AE0H4dITYXiC3KziqTZK",
+                    "ID": "spotify:playlist:43AE0H4dITYXiC3KziqTZK"
+                }
+            }
+        },
+        {
+            "lovely": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebba617f0d86d3ebbc5cb909e2a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/6VnR28qfPwj0zVbrKjFHug",
+                    "ID": "spotify:playlist:6VnR28qfPwj0zVbrKjFHug"
+                }
+            }
+        },
+        {
+            "Be emo": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2733b66a0844901eb01acf32b3aab67616d0000b27343dff0b3d7ef1fac7d3ad64bab67616d0000b2739ce9de7bbf5d183ca7954b33ab67616d0000b273e2614e5ffdedb55a3816946c",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/7dtJ2uEwsxOGVGzKzX3bVd",
+                    "ID": "spotify:playlist:7dtJ2uEwsxOGVGzKzX3bVd"
+                }
+            }
+        },
+        {
+            "emo stuff": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2733b66a0844901eb01acf32b3aab67616d0000b27343dff0b3d7ef1fac7d3ad64bab67616d0000b2739ce9de7bbf5d183ca7954b33ab67616d0000b273e2614e5ffdedb55a3816946c",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/0g7YuUMjV6NiwshiP4sWSj",
+                    "ID": "spotify:playlist:0g7YuUMjV6NiwshiP4sWSj"
+                }
+            }
+        },
+        {
+            "get you into the mood": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb964946e8237a45269972071e",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/0Dt0CmBIUJ94JV7coMwYNg",
+                    "ID": "spotify:playlist:0Dt0CmBIUJ94JV7coMwYNg"
+                }
+            }
+        },
+        {
+            "a mood.": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbad8086b5b80bdff8a482bb8d",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/0k6jo6HdorB3wpD3082CG5",
+                    "ID": "spotify:playlist:0k6jo6HdorB3wpD3082CG5"
+                }
+            }
+        },
+        {
+            "Mind loop": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbde1ebd51ef91b9c8b2761948",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
+                    "ID": "spotify:playlist:624UgHw3C3WllV8P9ynSB4"
+                }
+            }
+        },
+        {
+            "the Jazz mood": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2731a04649cc2ddb348a9e08f23ab67616d0000b27325fbfe01ca17e9984362f805ab67616d0000b273766fa7c4c98099f2e9153923ab67616d0000b273b586fc87d8bde3ba953f233a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4bdj3OSzFWYKqI5OLB9nuS",
+                    "ID": "spotify:playlist:4bdj3OSzFWYKqI5OLB9nuS"
+                }
+            }
+        },
+        {
+            "Vibing": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb52ee089e6e4530825a9995b8",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
+                    "ID": "spotify:playlist:1u1oMXEiC9Y2Rwy8tcpgux"
+                }
+            }
+        }
+    ],
     "Playlists links": [
         "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
         "https://open.spotify.com/playlist/5ZKp6FwxfFlnLnq62qy4tW",
