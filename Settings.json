@@ -1,12 +1,12 @@
 {
-    "System Os": "Linux",
+    "System Os": "",
     "Settings": {
         "Quality": "BEST",
         "Format": "MP3",
         "Paths": {
-            "Downloads": "/home/malek/Music/",
-            "Playlist": "/home/malek/Music/Playlists/",
-            "Outdated Playlists": "/home/malek/Music/Playlists//Outdated Playlists"
+            "Downloads": "",
+            "Playlist": "",
+            "Outdated Playlists": ""
         }
     }
 }
