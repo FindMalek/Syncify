@@ -6,7 +6,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from Functions.systemFunctions import getDataJSON, ReadFILE, WriteJSON, convertPath
 
 setting_path = "Settings.json"
-playlist_path = convertPath("Data/Playlist links.json")
+playlist_path = convertPath("Data/Playlists Informations.json")
 
 #Log in Spotipy_Session
 def SpotipySession():
@@ -40,6 +40,7 @@ def RefreshPlaylistFile(Spotipy_Session):
         playlist_Image = getPlaylistInformation(Spotipy_Session, "Image URL", link, playlist_ID)
         playlist_URL = getPlaylistInformation(Spotipy_Session, "Playlist URL", link, playlist_ID)
 
+        #Structure of the 
         playlist_list.append(
             {
                 playlist_Name : {
@@ -47,8 +48,8 @@ def RefreshPlaylistFile(Spotipy_Session):
                     "Links": {
                         "URL": playlist_URL,
                         "ID": playlist_ID
-                        }
                     }
+                }
             }
         )
     

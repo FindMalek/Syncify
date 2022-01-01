@@ -18,7 +18,7 @@ from Functions.playlistHandeling import CreatePlaylist, PlaylistManager
 
 
 setting_path = "Settings.json"
-playlist_path = convertPath("Data/Playlist links.json")
+playlist_path = convertPath("Data/Playlists Informations.json")
 
 #Downloader
 def Downloads():
@@ -47,17 +47,13 @@ def Downloads():
     print("\n>Download is finished! All songs are downloaded.")
 
 #print the name of the playlist and the discription
-def printPlaylist(link, Spotipy_Session):
+def printPlaylist(counter, total, link, Spotipy_Session):
     playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
     Result = Spotipy_Session.playlist(playlist_ID)
+    print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.\n\t({counter}/{total})\n")
+    input()
 
-    print("\n\t"+ Result["name"]
-            + "\n.Description: " + Result["description"]
-            + "\n.Number of tracks: " + str(len(Result["tracks"]["items"]))
-            + "\n.Owner: " + Result["owner"]["display_name"]
-            + "\n")
-
-#Add playlist link in the json file playlist links.json
+#Add playlist link in the json file Playlists Informations.json
 def AddLink(list):
     playlistLinks = ReadFILE(playlist_path)
     for link in list:
@@ -138,88 +134,81 @@ def DownloadSettings(Savify):
     
     return qual, download_format
 
+def addInformation(stroption, info, infoList, Settings):
+    infoEntered = '.'
+    while(infoEntered not in infoList):
+        infoEntered = input(f"{stroption} chosen (Press <Enter>, If you don't wish to change the {stroption}): ")
+        if(infoEntered == ""):
+            Settings["Settings"][stroption] = info
+            break
+    return Settings
+
 #Select which action the user wants
 def SelectCommand(Spotipy_Session): 
-    printLoad(19, 42)
+    printLoad(19, 42) #Printing for the user
     
     answer = input("Choose the number of the command: ")
 
-    if(answer == "1"):
+    if(answer == "1"): #Enter Playlists Informations
         AddPlaylist(Spotipy_Session)
 
-    elif(answer == "2"):
+    elif(answer == "2"): 
+        #Downloads newly added songs and Refresh playlists
+        #And move Outdated Playlists to the Outdated folder
+        #It keeps a version of each playlist
         RefreshPlaylistFile(Spotipy_Session)
         Downloads()  
         PlaylistUpdate()
 
     elif(answer == "3"):
-        SavifyPlaylists = ReadFILE(setting_path)["Playlists Informations"]
-        for playlist in SavifyPlaylists:
-            printPlaylist(playlist[list(playlist.keys())[0]]["Links"]["URL"], Spotipy_Session)
-            pause = input("Next playlist (Press <Enter>)")
+        SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
+        for playlist, counter in zip(SavifyPlaylists, range(1, len(SavifyPlaylists) + 1)):
+            playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
+            printPlaylist(counter, len(SavifyPlaylists), playlistLink,  Spotipy_Session)
 
     elif(answer == "4"):
         printLoad(29, 37)
 
-        ans4 = input("Choose the number of the command: ")
+        answer = input("Choose the number of the command: ")
         Settings = ReadFILE(setting_path)
         sysOs = getDataJSON(setting_path, "System Os")
         
-        if(ans4 == "1"):
-            print("\nCurrently the download quality is: " + Settings["Settings"]["Quality"] + "\nAvailable qualities: BEST, 320K, 256K, 192K, 128K, 96K, 32K, WORST")
+        if(answer == "1"):
+            quality = Settings["Settings"]["Quality"]
+            qualityList = ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
+            print(f"\nCurrently the download quality is: {quality}\nAvailable qualities: {qualityList}")
             
-            quality, qualities = "", ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
-            while(((quality in qualities) == False) or (quality == '')):
-                quality = input("Quality chosen (Press <Enter>, If you don't wish to change the quality): ")
-            if(quality != ""):
-                Settings["Settings"]["Quality"] = quality
+            Settings = addInformation("Quality", quality, qualityList, Settings)
+            WriteJSON(setting_path, Settings, 'w')
+
+        elif(answer == "2"):
+            formatType = Settings["Settings"]["Format"]
+            formatList = ["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
+            print(f"\nCurrently the download format is: {formatType}\nAvailable formats: {formatList}")
+            
+            Settings = addInformation("Format", formatType, formatList, Settings)
+            WriteJSON(setting_path, Settings, 'w')
+
+        elif(answer == "3"):
+            settingsDownload_path = Settings["Paths"]["Downloads"]
+            downloadPath = input(f"\nCurrently the download path is: {settingsDownload_path}\nNew download path (Press <Enter>, If you don't wish to change the path): ")
+            
+            if(sysOs != "Linux") and (downloadPath != ''):
+                Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
+            elif(downloadPath != ''):
+                Settings["Paths"]["Downloads"] = downloadPath
             
             WriteJSON(setting_path, Settings, 'w')
 
-        elif(ans4 == "2"):
-            print("\nCurrently the download format is: " + Settings["Settings"]["Format"] + "\nAvailable formats: WAV, VORBIS, OPUS, M4A, FLAC, AAC, MP3")
-            formate, formats = "", ["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
-            while((formate in formats) == False):
-                formate = input("Format chosen (Press <Enter>, If you don't wish to change the format): ")
-            if(formate != ""):
-                Settings["Settings"]["Format"] = formate
+        elif(answer == "4"):
+            settingplaylist_path = Settings["Paths"]["Playlist"]
+            PlaylistPath = input(f"\nCurrently the Playlist path is: {settingplaylist_path} \nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
             
-            WriteJSON(setting_path, Settings, 'w')
-
-        elif(ans4 == "3"):
-            if(Settings["Paths"]["Downloads"] == ""):
-                downloadPath = input("\nCurrently the download path is empty, please enter a path: ")
-                
-                if(sysOs != "Linux"):
-                    Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
-                else:
-                    Settings["Paths"]["Downloads"] = downloadPath
+            if(sysOs != "Linux"):
+                Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
             else:
-                downloadPath = input("\nCurrently the download path is: ", (Settings["Paths"]["Downloads"].replace("\\", r"\"")).replace('"', ''), "\nNew download path (Press <Enter>, If you don't wish to change the path): ")
+                Settings["Paths"]["Playlist"] = PlaylistPath
                 
-                if(sysOs != "Linux"):
-                    Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
-                else:
-                    Settings["Paths"]["Downloads"] = downloadPath
-                    
-            WriteJSON(setting_path, Settings, 'w')
-
-        elif(ans4 == "4"):
-            if(Settings["Paths"]["Playlist"] == ""):
-                PlaylistPath = input("\nCurrently the Playlist path is empty, please enter a path: ")
-                
-                if(sysOs != "Linux"):
-                    Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
-                else:
-                    Settings["Paths"]["Playlist"] = PlaylistPath
-            else:
-                PlaylistPath = input("\nCurrently the Playlist path is: ", (Settings["Paths"]["Playlist"].replace("\\", r"\"")).replace('"', ''), "\nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
-                
-                if(sysOs != "Linux"):
-                    Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
-                else:
-                    Settings["Paths"]["Playlist"] = PlaylistPath
-                    
             WriteJSON(setting_path, Settings, 'w')
 
     elif(answer == "5"):

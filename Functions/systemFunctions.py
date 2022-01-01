@@ -23,8 +23,8 @@ def getDataJSON(filePath, jsonPath):
 #Handle the windows path and Linux path
 def convertPath(path):
     sysos = getDataJSON(setting_path, "System Os")
-    if(sysos == 'Linux'):
-        return path.replace('/', '/')
+    if(sysos.lower() == 'linux'):
+        return path
     else:
         return path.replace('/', '\\')
 
@@ -35,8 +35,7 @@ def WriteJSON(filePath, toWrite, mode):
 
 #Set outdated path
 def SetOutdatedPath(settingFile):
-    odPlaylist_path = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + '/Outdated Playlists')
-    settingFile["Settings"]["Paths"]["Outdated Playlists"] = odPlaylist_path
+    settingFile["Settings"]["Paths"]["Outdated Playlists"] = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + 'Outdated Playlists/')
     return settingFile
 
 #Print loadtext.txt
