@@ -9,16 +9,28 @@ import spotipy
 
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
-from Functions.systemFunctions import printLoad, getDataJSON, WriteJSON, ReadFILE
-from Functions.systemFunctions import convertPath, SetOutdatedPath, isFilePlaylist, movePlaylists
+from Functions.systemFunctions import * 
 
 #Importing playlistHandeling
-from Functions.playlistHandeling import getPlaylistInformation, SpotipySession, RefreshPlaylistFile
-from Functions.playlistHandeling import CreatePlaylist, PlaylistManager
+from Functions.playlistHandeling import *
 
+
+#Setting up needed files
+SettingUp()
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
+
+#Returns playlist songs in whatever order
+def getPlaylistURL(pl_id):
+    resultTrackItems = Spotipy_Session.playlist(pl_id)["tracks"]["items"]
+    pl_links = []
+    for item in resultTrackItems:
+        try:
+            pl_links.append(item["track"]["external_urls"]["spotify"])
+        except KeyError:
+            pass  
+    return pl_links
 
 #Downloader
 def Downloads():
@@ -37,21 +49,37 @@ def Downloads():
         quality_type = DownloadSettings(Savify)[0]
         download_format = DownloadSettings(Savify)[1]
         
-        logger = Logger(log_location='logs/', log_level=None)
+        #Logging stuff
+        log_location = "logs/"
+        logger = Logger(log_location=log_location, log_level=None) # Silent output
+        CleanLogs(log_location)
+        
+        #Session
         Session = Savify(logger=logger,
                          quality=quality_type,
                          download_format=download_format,
                          path_holder=PathHolder(downloads_path=downloadPath))
-        Session.download(Playlists[counterPlaylist][playlist_Name]["Links"]["URL"])
+        
+        #Download each song individually
+        pl_links = getPlaylistURL(Playlists[counterPlaylist][playlist_Name]["Links"]["ID"])
+        for link in pl_links:
+            Session.download(link)
+        
+        print("\tDownloaded Playlist -> " + playlist_Name + "\n")
         counterPlaylist += 1
     print("\n>Download is finished! All songs are downloaded.")
 
-#print the name of the playlist and the discription
-def printPlaylist(counter, total, link, Spotipy_Session):
-    playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
-    Result = Spotipy_Session.playlist(playlist_ID)
-    print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.\n\t({counter}/{total})\n")
-    input()
+#print the name of the playlist and the description
+def printPlaylist(link, Spotipy_Session):
+    if("album" not in link):
+        playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
+        Result = Spotipy_Session.playlist(playlist_ID)
+        print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
+    else:
+        album_ID = link[link.find("album/") + len("album/"):]
+        Result = Spotipy_Session.album(album_ID)
+        WriteJSON("result.json", Result, "w")
+        print(f"\n\t{Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
 
 #Add playlist link in the json file Playlists Informations.json
 def AddLink(list):
@@ -94,7 +122,7 @@ def PlaylistUpdate():
 #Print the load text, load the savify client
 def Load(Spotipy_Session):
     printLoad(0, 18)
-
+    
     settingFile = ReadFILE(setting_path)
     if(settingFile["Settings"]["Paths"]["Downloads"] == ""):
         downloadPath = input(".Enter a path where to store downloaded music: ")
@@ -164,7 +192,8 @@ def SelectCommand(Spotipy_Session):
         SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
         for playlist, counter in zip(SavifyPlaylists, range(1, len(SavifyPlaylists) + 1)):
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
-            printPlaylist(counter, len(SavifyPlaylists), playlistLink,  Spotipy_Session)
+            printPlaylist(playlistLink,  Spotipy_Session)
+            input()
 
     elif(answer == "4"):
         printLoad(29, 37)

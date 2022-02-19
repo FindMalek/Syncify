@@ -1,9 +1,38 @@
 import json, os, shutil
 from datetime import datetime
 
+
+#Write on JSON files
+def WriteJSON(filePath, toWrite, mode):
+    with open(filePath, mode) as outfile:
+        json.dump(toWrite, outfile, indent=4)
+
+#Create "Playlists Informations.json" and "Settings.json"
+def SettingUp():
+    currentPath = os.path.abspath(os.getcwd())
+    Settings = {
+        "System Os": "",
+        "Settings": {
+            "Quality": "BEST",
+            "Format": "MP3",
+            "Paths": {
+                "Downloads": "",
+                "Playlist": "",
+                "Outdated Playlists": ""
+            }
+        }
+    }
+    WriteJSON(currentPath + "Settings.json", Settings, "w")
+    
+    playlistInformations = {
+        "Playlists Informations" : [],
+        "Playlists links": []
+    }
+    WriteJSON(currentPath + "Playlists Informations.json", playlistInformations, 'w')
+    
 setting_path = "Settings.json"
 
-#read any file
+#read JSON and TXT files
 def ReadFILE(path):
     if(path[-3:] == "txt"):
         with open(path, "r") as file:
@@ -27,11 +56,6 @@ def convertPath(path):
         return path
     else:
         return path.replace('/', '\\')
-
-#Write on JSON files
-def WriteJSON(filePath, toWrite, mode):
-    with open(filePath, mode) as outfile:
-        json.dump(toWrite, outfile, indent=4)
 
 #Set outdated path
 def SetOutdatedPath(settingFile):
@@ -69,3 +93,6 @@ def movePlaylists():
         pl_path = convertPath(playlist_path + "/" + file)
         odPl_path = convertPath(odFolder_path + "/" + file)
         shutil.move(pl_path, odPl_path)
+        
+def CleanLogs(path):
+    shutil.rmtree(path)

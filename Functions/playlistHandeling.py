@@ -57,18 +57,20 @@ def RefreshPlaylistFile(Spotipy_Session):
     Playlists["Playlists Informations"] = playlist_list
     WriteJSON(playlist_path, Playlists, 'w')
 
-#Create the playlist
+#Create the playlist // supports m3a and m3u8 formats
 def CreatePlaylist(order):
     SavifySettings = getDataJSON(setting_path, "Settings")
     playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
+    musicPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
-    fileName = convertPath(playlistPath + "/" + order["Name"] + ".m3u")
+    fileName = convertPath(playlistPath + order["Name"] + ".m3u")
+    
     with open(fileName, "w") as playlistm3a:
-        playlistm3a.write("#EXTM3U\n")
+        playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:
-            playlistm3a.write(line + "\n")
+            playlistm3a.write(musicPath + line + "\n")
 
-    
+
 #Manage .m3u playlists
 def PlaylistManager(Spotipy_Session, playlist_id):
     SavifySettings = getDataJSON(setting_path, "Settings")
@@ -77,9 +79,8 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     
     pl_order = {"Name": playlist["name"], "Order": []}
     for i in range(0, len(playlist["tracks"]["items"])):
-        songLocation = convertPath(str(downloadLocation)+ "/"
-                                 + playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
+        songLocation = convertPath(playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
                                  + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] +
                                  '.' + SavifySettings["Format"].lower())
         pl_order["Order"].append(songLocation)
-    return pl_order     
+    return pl_order   
