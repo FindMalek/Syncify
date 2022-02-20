@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 #importing systemFunctions
-from Functions.systemFunctions import getDataJSON, ReadFILE, WriteJSON, convertPath
+from Functions.systemFunctions import *
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
@@ -18,9 +18,16 @@ Spotipy_Session = SpotipySession()
 #get the needed informations to fill up the Playlist JSON file
 def getPlaylistInformation(Spotipy_Session, toGet, link, playlist_ID=""):
     if(toGet == "ID"):
-        return "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
+        if(isLinkAlbum(link)):
+            return "spotify:album:" + link[link.find("album/") + len("album/"):]
+        else:
+            return "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
     
-    spotipyResult = Spotipy_Session.playlist(playlist_ID)
+    if(isLinkAlbum(link)):
+        spotipyResult = Spotipy_Session.album(link[link.find("album/") + len("album/"):])
+    else:
+        spotipyResult = Spotipy_Session.playlist(playlist_ID)
+    
     if(toGet == "Name"):
         return spotipyResult["name"]
     elif(toGet == "Image URL"):
@@ -64,7 +71,6 @@ def CreatePlaylist(order):
     musicPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
     fileName = convertPath(playlistPath + order["Name"] + ".m3u")
-    
     with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:
@@ -77,10 +83,18 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
     playlist = Spotipy_Session.playlist(playlist_id)
     
+    WriteJSON("result.json", playlist, 'w')
     pl_order = {"Name": playlist["name"], "Order": []}
-    for i in range(0, len(playlist["tracks"]["items"])):
-        songLocation = convertPath(playlist["tracks"]["items"][i]["track"]["artists"][0]["name"]
-                                 + ' - ' + playlist["tracks"]["items"][i]["track"]["name"] +
-                                 '.' + SavifySettings["Format"].lower())
-        pl_order["Order"].append(songLocation)
+    
+    for track in playlist["tracks"]["items"]:
+        songLocation = convertPath(
+            track["track"]["artists"][0]["name"] + ' - ' +
+            track["track"]["name"] + '.' +
+            SavifySettings["Format"].lower()
+        )
+        pl_order["Order"].append(track["track"]["album"]["name"] + "*" + songLocation)
+    pl_order["Order"] = sorted(pl_order["Order"])
+    for i in range(0, len(pl_order["Order"])):
+        pl_order["Order"][i] = pl_order["Order"][i][pl_order["Order"][i].find("*") + 1:]
+        
     return pl_order   

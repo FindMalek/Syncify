@@ -94,5 +94,13 @@ def movePlaylists():
         odPl_path = convertPath(odFolder_path + "/" + file)
         shutil.move(pl_path, odPl_path)
         
+#Deletes the log files
 def CleanLogs(path):
     shutil.rmtree(path)
+    
+#Checks if a link is playlist or album
+def isLinkAlbum(link):
+    if("album" not in link):
+        return False
+    else:
+        return True

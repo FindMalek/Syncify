@@ -23,11 +23,18 @@ playlist_path = convertPath("Data/Playlists Informations.json")
 
 #Returns playlist songs in whatever order
 def getPlaylistURL(pl_id):
-    resultTrackItems = Spotipy_Session.playlist(pl_id)["tracks"]["items"]
+    if(isLinkAlbum(pl_id)):
+        resultTrackItems = Spotipy_Session.album(pl_id)["tracks"]["items"]
+    else:
+        resultTrackItems = Spotipy_Session.playlist(pl_id)["tracks"]["items"]
+
     pl_links = []
     for item in resultTrackItems:
         try:
-            pl_links.append(item["track"]["external_urls"]["spotify"])
+            if(isLinkAlbum(pl_id)):
+                pl_links.append(item["external_urls"]["spotify"])
+            else:
+                pl_links.append(item["track"]["external_urls"]["spotify"])
         except KeyError:
             pass  
     return pl_links
@@ -71,14 +78,13 @@ def Downloads():
 
 #print the name of the playlist and the description
 def printPlaylist(link, Spotipy_Session):
-    if("album" not in link):
+    if(isLinkAlbum(link)):
         playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
         Result = Spotipy_Session.playlist(playlist_ID)
         print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
     else:
         album_ID = link[link.find("album/") + len("album/"):]
         Result = Spotipy_Session.album(album_ID)
-        WriteJSON("result.json", Result, "w")
         print(f"\n\t{Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
 
 #Add playlist link in the json file Playlists Informations.json
@@ -98,7 +104,10 @@ def AddPlaylist(Spotipy_Session):
         if(link != ""):
             #Print the name of the playlist and the description
             printPlaylist(link, Spotipy_Session)
-            listPL.append(link[:link.find("?")])
+            if(isLinkAlbum(link)):
+                listPL.append(link[:link.find("?")])
+            else:
+                listPL.append(link)
         else:
             print(">No playlist have been entered!")
     AddLink(listPL)
@@ -115,8 +124,9 @@ def PlaylistUpdate():
             playlistID_list.append(playlist[key]["Links"]["ID"])
             
     for pl_id in playlistID_list:
-        pl_order = PlaylistManager(Spotipy_Session, pl_id)
-        CreatePlaylist(pl_order)
+        if(isLinkAlbum(pl_id) == False):
+            pl_order = PlaylistManager(Spotipy_Session, pl_id)
+            CreatePlaylist(pl_order)
     print("\n>All playlist files are created.")
 
 #Print the load text, load the savify client
@@ -190,7 +200,7 @@ def SelectCommand(Spotipy_Session):
 
     elif(answer == "3"):
         SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
-        for playlist, counter in zip(SavifyPlaylists, range(1, len(SavifyPlaylists) + 1)):
+        for playlist in SavifyPlaylists:
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
             printPlaylist(playlistLink,  Spotipy_Session)
             input()
@@ -222,7 +232,7 @@ def SelectCommand(Spotipy_Session):
             settingsDownload_path = Settings["Paths"]["Downloads"]
             downloadPath = input(f"\nCurrently the download path is: {settingsDownload_path}\nNew download path (Press <Enter>, If you don't wish to change the path): ")
             
-            if(sysOs != "Linux") and (downloadPath != ''):
+            if(sysOs.lower() != "linux") and (downloadPath != ''):
                 Settings["Paths"]["Downloads"] = downloadPath.replace(r"\"", "\\")
             elif(downloadPath != ''):
                 Settings["Paths"]["Downloads"] = downloadPath
@@ -233,7 +243,7 @@ def SelectCommand(Spotipy_Session):
             settingplaylist_path = Settings["Paths"]["Playlist"]
             PlaylistPath = input(f"\nCurrently the Playlist path is: {settingplaylist_path} \nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
             
-            if(sysOs != "Linux"):
+            if(sysOs.lower() != "linux"):
                 Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
             else:
                 Settings["Paths"]["Playlist"] = PlaylistPath
@@ -249,7 +259,8 @@ def SelectCommand(Spotipy_Session):
         quit()
 
 #Main
-Spotipy_Session = SpotipySession()
-Load(Spotipy_Session)
-while(True):
-    SelectCommand(Spotipy_Session)
+if __name__ == '__main__':
+    Spotipy_Session = SpotipySession()
+    Load(Spotipy_Session)
+    while(True):
+        SelectCommand(Spotipy_Session)
