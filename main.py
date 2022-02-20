@@ -78,7 +78,7 @@ def Downloads():
 
 #print the name of the playlist and the description
 def printPlaylist(link, Spotipy_Session):
-    if(isLinkAlbum(link)):
+    if(isLinkAlbum(link) == False):
         playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
         Result = Spotipy_Session.playlist(playlist_ID)
         print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
