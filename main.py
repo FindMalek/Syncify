@@ -11,12 +11,12 @@ import spotipy
 import logging, json, shutil, os, fnmatch
 from Functions.systemFunctions import * 
 
+#Setting up needed files
+SettingUp()
+
 #Importing playlistHandeling
 from Functions.playlistHandeling import *
 
-
-#Setting up needed files
-SettingUp()
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
