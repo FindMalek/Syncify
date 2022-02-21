@@ -105,9 +105,9 @@ def AddPlaylist(Spotipy_Session):
             #Print the name of the playlist and the description
             printPlaylist(link, Spotipy_Session)
             if(isLinkAlbum(link)):
-                listPL.append(link[:link.find("?")])
-            else:
                 listPL.append(link)
+            else:
+                listPL.append(link[:link.find("?")])
         else:
             print(">No playlist have been entered!")
     AddLink(listPL)
