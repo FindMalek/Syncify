@@ -83,7 +83,6 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
     playlist = Spotipy_Session.playlist(playlist_id)
     
-    WriteJSON("result.json", playlist, 'w')
     pl_order = {"Name": playlist["name"], "Order": []}
     
     for track in playlist["tracks"]["items"]:
