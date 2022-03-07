@@ -98,3 +98,11 @@ def PlaylistManager(Spotipy_Session, playlist_id):
         pl_order["Order"][i] = pl_order["Order"][i][pl_order["Order"][i].find("*") + 1:]
         
     return pl_order   
+
+def popAlbums():
+    playlistInfos = ReadFILE(playlist_path)
+    for element in playlistInfos["Playlists links"]:
+        if("album" in element):
+            playlistInfos["Playlists links"].remove(element)
+    
+    WriteJSON(playlist_path, playlistInfos, 'w')

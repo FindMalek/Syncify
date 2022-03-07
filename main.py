@@ -1,3 +1,10 @@
+__title__ = "Syncify"
+__author__ = "Malek Gara-Hellal"
+__email__ = 'malekgarahellalbus@gmail.com'
+__version__ = '1.0.3'
+
+
+
 #importing Savify
 from savify import Savify
 from savify.types import Type, Format, Quality
@@ -104,10 +111,10 @@ def AddPlaylist(Spotipy_Session):
         if(link != ""):
             #Print the name of the playlist and the description
             printPlaylist(link, Spotipy_Session)
-            if(isLinkAlbum(link)):
-                listPL.append(link)
-            else:
+            if("?" in link):
                 listPL.append(link[:link.find("?")])
+            else:
+                listPL.append(link)
         else:
             print(">No playlist have been entered!")
     AddLink(listPL)
@@ -128,6 +135,9 @@ def PlaylistUpdate():
             pl_order = PlaylistManager(Spotipy_Session, pl_id)
             CreatePlaylist(pl_order)
     print("\n>All playlist files are created.")
+    
+    #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
+    popAlbums()
 
 #Print the load text, load the savify client
 def Load(Spotipy_Session):
