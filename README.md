@@ -28,9 +28,9 @@ Now you need to add 2 environment variables to your system:
 To find out how to do this find a tutorial online for your specific operating system. Once you have done this make sure to restart your shell.
 
 ## Installation
-`git clone https://github.com/FindMalek/Syncify.git`
-`cd Syncify-main`
-`sudo python3 -m pip install -r requirements.txt`
+```git clone https://github.com/FindMalek/Syncify.git```
+```cd Syncify-main```
+```sudo python3 -m pip install -r requirements.txt```
 Run with `python3 main.py`
 
 A tutorial will be coming soon..
