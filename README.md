@@ -29,8 +29,11 @@ To find out how to do this find a tutorial online for your specific operating sy
 
 ## Installation
 ```git clone https://github.com/FindMalek/Syncify.git```
+
 ```cd Syncify-main```
+
 ```sudo python3 -m pip install -r requirements.txt```
+
 Run with `python3 main.py`
 
 A tutorial will be coming soon..
