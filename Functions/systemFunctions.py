@@ -106,9 +106,17 @@ def movePlaylists():
         odPl_path = convertPath(odFolder_path + "/" + file)
         shutil.move(pl_path, odPl_path)
         
-#Deletes the log files
-def CleanLogs(path):
-    shutil.rmtree(path)
+#Deletes the temporary files
+def deleteTemporaryFiles(path):
+    print(convertPath(path + "/Functions/__pycache__/"))
+    try:
+        shutil.rmtree(convertPath(path + '/tmp/'))
+    except OSError:
+        pass
+    try:
+        os.remove(convertPath(path + '/.cache'))
+    except OSError:
+        pass  
     
 #Checks if a link is playlist or album
 def isLinkAlbum(link):

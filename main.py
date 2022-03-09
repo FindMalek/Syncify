@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.3'
+__version__ = '1.0.4.2'
 
 
 
@@ -64,9 +64,7 @@ def Downloads():
         download_format = DownloadSettings(Savify)[1]
         
         #Logging stuff
-        log_location = "logs/"
-        logger = Logger(log_location=log_location, log_level=None) # Silent output
-        CleanLogs(log_location)
+        logger = Logger(log_location=convertPath("/tmp/"), log_level=None) # Silent output
         
         #Session
         Session = Savify(logger=logger,
@@ -274,3 +272,4 @@ if __name__ == '__main__':
     Load(Spotipy_Session)
     while(True):
         SelectCommand(Spotipy_Session)
+        deleteTemporaryFiles(os.getcwd())

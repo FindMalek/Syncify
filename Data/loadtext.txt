@@ -22,7 +22,7 @@
     1. Enter playlist links 
         Press <Enter> to stop.
     2. Start downloading the saved playlists.
-        Downloads all the playlists that are saved, and make a playlist file <.m3a>.
+        Downloads all the playlists that are saved, and make a playlist file <.m3u>.
     3. Check the saved playlists.
         Print all the saved playlists
     4. Change the setting of Syncify.
@@ -33,8 +33,8 @@
                 Recommended to keep it <MP3>
            3. Change the location of the downloaded music.
                 Where Syncify downloads the music.
-           4. Change the location of the stored playlist (.m3a)
-                Where the playlist <.m3a> files are stored.
+           4. Change the location of the stored playlist (.m3u)
+                Where the playlist <.m3u> files are stored.
     5. Correct the song.
         Use this command when you download a song but it dosen't match the version in the Spotify.
         <This command is coming in the next updates...>
