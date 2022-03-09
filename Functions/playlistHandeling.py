@@ -103,5 +103,4 @@ def popAlbums():
     for element in playlistInfos["Playlists links"]:
         if("album" in element):
             playlistInfos["Playlists links"].remove(element)
-    
     WriteJSON(playlist_path, playlistInfos, 'w')

@@ -108,7 +108,6 @@ def movePlaylists():
         
 #Deletes the temporary files
 def deleteTemporaryFiles(path):
-    print(convertPath(path + "/Functions/__pycache__/"))
     try:
         shutil.rmtree(convertPath(path + '/tmp/'))
     except OSError:

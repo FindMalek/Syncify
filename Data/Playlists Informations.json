@@ -170,33 +170,6 @@
                     "ID": "spotify:playlist:1u1oMXEiC9Y2Rwy8tcpgux"
                 }
             }
-        },
-        {
-            "Woods 5: Grey Skies & Electric Light": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b273a7e4d2b8e3514866dd34720b",
-                "Links": {
-                    "URL": "https://open.spotify.com/album/0Rap0bS5EZeaKFoma3tjGs",
-                    "ID": "spotify:album:0Rap0bS5EZeaKFoma3tjGs"
-                }
-            }
-        },
-        {
-            "The Wrong Side Of Heaven And The Righteous Side Of Hell, Volume 2": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b273a0c971d4cbfc9d5665d14b3d",
-                "Links": {
-                    "URL": "https://open.spotify.com/album/0RP9MT74WH7Yis10EO7tZS",
-                    "ID": "spotify:album:0RP9MT74WH7Yis10EO7tZS"
-                }
-            }
-        },
-        {
-            "Legenden": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b273423fcf866280011979f23e91",
-                "Links": {
-                    "URL": "https://open.spotify.com/album/0robahlOp6ys9i4nzMBCGS",
-                    "ID": "spotify:album:0robahlOp6ys9i4nzMBCGS"
-                }
-            }
         }
     ],
     "Playlists links": [
@@ -218,9 +191,6 @@
         "https://open.spotify.com/playlist/6VnR28qfPwj0zVbrKjFHug",
         "https://open.spotify.com/playlist/0Dt0CmBIUJ94JV7coMwYNg",
         "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
-        "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
-        "https://open.spotify.com/album/0Rap0bS5EZeaKFoma3tjGs",
-        "https://open.spotify.com/album/0RP9MT74WH7Yis10EO7tZS",
-        "https://open.spotify.com/album/0robahlOp6ys9i4nzMBCGS"
+        "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux"
     ]
 }
