@@ -40,7 +40,6 @@ To find out how to do this find a tutorial online for your specific operating sy
 ```cd Syncify-main```
 
 ```sudo python3 -m pip install -r requirements.txt```
->>>>>>> 4bcdf636e20f5e42e2dfd10b800e4069df30300a
 
 Run with `python3 main.py`
 
