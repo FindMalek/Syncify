@@ -1,2 +1,2 @@
 spotipy==2.16.1
-savify==2.3.4
+savify==v2.3.4

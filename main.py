@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.4.2'
+__version__ = '1.0.5'
 
 
 
@@ -24,30 +24,16 @@ SettingUp()
 #Importing playlistHandeling
 from Functions.playlistHandeling import *
 
+#Importing trackHandeling
+from Functions.trackHandeling import *
+
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
 
-#Returns playlist songs in whatever order
-def getPlaylistURL(pl_id):
-    if(isLinkAlbum(pl_id)):
-        resultTrackItems = Spotipy_Session.album(pl_id)["tracks"]["items"]
-    else:
-        resultTrackItems = Spotipy_Session.playlist(pl_id)["tracks"]["items"]
-
-    pl_links = []
-    for item in resultTrackItems:
-        try:
-            if(isLinkAlbum(pl_id)):
-                pl_links.append(item["external_urls"]["spotify"])
-            else:
-                pl_links.append(item["track"]["external_urls"]["spotify"])
-        except KeyError:
-            pass  
-    return pl_links
 
 #Downloader
-def Downloads():
+def Downloads(Spotipy_Session):
     #Get time before downloading the music and then compare every
     #music that its created time is later than that time and move it to
     #newly downloaded music  <Coming Soon>
@@ -73,11 +59,15 @@ def Downloads():
                          path_holder=PathHolder(downloads_path=downloadPath))
         
         #Download each song individually
-        pl_links = getPlaylistURL(Playlists[counterPlaylist][playlist_Name]["Links"]["ID"])
-        for link in pl_links:
-            Session.download(link)
+        tracksPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
+        for link in getTracks(Playlists[counterPlaylist][playlist_Name]["Links"]["ID"]):
+            track = trackInformation(Spotipy_Session, link)
+            if(isDownloaded(track) == False):
+                print(f"Downloading > {track[:-4]}")
+                Session.download(link)
+                print(f"Downloaded -> {track[:-4]}")
         
-        print("\tDownloaded Playlist -> " + playlist_Name + "\n")
+        print(f"\tDownloaded Playlist -> {playlist_Name}\n")
         counterPlaylist += 1
     print("\n>Download is finished! All songs are downloaded.")
 
@@ -119,9 +109,6 @@ def AddPlaylist(Spotipy_Session):
 
 #updating the playlists
 def PlaylistUpdate():  
-    #move the old playlists to the outdated folder
-    movePlaylists()  
-    
     playlist_list = getDataJSON(playlist_path, "Playlists Informations")
     playlistID_list = []
     for playlist in playlist_list:
@@ -149,9 +136,6 @@ def Load(Spotipy_Session):
     if(settingFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
         settingFile["Settings"]["Paths"]["Playlist"] = playlistPath
-        
-    settingFile = SetOutdatedPath(settingFile)
-    WriteJSON(setting_path, settingFile, 'w')
 
     playlistFile = getDataJSON(playlist_path, "Playlists Informations")
     if(playlistFile == []):
@@ -203,7 +187,7 @@ def SelectCommand(Spotipy_Session):
         #And move Outdated Playlists to the Outdated folder
         #It keeps a version of each playlist
         RefreshPlaylistFile(Spotipy_Session)
-        Downloads()  
+        Downloads(Spotipy_Session)  
         PlaylistUpdate()
 
     elif(answer == "3"):

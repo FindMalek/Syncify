@@ -83,15 +83,21 @@ def PlaylistManager(Spotipy_Session, playlist_id):
     downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
     playlist = Spotipy_Session.playlist(playlist_id)
     
-    pl_order = {"Name": playlist["name"], "Order": []}
-    
+    pl_order = {
+                    "Name": playlist["name"],
+                    "Order": []
+            }
+    #ALBUM*TRACKLOCATION+TrackName
     for track in playlist["tracks"]["items"]:
-        songLocation = convertPath(
-            track["track"]["artists"][0]["name"] + ' - ' +
-            track["track"]["name"] + '.' +
-            SavifySettings["Format"].lower()
-        )
-        pl_order["Order"].append(track["track"]["album"]["name"] + "*" + songLocation)
+        trackName = (
+                    track["track"]["artists"][0]["name"] + ' - ' +
+                    track["track"]["name"] + '.' +
+                    SavifySettings["Format"].lower()
+                )
+            
+        pl_order["Order"].append(track["track"]["album"]["name"] + "*" + trackName)
+    
+    #TRACKLOCATION+TrackName
     pl_order["Order"] = sorted(pl_order["Order"])
     for i in range(0, len(pl_order["Order"])):
         pl_order["Order"][i] = pl_order["Order"][i][pl_order["Order"][i].find("*") + 1:]

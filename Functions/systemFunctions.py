@@ -50,8 +50,7 @@ def SettingUp():
             "Format": "MP3",
             "Paths": {
                 "Downloads": "",
-                "Playlist": "",
-                "Outdated Playlists": ""
+                "Playlist": ""
             }
         }
     }
@@ -69,11 +68,6 @@ def SettingUp():
     
 setting_path = "Settings.json"
 
-#Set outdated path
-def SetOutdatedPath(settingFile):
-    settingFile["Settings"]["Paths"]["Outdated Playlists"] = convertPath(settingFile["Settings"]["Paths"]["Playlist"] + 'Outdated Playlists/')
-    return settingFile
-
 #Print loadtext.txt
 def printLoad(start, end): 
     loadText = ReadFILE(convertPath("Data/loadtext.txt"))[start:end]
@@ -88,23 +82,6 @@ def isFilePlaylist(file):
         return True
     else:
         return False
-
-#Store the old playlists in a folder with a date in it
-def movePlaylists():
-    playlist_path = getDataJSON(setting_path, "Settings/Paths/Playlist")
-    odFolder_path = convertPath(getDataJSON(setting_path, "Settings/Paths/Outdated Playlists") + "/" + datetime.now().strftime("%Y-%m-%d (%Hh.%Mm)")) 
-    
-    sysos = getDataJSON(setting_path, "System Os")
-    files = [f for f in os.listdir(playlist_path) if (os.path.isfile(f) and (isFilePlaylist(f) == True))]
-    for file in files:
-        try:
-            os.makedirs(odFolder_path)    
-        except FileExistsError:
-            pass 
-        #move the old playlist to the outdated folder
-        pl_path = convertPath(playlist_path + "/" + file)
-        odPl_path = convertPath(odFolder_path + "/" + file)
-        shutil.move(pl_path, odPl_path)
         
 #Deletes the temporary files
 def deleteTemporaryFiles(path):
