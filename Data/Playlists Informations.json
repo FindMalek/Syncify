@@ -1,0 +1,56 @@
+{
+    "Playlists Informations": [
+        {
+            "just dark metal": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737cf2fa22321c862465e237daab67616d0000b2738d529980602b892735c091c7ab67616d0000b273f01ff2ac22f31e1dc480fb0bab67616d0000b273faf17a6ceb9fe1feada91ef0",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
+                    "ID": "spotify:playlist:7vjXezNk8qMwCsW4Xcg1Ll"
+                }
+            }
+        },
+        {
+            "heavy chill": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2738a2f9fa2bcc0c93703978a52ab67616d0000b273a49eff6d64cafc2551553380ab67616d0000b273a7e4d2b8e3514866dd34720bab67616d0000b273d6eb84f2391f9206d00f0660",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
+                    "ID": "spotify:playlist:4uau55EZrUw4hrQf4La32i"
+                }
+            }
+        },
+        {
+            "the holy": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730c100c40bdedea776770e7aaab67616d0000b2734f41a332a8deb1ff7b9ebafeab67616d0000b27355a21bacb7082eff509ed279ab67616d0000b273e0c2d5b7d5842299671c7320",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/2lbgWON6x5EVK2kI5v6FQv",
+                    "ID": "spotify:playlist:2lbgWON6x5EVK2kI5v6FQv"
+                }
+            }
+        },
+        {
+            "Built from War": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273dbfc6bedf72fe1a5f804b41f",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/7MddLpGzrzx1zy2bgNNvRq",
+                    "ID": "spotify:album:7MddLpGzrzx1zy2bgNNvRq"
+                }
+            }
+        },
+        {
+            "Amir": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273ef506280e70e4dbba1c94bc9",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy",
+                    "ID": "spotify:album:5znkKeZluet6ArfR5RplEy"
+                }
+            }
+        }
+    ],
+    "Playlists links": [
+        "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
+        "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
+        "https://open.spotify.com/playlist/2lbgWON6x5EVK2kI5v6FQv",
+        "https://open.spotify.com/album/7MddLpGzrzx1zy2bgNNvRq",
+        "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy"
+    ]
+}

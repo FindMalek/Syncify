@@ -1,0 +1,11 @@
+{
+    "System Os": "Windows",
+    "Settings": {
+        "Quality": "BEST",
+        "Format": "MP3",
+        "Paths": {
+            "Downloads": "C:\\Users\\SBS\\Music",
+            "Playlist": "C:\\Users\\SBS\\Music\\Playlist"
+        }
+    }
+}
