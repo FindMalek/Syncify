@@ -28,6 +28,240 @@
             }
         },
         {
+            "Amir": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273ef506280e70e4dbba1c94bc9",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy",
+                    "ID": "spotify:album:5znkKeZluet6ArfR5RplEy"
+                }
+            }
+        },
+        {
+            "BERSERK": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb629e78f147374acf9bf8a748",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/62lE4LViAuBykovM5yq2zY",
+                    "ID": "spotify:playlist:62lE4LViAuBykovM5yq2zY"
+                }
+            }
+        },
+        {
+            "Anger.": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb717519cbb235eaadbd1de867",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3TK5Tq4L9Q5P6YkFz70DiE",
+                    "ID": "spotify:playlist:3TK5Tq4L9Q5P6YkFz70DiE"
+                }
+            }
+        },
+        {
+            "Feel my rage.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27302add2c77fb6999e311a3248ab67616d0000b27373334683c071cfa000319c53ab67616d0000b2739989949d5b4f76d1aa9e0304ab67616d0000b273b5836f92f626bb4fe05b016a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
+                    "ID": "spotify:playlist:4eBoEZ89xY9nqcVigCBoaU"
+                }
+            }
+        },
+        {
+            "unleash the god within": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27302add2c77fb6999e311a3248ab67616d0000b2734eaa6b95827dced309afbe04ab67616d0000b27373334683c071cfa000319c53ab67616d0000b27396b4163add6c85325f8961fd",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3HyxE55XuaORFtL4SLKA7U",
+                    "ID": "spotify:playlist:3HyxE55XuaORFtL4SLKA7U"
+                }
+            }
+        },
+        {
+            "energy pill": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730ea1ecb2d5271c2db402b0c2ab67616d0000b2731e76eaa664f5b71699066c72ab67616d0000b273822cf865426a24c2237f4747ab67616d0000b2739989949d5b4f76d1aa9e0304",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4uhe84j6DaY22GObugBSwE",
+                    "ID": "spotify:playlist:4uhe84j6DaY22GObugBSwE"
+                }
+            }
+        },
+        {
+            "Rage.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27368780bf3f5a4af94f2c953c6ab67616d0000b27382298636c94b8167c4793db2ab67616d0000b273b695c1245015022c2ca5900aab67616d0000b273e2614e5ffdedb55a3816946c",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/6T5C4irGIAg0WpH5eb3aYQ",
+                    "ID": "spotify:playlist:6T5C4irGIAg0WpH5eb3aYQ"
+                }
+            }
+        },
+        {
+            "a workout mix": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb0a2d723528b0c7c75c4fd2bf",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/1hRFW8th6zBKKqSh7Lf7dE",
+                    "ID": "spotify:playlist:1hRFW8th6zBKKqSh7Lf7dE"
+                }
+            }
+        },
+        {
+            "Just high.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27367291695d95d55b5504156f1ab67616d0000b2737bb3a4dd85841c3133af079bab67616d0000b273b298538481c52f7e217ed000ab67616d0000b273c428f67b4a9b7e1114dfc117",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3DzaozszqS8oLHXiIUDRME",
+                    "ID": "spotify:playlist:3DzaozszqS8oLHXiIUDRME"
+                }
+            }
+        },
+        {
+            "Morning": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbf9d47a5e3cb4c0878e2f5f69",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/3ro0toqvurx4RPt2SEFiCC",
+                    "ID": "spotify:playlist:3ro0toqvurx4RPt2SEFiCC"
+                }
+            }
+        },
+        {
+            "just the mood to be sad": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730bed9affdad909c9c4baf35dab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b27367291695d95d55b5504156f1ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
+                    "ID": "spotify:playlist:2kPyOGqApBFu5CuuJBsRfA"
+                }
+            }
+        },
+        {
+            "late nights mood": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737bb3a4dd85841c3133af079bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273ad2af428ccc52bc175bab64b",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/5ZKp6FwxfFlnLnq62qy4tW",
+                    "ID": "spotify:playlist:5ZKp6FwxfFlnLnq62qy4tW"
+                }
+            }
+        },
+        {
+            "Felt sad": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b2734627b6aa3c28314c2479c17bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4295WQ4KvsUAtp3vAzC9NN",
+                    "ID": "spotify:playlist:4295WQ4KvsUAtp3vAzC9NN"
+                }
+            }
+        },
+        {
+            "Lana vibes": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273d0a93f4d6d61ec9f850218f9ab67616d0000b273f894be72a77b1488292672c7",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/5AwGcsnUtHZZWVvWajRALR",
+                    "ID": "spotify:playlist:5AwGcsnUtHZZWVvWajRALR"
+                }
+            }
+        },
+        {
+            "The love mood.": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27336b8b20d156605c4d5d1ee68ab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273f894be72a77b1488292672c7",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/43AE0H4dITYXiC3KziqTZK",
+                    "ID": "spotify:playlist:43AE0H4dITYXiC3KziqTZK"
+                }
+            }
+        },
+        {
+            "lovely": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebba617f0d86d3ebbc5cb909e2a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/6VnR28qfPwj0zVbrKjFHug",
+                    "ID": "spotify:playlist:6VnR28qfPwj0zVbrKjFHug"
+                }
+            }
+        },
+        {
+            "Vibing": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb52ee089e6e4530825a9995b8",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
+                    "ID": "spotify:playlist:1u1oMXEiC9Y2Rwy8tcpgux"
+                }
+            }
+        },
+        {
+            "Mind loop": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbde1ebd51ef91b9c8b2761948",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
+                    "ID": "spotify:playlist:624UgHw3C3WllV8P9ynSB4"
+                }
+            }
+        },
+        {
+            "The Heretics": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2732658fb6555f3a8309c513ed8",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/00oBoAA6p3N4jUGAGk19zr",
+                    "ID": "spotify:album:00oBoAA6p3N4jUGAGk19zr"
+                }
+            }
+        },
+        {
+            "Born To Die - The Paradise Edition": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273ebc8cfac8b586bc475b04918",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5VoeRuTrGhTbKelUfwymwu",
+                    "ID": "spotify:album:5VoeRuTrGhTbKelUfwymwu"
+                }
+            }
+        },
+        {
+            "Ibn El Leil": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2737e521931327ae0775498fe72",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2o1oVA8QBzR3vFbH1bs73d",
+                    "ID": "spotify:album:2o1oVA8QBzR3vFbH1bs73d"
+                }
+            }
+        },
+        {
+            "Born To Die (Deluxe Version)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273959280fee07d485cb5b56fe7",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2GGstjn2lepcltXd21I24t",
+                    "ID": "spotify:album:2GGstjn2lepcltXd21I24t"
+                }
+            }
+        },
+        {
+            "Strange Trails": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2731fa318e90c9d4ddc6b480853",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/4sD1qg4jwTZR4mvR4Iflk5",
+                    "ID": "spotify:album:4sD1qg4jwTZR4mvR4Iflk5"
+                }
+            }
+        },
+        {
+            "Killer Be Killed": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2735bbbc37d53ccfc3df58b6e01",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5dO5FIOACOIDicUFfEDDk6",
+                    "ID": "spotify:album:5dO5FIOACOIDicUFfEDDk6"
+                }
+            }
+        },
+        {
+            "The Way of the Fist": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2732451bb3248238cd835906aae",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5WKUwwYLzwSJAwMCrxhCdj",
+                    "ID": "spotify:album:5WKUwwYLzwSJAwMCrxhCdj"
+                }
+            }
+        },
+        {
+            "Hate \u00dcber Alles": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2733544064dd2cae1950ce24766",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/4BSudvLi4v6OZWm3uN5BSo",
+                    "ID": "spotify:album:4BSudvLi4v6OZWm3uN5BSo"
+                }
+            }
+        },
+        {
             "Built from War": {
                 "Image": "https://i.scdn.co/image/ab67616d0000b273dbfc6bedf72fe1a5f804b41f",
                 "Links": {
@@ -37,11 +271,227 @@
             }
         },
         {
-            "Amir": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b273ef506280e70e4dbba1c94bc9",
+            "Berserker": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273e70aac569b94abd971112f1b",
                 "Links": {
-                    "URL": "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy",
-                    "ID": "spotify:album:5znkKeZluet6ArfR5RplEy"
+                    "URL": "https://open.spotify.com/album/0svoIboyRzqgRpvBDbJtUE",
+                    "ID": "spotify:album:0svoIboyRzqgRpvBDbJtUE"
+                }
+            }
+        },
+        {
+            "Legenden": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273423fcf866280011979f23e91",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/0robahlOp6ys9i4nzMBCGS",
+                    "ID": "spotify:album:0robahlOp6ys9i4nzMBCGS"
+                }
+            }
+        },
+        {
+            "Liebe auf den ersten Fick": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273ec5b62ea83201fd0c70ba59c",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/53UzofG4KhaeIltNu2mDZQ",
+                    "ID": "spotify:album:53UzofG4KhaeIltNu2mDZQ"
+                }
+            }
+        },
+        {
+            "F8": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b27368780bf3f5a4af94f2c953c6",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/7vAcymF4feKxvqcUDzLQD2",
+                    "ID": "spotify:album:7vAcymF4feKxvqcUDzLQD2"
+                }
+            }
+        },
+        {
+            "The War to End All Wars": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2734973c03327b47148881afe9c",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/3kB4VjXKKCY7l5xeH113Da",
+                    "ID": "spotify:album:3kB4VjXKKCY7l5xeH113Da"
+                }
+            }
+        },
+        {
+            "The Sickness": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2732b222dcd5c4fcac7c0e81da2",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/6IvosVciDOQ9NAPaKwhtLY",
+                    "ID": "spotify:album:6IvosVciDOQ9NAPaKwhtLY"
+                }
+            }
+        },
+        {
+            "vertigo": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273da09e2843f974e8fdf807d27",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2Dbm63Nwx511E4HclnQto6",
+                    "ID": "spotify:album:2Dbm63Nwx511E4HclnQto6"
+                }
+            }
+        },
+        {
+            "System Of A Down": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2732dc63e977bd5101072adcef6",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/3sSfjX4fhZonjyZ10x0l0f",
+                    "ID": "spotify:album:3sSfjX4fhZonjyZ10x0l0f"
+                }
+            }
+        },
+        {
+            "Rammstein": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b27302add2c77fb6999e311a3248",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/1LoyJQVHPLHE3fCCS8Juek",
+                    "ID": "spotify:album:1LoyJQVHPLHE3fCCS8Juek"
+                }
+            }
+        },
+        {
+            "i think you think too much of me": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273c61b46cf682d7f0183fcb87c",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/7AVvQhnDEUidKyJsXmQ7ju",
+                    "ID": "spotify:album:7AVvQhnDEUidKyJsXmQ7ju"
+                }
+            }
+        },
+        {
+            "Faith Divides Us - Death Unites Us": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273f01ff2ac22f31e1dc480fb0b",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/69hISpPZVG5mINEJfKaluL",
+                    "ID": "spotify:album:69hISpPZVG5mINEJfKaluL"
+                }
+            }
+        },
+        {
+            "Ultraviolence (Deluxe)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2731624590458126fc8b8c64c2f",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/1ORxRsK3MrSLvh7VQTF01F",
+                    "ID": "spotify:album:1ORxRsK3MrSLvh7VQTF01F"
+                }
+            }
+        },
+        {
+            "Arson": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2737cf2fa22321c862465e237da",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2swBN6MZL9myFcJPgqQR2V",
+                    "ID": "spotify:album:2swBN6MZL9myFcJPgqQR2V"
+                }
+            }
+        },
+        {
+            "Undertow": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b27382298636c94b8167c4793db2",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/3Esn6LoXuWtLZNYq8FCzr0",
+                    "ID": "spotify:album:3Esn6LoXuWtLZNYq8FCzr0"
+                }
+            }
+        },
+        {
+            "Woods 5: Grey Skies & Electric Light": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273a7e4d2b8e3514866dd34720b",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/0Rap0bS5EZeaKFoma3tjGs",
+                    "ID": "spotify:album:0Rap0bS5EZeaKFoma3tjGs"
+                }
+            }
+        },
+        {
+            "Cigarettes After Sex": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b27394d280f0006107be47bb4fe7",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2mxFsS5yylSTHNivV53HoA",
+                    "ID": "spotify:album:2mxFsS5yylSTHNivV53HoA"
+                }
+            }
+        },
+        {
+            "End Credits": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273c7ec91ed46429c9a70351f6c",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5eESUGzjysOJC0S2y2KwYn",
+                    "ID": "spotify:album:5eESUGzjysOJC0S2y2KwYn"
+                }
+            }
+        },
+        {
+            "Laurel Hell": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273d8041a531487d0e0e4cfb41f",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/4rcinMUHEWOxpIwJo2sf22",
+                    "ID": "spotify:album:4rcinMUHEWOxpIwJo2sf22"
+                }
+            }
+        },
+        {
+            "Be the Cowboy": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273c428f67b4a9b7e1114dfc117",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/42cH7mrkfljkqkxA2Ip9Xq",
+                    "ID": "spotify:album:42cH7mrkfljkqkxA2Ip9Xq"
+                }
+            }
+        },
+        {
+            "Berserker": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273eae389f411e0a8d740d03561",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/499iZ0iesrciB5jO9jSOWx",
+                    "ID": "spotify:album:499iZ0iesrciB5jO9jSOWx"
+                }
+            }
+        },
+        {
+            "Woods 4: The Green Album": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273d6eb84f2391f9206d00f0660",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/6QCd6IRkbpty4LPPajcYvN",
+                    "ID": "spotify:album:6QCd6IRkbpty4LPPajcYvN"
+                }
+            }
+        },
+        {
+            "Trilogy": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273b298538481c52f7e217ed000",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/5EbpxRwbbpCJUepbqVTZ1U",
+                    "ID": "spotify:album:5EbpxRwbbpCJUepbqVTZ1U"
+                }
+            }
+        },
+        {
+            "Carolus Rex (English Version) [Bonus Version]": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b27324a4a55f361ac70f263e7764",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/6oHloP6K30IDq3KVNVIBOf",
+                    "ID": "spotify:album:6oHloP6K30IDq3KVNVIBOf"
+                }
+            }
+        },
+        {
+            "The Wrong Side Of Heaven And The Righteous Side Of Hell, Volume 2": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273a0c971d4cbfc9d5665d14b3d",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/0RP9MT74WH7Yis10EO7tZS",
+                    "ID": "spotify:album:0RP9MT74WH7Yis10EO7tZS"
+                }
+            }
+        },
+        {
+            "And Justice for None (Deluxe)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273fb94cdee49bcfbbefa8400ee",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2IA9d7atwNgtiS6Tpv9WKt",
+                    "ID": "spotify:album:2IA9d7atwNgtiS6Tpv9WKt"
                 }
             }
         }
@@ -50,7 +500,57 @@
         "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
         "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
         "https://open.spotify.com/playlist/2lbgWON6x5EVK2kI5v6FQv",
+        "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy",
+        "https://open.spotify.com/playlist/62lE4LViAuBykovM5yq2zY",
+        "https://open.spotify.com/playlist/3TK5Tq4L9Q5P6YkFz70DiE",
+        "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
+        "https://open.spotify.com/playlist/3HyxE55XuaORFtL4SLKA7U",
+        "https://open.spotify.com/playlist/4uhe84j6DaY22GObugBSwE",
+        "https://open.spotify.com/playlist/6T5C4irGIAg0WpH5eb3aYQ",
+        "https://open.spotify.com/playlist/1hRFW8th6zBKKqSh7Lf7dE",
+        "https://open.spotify.com/playlist/3DzaozszqS8oLHXiIUDRME",
+        "https://open.spotify.com/playlist/3ro0toqvurx4RPt2SEFiCC",
+        "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
+        "https://open.spotify.com/playlist/5ZKp6FwxfFlnLnq62qy4tW",
+        "https://open.spotify.com/playlist/4295WQ4KvsUAtp3vAzC9NN",
+        "https://open.spotify.com/playlist/5AwGcsnUtHZZWVvWajRALR",
+        "https://open.spotify.com/playlist/43AE0H4dITYXiC3KziqTZK",
+        "https://open.spotify.com/playlist/6VnR28qfPwj0zVbrKjFHug",
+        "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
+        "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
+        "https://open.spotify.com/album/00oBoAA6p3N4jUGAGk19zr",
+        "https://open.spotify.com/album/5VoeRuTrGhTbKelUfwymwu",
+        "https://open.spotify.com/album/2o1oVA8QBzR3vFbH1bs73d",
+        "https://open.spotify.com/album/2GGstjn2lepcltXd21I24t",
+        "https://open.spotify.com/album/4sD1qg4jwTZR4mvR4Iflk5",
+        "https://open.spotify.com/album/5dO5FIOACOIDicUFfEDDk6",
+        "https://open.spotify.com/album/5WKUwwYLzwSJAwMCrxhCdj",
+        "https://open.spotify.com/album/4BSudvLi4v6OZWm3uN5BSo",
         "https://open.spotify.com/album/7MddLpGzrzx1zy2bgNNvRq",
-        "https://open.spotify.com/album/5znkKeZluet6ArfR5RplEy"
+        "https://open.spotify.com/album/0svoIboyRzqgRpvBDbJtUE",
+        "https://open.spotify.com/album/0robahlOp6ys9i4nzMBCGS",
+        "https://open.spotify.com/album/53UzofG4KhaeIltNu2mDZQ",
+        "https://open.spotify.com/album/7vAcymF4feKxvqcUDzLQD2",
+        "https://open.spotify.com/album/3kB4VjXKKCY7l5xeH113Da",
+        "https://open.spotify.com/album/6IvosVciDOQ9NAPaKwhtLY",
+        "https://open.spotify.com/album/2Dbm63Nwx511E4HclnQto6",
+        "https://open.spotify.com/album/3sSfjX4fhZonjyZ10x0l0f",
+        "https://open.spotify.com/album/1LoyJQVHPLHE3fCCS8Juek",
+        "https://open.spotify.com/album/7AVvQhnDEUidKyJsXmQ7ju",
+        "https://open.spotify.com/album/69hISpPZVG5mINEJfKaluL",
+        "https://open.spotify.com/album/1ORxRsK3MrSLvh7VQTF01F",
+        "https://open.spotify.com/album/2swBN6MZL9myFcJPgqQR2V",
+        "https://open.spotify.com/album/3Esn6LoXuWtLZNYq8FCzr0",
+        "https://open.spotify.com/album/0Rap0bS5EZeaKFoma3tjGs",
+        "https://open.spotify.com/album/2mxFsS5yylSTHNivV53HoA",
+        "https://open.spotify.com/album/5eESUGzjysOJC0S2y2KwYn",
+        "https://open.spotify.com/album/4rcinMUHEWOxpIwJo2sf22",
+        "https://open.spotify.com/album/42cH7mrkfljkqkxA2Ip9Xq",
+        "https://open.spotify.com/album/499iZ0iesrciB5jO9jSOWx",
+        "https://open.spotify.com/album/6QCd6IRkbpty4LPPajcYvN",
+        "https://open.spotify.com/album/5EbpxRwbbpCJUepbqVTZ1U",
+        "https://open.spotify.com/album/6oHloP6K30IDq3KVNVIBOf",
+        "https://open.spotify.com/album/0RP9MT74WH7Yis10EO7tZS",
+        "https://open.spotify.com/album/2IA9d7atwNgtiS6Tpv9WKt"
     ]
 }
