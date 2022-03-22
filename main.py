@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.5'
+__version__ = '1.0.5.1'
 
 
 

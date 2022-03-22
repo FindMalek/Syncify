@@ -172,20 +172,29 @@
             }
         },
         {
-            "The War to End All Wars": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b2734973c03327b47148881afe9c",
-                "Links": {
-                    "URL": "https://open.spotify.com/album/3kB4VjXKKCY7l5xeH113Da",
-                    "ID": "spotify:album:3kB4VjXKKCY7l5xeH113Da"
-                }
-            }
-        },
-        {
             "just dark metal": {
                 "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737cf2fa22321c862465e237daab67616d0000b2738d529980602b892735c091c7ab67616d0000b273f01ff2ac22f31e1dc480fb0bab67616d0000b273faf17a6ceb9fe1feada91ef0",
                 "Links": {
                     "URL": "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
                     "ID": "spotify:playlist:7vjXezNk8qMwCsW4Xcg1Ll"
+                }
+            }
+        },
+        {
+            "The Heretics": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2732658fb6555f3a8309c513ed8",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/00oBoAA6p3N4jUGAGk19zr",
+                    "ID": "spotify:album:00oBoAA6p3N4jUGAGk19zr"
+                }
+            }
+        },
+        {
+            "Shadows of the Dying Sun": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273193d35e3a55430dc59d4c710",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/0iYAnDAQLAOXIl5bUAfYG3",
+                    "ID": "spotify:album:0iYAnDAQLAOXIl5bUAfYG3"
                 }
             }
         }
@@ -210,6 +219,7 @@
         "https://open.spotify.com/playlist/0Dt0CmBIUJ94JV7coMwYNg",
         "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
         "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
-        "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll"
+        "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
+        "https://open.spotify.com/album/0iYAnDAQLAOXIl5bUAfYG3"
     ]
 }
