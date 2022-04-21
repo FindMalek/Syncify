@@ -1,7 +1,6 @@
-import json, os, shutil, platform
+import json, os, shutil, platform, sys
 from os import listdir
 from os.path import isfile, join
-
 
  
 #read JSON and TXT files

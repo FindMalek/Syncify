@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.5.1'
+__version__ = '1.0.6'
 
 
 
@@ -16,16 +16,16 @@ import spotipy
 
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
-from Functions.systemFunctions import * 
+from Functions.SyncifyFunctions.systemFunctions import * 
 
 #Setting up needed files
 SettingUp()
 
 #Importing playlistHandeling
-from Functions.playlistHandeling import *
+from Functions.SyncifyFunctions.playlistHandeling import *
 
 #Importing trackHandeling
-from Functions.trackHandeling import *
+from Functions.SyncifyFunctions.trackHandeling import *
 
 
 setting_path = "Settings.json"
@@ -78,8 +78,14 @@ def printPlaylist(link, Spotipy_Session):
         Result = Spotipy_Session.playlist(playlist_ID)
         print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
     else:
-        album_ID = link[link.find("album/") + len("album/"):]
-        Result = Spotipy_Session.album(album_ID)
+        album_ID = link[link.find("album/") + len("album/"):link.find("?")]
+        
+        while True:
+            try:
+                Result = Spotipy_Session.album(album_ID)
+            except Exception:
+                time.sleep(1.25)        
+                        
         print(f"\n\t{Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
 
 #Add playlist link in the json file Playlists Informations.json

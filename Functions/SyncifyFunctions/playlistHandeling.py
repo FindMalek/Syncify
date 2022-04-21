@@ -3,7 +3,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 #importing systemFunctions
-from Functions.systemFunctions import *
+from Functions.SyncifyFunctions.systemFunctions import *
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")

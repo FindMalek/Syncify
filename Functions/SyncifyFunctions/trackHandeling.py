@@ -1,11 +1,19 @@
-from Functions.systemFunctions import *
-from Functions.playlistHandeling import *
-
+from Functions.SyncifyFunctions.systemFunctions import *
+from Functions.SyncifyFunctions.playlistHandeling import *
+import time
 
 #Get {Artist} - {Trackname}.{format}
 def trackInformation(Spotipy_Session, trackLink):
     trackFormat = getDataJSON(setting_path, "Settings/Format")
-    trackResult = Spotipy_Session.track("spotify:track:" + trackLink[trackLink.find("track/") + len("track/"):])
+    spotifyTrackFormat = "spotify:track:" + trackLink[trackLink.find("track/") + len("track/"):]
+    
+    while True:
+        try:
+            trackResult = Spotipy_Session.track(spotifyTrackFormat)
+            break
+        except Exception:
+            time.sleep(1.25)
+
     return trackResult["artists"][0]["name"] + ' - ' + trackResult["name"] + '.' + trackFormat.lower()
 
 #Returns playlist songs in whatever order
