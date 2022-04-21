@@ -136,6 +136,7 @@ def Load(Spotipy_Session):
     if(settingFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
         settingFile["Settings"]["Paths"]["Playlist"] = playlistPath
+    WriteJSON(setting_path, settingFile, 'w')
 
     playlistFile = getDataJSON(playlist_path, "Playlists Informations")
     if(playlistFile == []):

@@ -64,13 +64,13 @@ def RefreshPlaylistFile(Spotipy_Session):
     Playlists["Playlists Informations"] = playlist_list
     WriteJSON(playlist_path, Playlists, 'w')
 
-#Create the playlist // supports m3a and m3u8 formats
+#Create the playlist // supports m3a format
 def CreatePlaylist(order):
     SavifySettings = getDataJSON(setting_path, "Settings")
     playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
     musicPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
-    fileName = convertPath(playlistPath + order["Name"] + ".m3u")
+    fileName = convertPath(playlistPath + '/' + order["Name"] + ".m3u")
     with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:

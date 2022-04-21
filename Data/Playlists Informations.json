@@ -11,7 +11,7 @@
         },
         {
             "late nights mood": {
-                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737bb3a4dd85841c3133af079bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273ad2af428ccc52bc175bab64b",
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273ad2af428ccc52bc175bab64bab67616d0000b273d68e7bf7f2092849bc7f2a9d",
                 "Links": {
                     "URL": "https://open.spotify.com/playlist/5ZKp6FwxfFlnLnq62qy4tW",
                     "ID": "spotify:playlist:5ZKp6FwxfFlnLnq62qy4tW"
@@ -119,7 +119,7 @@
         },
         {
             "Felt sad": {
-                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b2734627b6aa3c28314c2479c17bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b2734627b6aa3c28314c2479c17bab67616d0000b273a3b3f48ca81acacb3ad4ec8aab67616d0000b273d68e7bf7f2092849bc7f2a9d",
                 "Links": {
                     "URL": "https://open.spotify.com/playlist/4295WQ4KvsUAtp3vAzC9NN",
                     "ID": "spotify:playlist:4295WQ4KvsUAtp3vAzC9NN"
@@ -181,20 +181,20 @@
             }
         },
         {
-            "The Heretics": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b2732658fb6555f3a8309c513ed8",
+            "Vlad Holiday Radio": {
+                "Image": "https://seeded-session-images.scdn.co/v1/img/artist/4kzBapiIVMxwhJLsTm28Gc/en",
                 "Links": {
-                    "URL": "https://open.spotify.com/album/00oBoAA6p3N4jUGAGk19zr",
-                    "ID": "spotify:album:00oBoAA6p3N4jUGAGk19zr"
+                    "URL": "https://open.spotify.com/playlist/37i9dQZF1E4yxe1Kpukk4E",
+                    "ID": "spotify:playlist:37i9dQZF1E4yxe1Kpukk4E"
                 }
             }
         },
         {
-            "Shadows of the Dying Sun": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b273193d35e3a55430dc59d4c710",
+            "Vlad Holiday": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebb8f385797339261665713a76c",
                 "Links": {
-                    "URL": "https://open.spotify.com/album/0iYAnDAQLAOXIl5bUAfYG3",
-                    "ID": "spotify:album:0iYAnDAQLAOXIl5bUAfYG3"
+                    "URL": "https://open.spotify.com/playlist/1sMJcXffo3LuUvt24KWKcL",
+                    "ID": "spotify:playlist:1sMJcXffo3LuUvt24KWKcL"
                 }
             }
         }
@@ -220,6 +220,7 @@
         "https://open.spotify.com/playlist/624UgHw3C3WllV8P9ynSB4",
         "https://open.spotify.com/playlist/1u1oMXEiC9Y2Rwy8tcpgux",
         "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
-        "https://open.spotify.com/album/0iYAnDAQLAOXIl5bUAfYG3"
+        "https://open.spotify.com/playlist/37i9dQZF1E4yxe1Kpukk4E",
+        "https://open.spotify.com/playlist/1sMJcXffo3LuUvt24KWKcL"
     ]
 }
