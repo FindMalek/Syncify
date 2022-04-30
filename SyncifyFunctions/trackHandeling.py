@@ -1,27 +1,29 @@
-from Functions.SyncifyFunctions.systemFunctions import *
-from Functions.SyncifyFunctions.playlistHandeling import *
 import time
 
+#Importing Syncify functions
+from SyncifyFunctions.systemFunctions import *
+from SyncifyFunctions.playlistHandeling import *
+
 #Get {Artist} - {Trackname}.{format}
-def trackInformation(Spotipy_Session, trackLink):
+def trackInformation(syncifyToken, trackLink):
     trackFormat = getDataJSON(setting_path, "Settings/Format")
-    spotifyTrackFormat = "spotify:track:" + trackLink[trackLink.find("track/") + len("track/"):]
+    spotifyTrackFormat = trackLink[trackLink.find("track/") + len("track/"):]
     
     while True:
         try:
-            trackResult = Spotipy_Session.track(spotifyTrackFormat)
+            trackResult = track(syncifyToken, spotifyTrackFormat)
             break
         except Exception:
             time.sleep(1.25)
-
+    
     return trackResult["artists"][0]["name"] + ' - ' + trackResult["name"] + '.' + trackFormat.lower()
 
 #Returns playlist songs in whatever order
-def getTracks(pl_id):
+def getTracks(syncifyToken, pl_id):
     if(isLinkAlbum(pl_id)):
-        resultTrackItems = Spotipy_Session.album(pl_id)["tracks"]["items"]
+        resultTrackItems = album(syncifyToken, pl_id)["tracks"]["items"]
     else:
-        resultTrackItems = Spotipy_Session.playlist(pl_id)["tracks"]["items"]
+        resultTrackItems = playlist(syncifyToken, pl_id)["tracks"]["items"]
 
     track_links = []
     for item in resultTrackItems:

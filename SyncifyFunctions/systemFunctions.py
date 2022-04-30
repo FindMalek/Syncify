@@ -91,6 +91,14 @@ def deleteTemporaryFiles(path):
         os.remove(convertPath(path + '/.cache'))
     except OSError:
         pass  
+    try:
+        shutil.rmtree(convertPath(path + '/Functions/__pycache__'))
+    except:
+        pass
+    try:
+        shutil.rmtree(convertPath(path + '/Functions/SyncifyFunctions/__pycache__'))
+    except:
+        pass
     
 #Checks if a link is playlist or album
 def isLinkAlbum(link):

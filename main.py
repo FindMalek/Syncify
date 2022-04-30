@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6'
+__version__ = '1.0.6.1'
 
 
 
@@ -11,29 +11,28 @@ from savify.types import Type, Format, Quality
 from savify.utils import PathHolder
 from savify.logger import Logger
 
-#importing Spotipy
-import spotipy
+#Importing spotifyHandeler
+from spotifyHandenler.requestsHandeling import *
 
 #importing systemFunctions
 import logging, json, shutil, os, fnmatch
-from Functions.SyncifyFunctions.systemFunctions import * 
+from SyncifyFunctions.systemFunctions import * 
+from spotifyHandenler.systemHandeling import *
 
 #Setting up needed files
 SettingUp()
-
-#Importing playlistHandeling
-from Functions.SyncifyFunctions.playlistHandeling import *
-
-#Importing trackHandeling
-from Functions.SyncifyFunctions.trackHandeling import *
-
-
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
 
+#Importing playlistHandeling
+from SyncifyFunctions.playlistHandeling import *
+
+#Importing trackHandeling
+from SyncifyFunctions.trackHandeling import *
+
 
 #Downloader
-def Downloads(Spotipy_Session):
+def Downloads(syncifyToken):
     #Get time before downloading the music and then compare every
     #music that its created time is later than that time and move it to
     #newly downloaded music  <Coming Soon>
@@ -60,8 +59,8 @@ def Downloads(Spotipy_Session):
         
         #Download each song individually
         tracksPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-        for link in getTracks(Playlists[counterPlaylist][playlist_Name]["Links"]["ID"]):
-            track = trackInformation(Spotipy_Session, link)
+        for link in getTracks(syncifyToken, Playlists[counterPlaylist][playlist_Name]["Links"]["ID"]):
+            track = trackInformation(syncifyToken, link)
             if(isDownloaded(track) == False):
                 print(f"Downloading > {track[:-4]}")
                 Session.download(link)
@@ -72,17 +71,17 @@ def Downloads(Spotipy_Session):
     print("\n>Download is finished! All songs are downloaded.")
 
 #print the name of the playlist and the description
-def printPlaylist(link, Spotipy_Session):
+def printPlaylist(link, syncifyToken):
     if(isLinkAlbum(link) == False):
-        playlist_ID = "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
-        Result = Spotipy_Session.playlist(playlist_ID)
+        playlist_ID = link[link.find("playlist/") + len("playlist/"):]
+        Result = playlist(syncifyToken, playlist_ID)
         print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
     else:
         album_ID = link[link.find("album/") + len("album/"):link.find("?")]
         
         while True:
             try:
-                Result = Spotipy_Session.album(album_ID)
+                Result = album(syncifyToken, album_ID)
             except Exception:
                 time.sleep(1.25)        
                         
@@ -98,13 +97,13 @@ def AddLink(list):
     WriteJSON(playlist_path, playlistLinks, 'w')
 
 #Add playlists to the settings.json "Playlists Informations"
-def AddPlaylist(Spotipy_Session):
+def AddPlaylist(syncifyToken):
     link, listPL = ".", []
     while(link != ""):
         link = input("\n.Enter playlist link: ")
         if(link != ""):
             #Print the name of the playlist and the description
-            printPlaylist(link, Spotipy_Session)
+            printPlaylist(link, syncifyToken)
             if("?" in link):
                 listPL.append(link[:link.find("?")])
             else:
@@ -114,7 +113,7 @@ def AddPlaylist(Spotipy_Session):
     AddLink(listPL)
 
 #updating the playlists
-def PlaylistUpdate():  
+def PlaylistUpdate(syncifyToken):  
     playlist_list = getDataJSON(playlist_path, "Playlists Informations")
     playlistID_list = []
     for playlist in playlist_list:
@@ -123,7 +122,7 @@ def PlaylistUpdate():
             
     for pl_id in playlistID_list:
         if(isLinkAlbum(pl_id) == False):
-            pl_order = PlaylistManager(Spotipy_Session, pl_id)
+            pl_order = PlaylistManager(syncifyToken, pl_id)
             CreatePlaylist(pl_order)
     print("\n>All playlist files are created.")
     
@@ -131,7 +130,7 @@ def PlaylistUpdate():
     popAlbums()
 
 #Print the load text, load the savify client
-def Load(Spotipy_Session):
+def Load(syncifyToken):
     printLoad(0, 18)
     
     settingFile = ReadFILE(setting_path)
@@ -146,9 +145,9 @@ def Load(Spotipy_Session):
 
     playlistFile = getDataJSON(playlist_path, "Playlists Informations")
     if(playlistFile == []):
-        AddPlaylist(Spotipy_Session)
+        AddPlaylist(syncifyToken)
 
-#download ettings
+#Download settings
 def DownloadSettings(Savify):
     SavifySettings = ReadFILE(setting_path)["Settings"]
     
@@ -171,6 +170,7 @@ def DownloadSettings(Savify):
     
     return qual, download_format
 
+#Add information in settings file
 def addInformation(stroption, info, infoList, Settings):
     infoEntered = '.'
     while(infoEntered not in infoList):
@@ -181,27 +181,27 @@ def addInformation(stroption, info, infoList, Settings):
     return Settings
 
 #Select which action the user wants
-def SelectCommand(Spotipy_Session): 
+def SelectCommand(syncifyToken): 
     printLoad(19, 42) #Printing for the user
     
     answer = input("Choose the number of the command: ")
 
     if(answer == "1"): #Enter Playlists Informations
-        AddPlaylist(Spotipy_Session)
+        AddPlaylist(syncifyToken)
 
     elif(answer == "2"): 
         #Downloads newly added songs and Refresh playlists
         #And move Outdated Playlists to the Outdated folder
         #It keeps a version of each playlist
-        RefreshPlaylistFile(Spotipy_Session)
-        Downloads(Spotipy_Session)  
-        PlaylistUpdate()
+        RefreshPlaylistFile(syncifyToken)
+        Downloads(syncifyToken)  
+        PlaylistUpdate(syncifyToken)
 
     elif(answer == "3"):
         SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
         for playlist in SavifyPlaylists:
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
-            printPlaylist(playlistLink,  Spotipy_Session)
+            printPlaylist(playlistLink,  syncifyToken)
             input()
 
     elif(answer == "4"):
@@ -257,10 +257,12 @@ def SelectCommand(Spotipy_Session):
         print("<Exit>")
         quit()
 
+
 #Main
 if __name__ == '__main__':
-    Spotipy_Session = SpotipySession()
-    Load(Spotipy_Session)
+    syncifyToken = getAccessToken(CLIENT_ID, CLIENT_SECRET)
+    
+    Load(syncifyToken)
     while(True):
-        SelectCommand(Spotipy_Session)
+        SelectCommand(syncifyToken)
         deleteTemporaryFiles(os.getcwd())

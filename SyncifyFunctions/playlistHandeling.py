@@ -1,60 +1,51 @@
+import time
+
 #importing Spotipy
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
 #importing systemFunctions
-from Functions.SyncifyFunctions.systemFunctions import *
+from SyncifyFunctions.systemFunctions import *
+
+#Importing spotifyHandeler
+from spotifyHandenler.requestsHandeling import *
+
 
 setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
 
-#Log in Spotipy_Session
-def SpotipySession():
-    client_credentials_manager = SpotifyClientCredentials()#Spotify Client
-    return spotipy.Spotify(client_credentials_manager = client_credentials_manager)
-
-Spotipy_Session = SpotipySession()
 
 #get the needed informations to fill up the Playlist JSON file
-def getPlaylistInformation(Spotipy_Session, toGet, link, playlist_ID=""):
-    if(toGet == "ID"):
-        if(isLinkAlbum(link)):
-            return "spotify:album:" + link[link.find("album/") + len("album/"):]
-        else:
-            return "spotify:playlist:" + link[link.find("playlist/") + len("playlist/"):]
-    
-    if(isLinkAlbum(link)):
-        spotipyResult = Spotipy_Session.album(link[link.find("album/") + len("album/"):])
+def getPlaylistInformation(syncifyToken, objId=""):
+    if(isLinkAlbum(objId)):
+        spotipyResult = album(syncifyToken, objId)
     else:
-        spotipyResult = Spotipy_Session.playlist(playlist_ID)
-    
-    if(toGet == "Name"):
-        return spotipyResult["name"]
-    elif(toGet == "Image URL"):
-        return spotipyResult["images"][0]["url"]
-    elif(toGet == "Playlist URL"):
-        return spotipyResult["external_urls"]["spotify"]
+        spotipyResult = playlist(syncifyToken, objId)
+        
+    return spotipyResult
     
 #Updates and Add Playlists from the Playlist JSON file
-def RefreshPlaylistFile(Spotipy_Session):
+def RefreshPlaylistFile(syncifyToken):
     SyncifySettings = getDataJSON(setting_path, "Settings")
     
     playlistFile = ReadFILE(playlist_path)
     playlist_list = []
     for link in playlistFile["Playlists links"]:
-        playlist_ID = getPlaylistInformation(Spotipy_Session, "ID", link)
-        playlist_Name = getPlaylistInformation(Spotipy_Session, "Name", link, playlist_ID)
-        playlist_Image = getPlaylistInformation(Spotipy_Session, "Image URL", link, playlist_ID)
-        playlist_URL = getPlaylistInformation(Spotipy_Session, "Playlist URL", link, playlist_ID)
+        if(isLinkAlbum(link)):
+            spotifyObjId = link[link.find("album/") + len("album/"):]
+        else:
+            spotifyObjId = link[link.find("playlist/") + len("playlist/"):]
 
-        #Structure of the 
+        spotipyResult = getPlaylistInformation(syncifyToken, spotifyObjId)
+        
+        #Structure of the playlist
         playlist_list.append(
             {
-                playlist_Name : {
-                    "Image": playlist_Image,
+                spotipyResult["name"] : {
+                    "Image": spotipyResult["images"][0]["url"],
                     "Links": {
-                        "URL": playlist_URL,
-                        "ID": playlist_ID
+                        "URL": spotipyResult["external_urls"]["spotify"],
+                        "ID": spotifyObjId
                     }
                 }
             }
@@ -76,19 +67,19 @@ def CreatePlaylist(order):
         for line in order["Order"]:
             playlistm3a.write(musicPath + line + "\n")
 
-
 #Manage .m3u playlists
-def PlaylistManager(Spotipy_Session, playlist_id):
+def PlaylistManager(syncifyToken, playlist_id):
     SavifySettings = getDataJSON(setting_path, "Settings")
     downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
-    playlist = Spotipy_Session.playlist(playlist_id)
+    playlistList = playlist(syncifyToken, playlist_id)
     
     pl_order = {
-                    "Name": playlist["name"],
+                    "Name": playlistList["name"],
                     "Order": []
             }
+    
     #ALBUM*TRACKLOCATION+TrackName
-    for track in playlist["tracks"]["items"]:
+    for track in playlistList["tracks"]["items"]:
         trackName = (
                     track["track"]["artists"][0]["name"] + ' - ' +
                     track["track"]["name"] + '.' +
