@@ -102,7 +102,7 @@ def deleteTemporaryFiles(path):
     
 #Checks if a link is playlist or album
 def isLinkAlbum(link):
-    if("album" not in link):
-        return False
-    else:
+    if("album" in link):
         return True
+    else:
+        return False

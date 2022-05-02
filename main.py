@@ -1,7 +1,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.1'
+__version__ = '1.0.6.2'
 
 
 
@@ -37,13 +37,12 @@ def Downloads(syncifyToken):
     #music that its created time is later than that time and move it to
     #newly downloaded music  <Coming Soon>
     
-    Playlists = getDataJSON(playlist_path, "Playlists Informations")
+    downloadableObjs = getDataJSON(playlist_path, "Playlists Informations")
     downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
-    counterPlaylist = 0
-    for element in Playlists:
-        playlist_Name = str(list(element.keys())[0])
-        print("\n\n\tDownloading from :", playlist_Name)
+    for objectCounter, element in zip(range(len(downloadableObjs)), downloadableObjs):
+        objName = str(list(element.keys())[0])
+        print("\n\n\tDownloading from :", objName)
         
         quality_type = DownloadSettings(Savify)[0]
         download_format = DownloadSettings(Savify)[1]
@@ -59,33 +58,41 @@ def Downloads(syncifyToken):
         
         #Download each song individually
         tracksPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-        for link in getTracks(syncifyToken, Playlists[counterPlaylist][playlist_Name]["Links"]["ID"]):
+        for link in getTracks(syncifyToken, downloadableObjs[objectCounter][objName]["Links"]["ID"], downloadableObjs[objectCounter][objName]["Links"]["URL"]):
             track = trackInformation(syncifyToken, link)
             if(isDownloaded(track) == False):
                 print(f"Downloading > {track[:-4]}")
                 Session.download(link)
                 print(f"Downloaded -> {track[:-4]}")
         
-        print(f"\tDownloaded Playlist -> {playlist_Name}\n")
-        counterPlaylist += 1
-    print("\n>Download is finished! All songs are downloaded.")
+        print(f"\tDownloaded Playlist -> {objName}\n")
+    print("\n>Download is finished! All tracks are downloaded.")
 
-#print the name of the playlist and the description
-def printPlaylist(link, syncifyToken):
+#print Playlist / Album informations
+def printObject(link, syncifyToken):
+    print("\n\n_______________________________________")
     if(isLinkAlbum(link) == False):
         playlist_ID = link[link.find("playlist/") + len("playlist/"):]
-        Result = playlist(syncifyToken, playlist_ID)
-        print(f"\n\t{Result['name']}\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
-    else:
-        album_ID = link[link.find("album/") + len("album/"):link.find("?")]
+        while True:
+            try:
+                Result = playlist(syncifyToken, playlist_ID)
+                break
+            except Exception:
+                time.sleep(1.25)
+        print(f"\t-(Playlist)-\nName: {Result['name']}\n\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
         
+    else:
+        album_ID = link[link.find("album/") + len("album/"):]
         while True:
             try:
                 Result = album(syncifyToken, album_ID)
+                break
             except Exception:
                 time.sleep(1.25)        
-                        
-        print(f"\n\t{Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
+        WriteJSON('res.json', Result, 'w')
+        print(f"\t-(Album)-\nName: {Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
+    print("_______________________________________")
+
 
 #Add playlist link in the json file Playlists Informations.json
 def AddLink(list):
@@ -100,29 +107,29 @@ def AddLink(list):
 def AddPlaylist(syncifyToken):
     link, listPL = ".", []
     while(link != ""):
-        link = input("\n.Enter playlist link: ")
+        link = input("\n-> Enter link (Album / Playlist): ")
         if(link != ""):
             #Print the name of the playlist and the description
-            printPlaylist(link, syncifyToken)
+            printObject(link, syncifyToken)
             if("?" in link):
                 listPL.append(link[:link.find("?")])
             else:
                 listPL.append(link)
         else:
-            print(">No playlist have been entered!")
+            print("=> No playlist have been entered!")
     AddLink(listPL)
 
-#updating the playlists
+#Updating the playlists
 def PlaylistUpdate(syncifyToken):  
     playlist_list = getDataJSON(playlist_path, "Playlists Informations")
-    playlistID_list = []
+    playlistUrl = []
     for playlist in playlist_list:
         for key in playlist.keys():
-            playlistID_list.append(playlist[key]["Links"]["ID"])
+            playlistUrl.append(playlist[key]["Links"]["URL"])
             
-    for pl_id in playlistID_list:
-        if(isLinkAlbum(pl_id) == False):
-            pl_order = PlaylistManager(syncifyToken, pl_id)
+    for plUrl in playlistUrl:
+        if(isLinkAlbum(plUrl) == False):
+            pl_order = PlaylistManager(syncifyToken, plUrl[plUrl.find("playlist/") + len("playlist/"):], plUrl)
             CreatePlaylist(pl_order)
     print("\n>All playlist files are created.")
     
@@ -201,7 +208,7 @@ def SelectCommand(syncifyToken):
         SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
         for playlist in SavifyPlaylists:
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
-            printPlaylist(playlistLink,  syncifyToken)
+            printObject(playlistLink, syncifyToken)
             input()
 
     elif(answer == "4"):

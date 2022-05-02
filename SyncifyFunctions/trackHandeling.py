@@ -19,21 +19,33 @@ def trackInformation(syncifyToken, trackLink):
     return trackResult["artists"][0]["name"] + ' - ' + trackResult["name"] + '.' + trackFormat.lower()
 
 #Returns playlist songs in whatever order
-def getTracks(syncifyToken, pl_id):
-    if(isLinkAlbum(pl_id)):
-        resultTrackItems = album(syncifyToken, pl_id)["tracks"]["items"]
+def getTracks(syncifyToken, objId, objURL):
+    if(isLinkAlbum(objURL)):
+        while True:
+            try:
+                resultTrackItems = album(syncifyToken, objId)["tracks"]["items"]
+                break
+            except KeyError:
+                time.sleep(1.25)
+                
     else:
-        resultTrackItems = playlist(syncifyToken, pl_id)["tracks"]["items"]
-
+        while True:
+            try:      
+                resultTrackItems = playlist(syncifyToken, objId)["tracks"]["items"]
+                break
+            except KeyError:
+                time.sleep(1.25)
+        
     track_links = []
     for item in resultTrackItems:
         try:
-            if(isLinkAlbum(pl_id)):
+            if(isLinkAlbum(objURL)):
                 track_links.append(item["external_urls"]["spotify"])
             else:
                 track_links.append(item["track"]["external_urls"]["spotify"])
         except KeyError:
             pass  
+        
     return track_links
 
 #Put every downloaded track in a list
@@ -51,5 +63,5 @@ def isDownloaded(track):
     downloads = sorted(getDownloadedTracks())
     if(track in downloads):
         return True
-    elif(track not in downloads):
+    else:
         return False

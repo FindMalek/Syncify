@@ -21,9 +21,9 @@ To use the Syncify Python module you will need your own Spotify developer applic
 #### Environment variables (recommended)
 Now you need to add 2 environment variables to your system:
 
-```SPOTIPY_CLIENT_ID```
+```SYNCIFY_CLIENT_ID```
 
-```SPOTIPY_CLIENT_SECRET```
+```SYNCIFY_CLIENT_SECRET```
 
 To find out how to do this find a tutorial online for your specific operating system. Once you have done this make sure to restart your shell.
 

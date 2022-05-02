@@ -15,45 +15,43 @@ setting_path = "Settings.json"
 playlist_path = convertPath("Data/Playlists Informations.json")
 
 
-#get the needed informations to fill up the Playlist JSON file
-def getPlaylistInformation(syncifyToken, objId=""):
-    if(isLinkAlbum(objId)):
-        spotipyResult = album(syncifyToken, objId)
-    else:
-        spotipyResult = playlist(syncifyToken, objId)
+#get the needed informations to fill up the Playlist / Album JSON file
+def getObjectInformation(syncifyToken, objLink):
+    if(isLinkAlbum(objLink)):
+        spotifyObjId = objLink[objLink.find("album/") + len("album/"):]
+        spotipyResult = album(syncifyToken, spotifyObjId)
         
-    return spotipyResult
+    elif(isLinkAlbum(objLink) == False):
+        spotifyObjId = objLink[objLink.find("playlist/") + len("playlist/"):]
+        spotipyResult = playlist(syncifyToken, spotifyObjId)
+        
+    return spotipyResult, spotifyObjId
     
 #Updates and Add Playlists from the Playlist JSON file
 def RefreshPlaylistFile(syncifyToken):
     SyncifySettings = getDataJSON(setting_path, "Settings")
     
-    playlistFile = ReadFILE(playlist_path)
-    playlist_list = []
-    for link in playlistFile["Playlists links"]:
-        if(isLinkAlbum(link)):
-            spotifyObjId = link[link.find("album/") + len("album/"):]
-        else:
-            spotifyObjId = link[link.find("playlist/") + len("playlist/"):]
-
-        spotipyResult = getPlaylistInformation(syncifyToken, spotifyObjId)
-        
+    objectFile = ReadFILE(playlist_path)
+    Objectlist = []
+    for link in objectFile["Playlists links"]:
+        objectResult = getObjectInformation(syncifyToken, link)
+                
         #Structure of the playlist
-        playlist_list.append(
+        Objectlist.append(
             {
-                spotipyResult["name"] : {
-                    "Image": spotipyResult["images"][0]["url"],
+                objectResult[0]["name"] : {
+                    "Image": objectResult[0]["images"][0]["url"],
                     "Links": {
-                        "URL": spotipyResult["external_urls"]["spotify"],
-                        "ID": spotifyObjId
+                        "URL": objectResult[0]["external_urls"]["spotify"],
+                        "ID": objectResult[1]
                     }
                 }
             }
         )
     
-    Playlists = ReadFILE(playlist_path)
-    Playlists["Playlists Informations"] = playlist_list
-    WriteJSON(playlist_path, Playlists, 'w')
+    Objects = ReadFILE(playlist_path)
+    Objects["Playlists Informations"] = Objectlist
+    WriteJSON(playlist_path, Objects, 'w')
 
 #Create the playlist // supports m3a format
 def CreatePlaylist(order):
@@ -68,10 +66,10 @@ def CreatePlaylist(order):
             playlistm3a.write(musicPath + line + "\n")
 
 #Manage .m3u playlists
-def PlaylistManager(syncifyToken, playlist_id):
+def PlaylistManager(syncifyToken, playlistId, playlistURL):
     SavifySettings = getDataJSON(setting_path, "Settings")
     downloadLocation = getDataJSON(setting_path, "Settings/Paths/Downloads")
-    playlistList = playlist(syncifyToken, playlist_id)
+    playlistList = playlist(syncifyToken, playlistId)
     
     pl_order = {
                     "Name": playlistList["name"],
@@ -101,3 +99,4 @@ def popAlbums():
         if("album" in element):
             playlistInfos["Playlists links"].remove(element)
     WriteJSON(playlist_path, playlistInfos, 'w')
+    
