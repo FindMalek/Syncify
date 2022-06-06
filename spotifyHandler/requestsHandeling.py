@@ -1,7 +1,10 @@
 import requests, base64, json
 
 #Importing the Client_ID and Client_Secret
-from spotifyHandenler.systemHandeling import *
+from spotifyHandler.systemHandeling import *
+
+#Importing the systeme Handeling
+from SyncifyFunctions.systemFunctions import *
 
 
 #From Text to base64
@@ -13,14 +16,18 @@ def convertBase64(string):
 
 #Get access token
 def getAccessToken(CLIENT_ID, CLIENT_SECRET):
+    logsSyncify.Syncify(f"Getting Token Access...").debug()
     authURL = "https://accounts.spotify.com/api/token"
     authHeader = {}
     authData = {}
     base64Client = convertBase64(f"{CLIENT_ID}:{CLIENT_SECRET}")
+    logsSyncify.Syncify(f"Converted the CLIENT_ID and CLIENT_SECRET to Base 64 -> {base64Client}.").debug()
     
     authHeader["Authorization"] = "Basic " + base64Client
     authData["grant_type"] = "client_credentials"
+    logsSyncify.Syncify(f"Sending a POST REQUEST to {authURL} for Token Acess...").debug()
     responseObj = requests.post(authURL, headers=authHeader, data=authData).json()
+    logsSyncify.Syncify(f"Sent a POST REQUEST to {authURL} for Token Acess.").debug()
     return responseObj['access_token']
 
 #Gets the result of the API
@@ -29,8 +36,11 @@ def spotifyInformations(token, obj, id):
         "Authorization": "Bearer " + token
     }
     objEndPoint = f"https://api.spotify.com/v1/{obj}/{id}"
-    objRes = requests.get(objEndPoint, headers=getHeader).json()
     
+    logsSyncify.Syncify(f"Sending a POST REQUEST to {objEndPoint} for Request ALL...").debug()
+    objRes = requests.get(objEndPoint, headers=getHeader).json()
+    logsSyncify.Syncify(f"Sent a POST REQUEST to {objEndPoint} for Request ALL.").debug()
+
     return objRes
 
 #Gets Album result 
@@ -46,4 +56,5 @@ def track(token, id):
     return spotifyInformations(token, "tracks", id)    
 
 if __name__ == '__main__':
+    logsSyncify("").loggingSetup()
     token = getAccessToken(CLIENT_ID, CLIENT_SECRET)

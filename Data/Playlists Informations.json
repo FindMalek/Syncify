@@ -2,7 +2,7 @@
     "Playlists Informations": [
         {
             "Feel my rage.": {
-                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27302add2c77fb6999e311a3248ab67616d0000b27373334683c071cfa000319c53ab67616d0000b2739989949d5b4f76d1aa9e0304ab67616d0000b273b5836f92f626bb4fe05b016a",
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273547cdd9898270f133151fcbeab67616d0000b27373334683c071cfa000319c53ab67616d0000b2739989949d5b4f76d1aa9e0304ab67616d0000b273b5836f92f626bb4fe05b016a",
                 "Links": {
                     "URL": "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
                     "ID": "4eBoEZ89xY9nqcVigCBoaU"
@@ -15,15 +15,6 @@
                 "Links": {
                     "URL": "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
                     "ID": "2kPyOGqApBFu5CuuJBsRfA"
-                }
-            }
-        },
-        {
-            "Reload": {
-                "Image": "https://i.scdn.co/image/ab67616d0000b27306cb74d39d123ebe1b3c6631",
-                "Links": {
-                    "URL": "https://open.spotify.com/album/0Ip2GlQPoAIgdkqCO2YkMa",
-                    "ID": "0Ip2GlQPoAIgdkqCO2YkMa"
                 }
             }
         }

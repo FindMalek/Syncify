@@ -8,7 +8,7 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from SyncifyFunctions.systemFunctions import *
 
 #Importing spotifyHandeler
-from spotifyHandenler.requestsHandeling import *
+from spotifyHandler.requestsHandeling import *
 
 
 setting_path = "Settings.json"
@@ -19,11 +19,39 @@ playlist_path = convertPath("Data/Playlists Informations.json")
 def getObjectInformation(syncifyToken, objLink):
     if(isLinkAlbum(objLink)):
         spotifyObjId = objLink[objLink.find("album/") + len("album/"):]
-        spotipyResult = album(syncifyToken, spotifyObjId)
+        
+        tries = 0
+        while True:
+            try:
+                spotipyResult = album(syncifyToken, spotifyObjId)
+                break
+            except Exception:
+                logMessage.Syncify(f"({nbTries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                
+                tries = triesCounter(tries)
+                if(tries == True):
+                    logsSyncify.Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    quit()
+                    
+                time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
         
     elif(isLinkAlbum(objLink) == False):
         spotifyObjId = objLink[objLink.find("playlist/") + len("playlist/"):]
-        spotipyResult = playlist(syncifyToken, spotifyObjId)
+        
+        tries = 0
+        while True:
+            try:
+                spotipyResult = playlist(syncifyToken, spotifyObjId)
+                break
+            except Exception:
+                logMessage.Syncify(f"({nbTries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                
+                tries = triesCounter(tries)
+                if(tries == True):
+                    logsSyncify.Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    quit()
+                    
+                time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
         
     return spotipyResult, spotifyObjId
     
@@ -35,7 +63,7 @@ def RefreshPlaylistFile(syncifyToken):
     Objectlist = []
     for link in objectFile["Playlists links"]:
         objectResult = getObjectInformation(syncifyToken, link)
-                
+        
         #Structure of the playlist
         Objectlist.append(
             {
@@ -48,6 +76,7 @@ def RefreshPlaylistFile(syncifyToken):
                 }
             }
         )
+        logsSyncify.Syncify(f"Added {link} to {playlist_path}").debug()
     
     Objects = ReadFILE(playlist_path)
     Objects["Playlists Informations"] = Objectlist
@@ -64,7 +93,8 @@ def CreatePlaylist(order):
         playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:
             playlistm3a.write(musicPath + line + "\n")
-
+    logsSyncify.Syncify(f"Created playlist -> {fileName}").debug()
+    
 #Manage .m3u playlists
 def PlaylistManager(syncifyToken, playlistId, playlistURL):
     SavifySettings = getDataJSON(setting_path, "Settings")
@@ -100,3 +130,7 @@ def popAlbums():
             playlistInfos["Playlists links"].remove(element)
     WriteJSON(playlist_path, playlistInfos, 'w')
     
+    
+if __name__ == '__main__':
+    #Setting up the logging configuration
+    logsSyncify("").loggingSetup()

@@ -1,4 +1,4 @@
-import json, os, shutil, platform, sys
+import json, os, shutil, platform, sys, logging, re
 from os import listdir
 from os.path import isfile, join
 
@@ -27,7 +27,69 @@ def convertPath(path):
         return path
     else:
         return path.replace('/', '\\')
+    
+#Logging class that prints and also logs
+class logsSyncify: 
+    def __init__(self, infos):
+        #Fix for the next update!!
+        self.filename = ""          #infos.split('/')[0]
+        self.funcName = ""          #infos.split('/')[1]
+        self.line = ""              #infos.split('/')[2]
+        
+    #Setup logging configs
+    def loggingSetup(self):
+        logging.basicConfig(
+            filename = "logs.log",
+            level=logging.DEBUG,
+            format="[%(asctime)s] - [" + self.filename + "/" + self.funcName + "/"  + self.line + "] - (%(levelname)s) - %(message)s"
+        )
+        
+    #Print the message simply, without logging it
+    def message(msg):
+        print(msg) 
+    
+    #Remove '\n' and '\t' from the message
+    def removeNewLines(self, msg):
+        while('\n' in msg) or ('\t' in msg):
+            msg = msg.strip()
+            msg = re.sub('\s+', ' ', msg)
+        return msg
+               
+    #Savify class
+    class Savify:
+        def __init__(self, msg):
+            self.module = "Savify"
+            self.orgMsg = msg
+            self.msg = logsSyncify.removeNewLines(self, msg)
+            
+        def info(self):
+            print(self.orgMsg)
+            logging.info(f'({self.module}): {self.msg}')
+        def debug(self):
+            logging.debug(f'({self.module}): {self.msg}')
+        def warning(self):
+            logging.warning(f'({self.module}): {self.msg}')
+        def critical(self):
+            print(f'(CRITICAL) -> ({self.module}): {self.msg}')
+            logging.critical(f'({self.module}): {self.msg}')
 
+    class Syncify:
+        def __init__(self, msg):
+            self.module = "Syncify"
+            self.orgMsg = msg
+            self.msg = logsSyncify.removeNewLines(self, msg)
+            
+        def info(self):
+            print(self.orgMsg)
+            logging.info(f'({self.module}): {self.msg}')
+        def debug(self):
+            logging.debug(f'({self.module}): {self.msg}')
+        def warning(self):
+            logging.warning(f'({self.module}): {self.msg}')
+        def critical(self):
+            print(f'(CRITICAL) -> ({self.module}): {self.msg}')
+            logging.critical(f'({self.module}): {self.msg}')
+            
 #Write on JSON files
 def WriteJSON(filePath, toWrite, mode):
     with open(filePath, mode) as outfile:
@@ -46,6 +108,7 @@ def SettingUp():
         "Settings": {
             "Quality": "BEST",
             "Format": "MP3",
+            "Sleep": 1.25,
             "Paths": {
                 "Downloads": "",
                 "Playlist": ""
@@ -63,6 +126,9 @@ def SettingUp():
     onlyfiles = [f for f in listdir(convertPath(currentPath + "Data/")) if isfile(join(convertPath(currentPath + "Data/"), f))]
     if("Playlists Informations.json" not in onlyfiles):
         WriteJSON(convertPath(currentPath + "Data/Playlists Informations.json") , playlistInformations, 'w')
+    
+    #Setting up the logging configuration
+    logsSyncify("").loggingSetup()
     
 setting_path = "Settings.json"
 
@@ -85,18 +151,29 @@ def isFilePlaylist(file):
 def deleteTemporaryFiles(path):
     try:
         shutil.rmtree(convertPath(path + '/tmp/'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/tmp/')}").debug()
+
     except OSError:
         pass
+    
     try:
         os.remove(convertPath(path + '/.cache'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/.cache')}").debug()
+
     except OSError:
         pass  
+    
     try:
         shutil.rmtree(convertPath(path + '/Functions/__pycache__'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/Functions/__pycache__')}").debug()
+
     except:
         pass
+    
     try:
         shutil.rmtree(convertPath(path + '/Functions/SyncifyFunctions/__pycache__'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/Functions/SyncifyFunctions/__pycache__')}").debug()
+
     except:
         pass
     
@@ -106,3 +183,9 @@ def isLinkAlbum(link):
         return True
     else:
         return False
+
+#Tries detector
+def triesCounter(tries):
+    if(tries > 5):
+        return True
+    return tries + 1

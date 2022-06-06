@@ -3,6 +3,7 @@
     "Settings": {
         "Quality": "BEST",
         "Format": "MP3",
+        "Sleep": 1.25,
         "Paths": {
             "Downloads": "/home/malek/Music/",
             "Playlist": "/home/malek/Music/Playlists/Playlists for PC/"
