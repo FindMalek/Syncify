@@ -36,10 +36,7 @@ def spotifyInformations(token, obj, id):
         "Authorization": "Bearer " + token
     }
     objEndPoint = f"https://api.spotify.com/v1/{obj}/{id}"
-    
-    logsSyncify.Syncify(f"Sending a POST REQUEST to {objEndPoint} for Request ALL...").debug()
     objRes = requests.get(objEndPoint, headers=getHeader).json()
-    logsSyncify.Syncify(f"Sent a POST REQUEST to {objEndPoint} for Request ALL.").debug()
 
     return objRes
 

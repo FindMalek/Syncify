@@ -17,10 +17,20 @@
                     "ID": "2kPyOGqApBFu5CuuJBsRfA"
                 }
             }
+        },
+        {
+            "Arab Metal": {
+                "Image": "https://i.scdn.co/image/ab67706f00000003e255a7162960a614bf3933f9",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/37i9dQZF1DXaqykGqi6KX8",
+                    "ID": "37i9dQZF1DXaqykGqi6KX8"
+                }
+            }
         }
     ],
     "Playlists links": [
         "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
-        "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA"
+        "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
+        "https://open.spotify.com/playlist/37i9dQZF1DXaqykGqi6KX8"
     ]
 }

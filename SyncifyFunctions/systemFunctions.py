@@ -39,13 +39,13 @@ class logsSyncify:
     #Setup logging configs
     def loggingSetup(self):
         logging.basicConfig(
-            filename = "logs.log",
+            filename = convertPath("Data/logs.log"),
             level=logging.DEBUG,
             format="[%(asctime)s] - [" + self.filename + "/" + self.funcName + "/"  + self.line + "] - (%(levelname)s) - %(message)s"
         )
         
     #Print the message simply, without logging it
-    def message(msg):
+    def message(self, msg):
         print(msg) 
     
     #Remove '\n' and '\t' from the message

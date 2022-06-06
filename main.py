@@ -7,7 +7,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.3.1'
+__version__ = '1.0.6.3.2'
 
 
 #importing systemFunctions
@@ -41,7 +41,7 @@ logsSyncify("").Syncify("Imported all modules and packages.").debug()
 def Downloads(syncifyToken):
     downloadableObjs = getDataJSON(playlist_path, "Playlists Informations")
     downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-    logsSyncify("").Syncify(f"downloadableObj = {downloadableObjs} & downloadPath = {downloadPath}").debug()
+    logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
     
     for objectCounter, element in zip(range(len(downloadableObjs)), downloadableObjs):
         objName = str(list(element.keys())[0])
@@ -162,7 +162,7 @@ def PlaylistUpdate(syncifyToken):
     
     #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
     popAlbums()
-    logsSyncify("").Syncify(f"Deleted Albums links from {playlist_path} for optimization.").debug()
+    logsSyncify("").Syncify(f"Deleted Albums links from '{playlist_path}' for optimization.").debug()
 
 #Print the load text, load the savify client
 def Load(syncifyToken):
@@ -294,7 +294,7 @@ def SelectCommand(syncifyToken):
         pause = input("")
 
     elif(answer == "6"):
-        logsSyncify("").Syncify.logs("<Exit>")
+        logsSyncify("").Syncify("<Exit>").info()
         quit()
 
 
