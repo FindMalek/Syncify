@@ -1,13 +1,23 @@
 """ 
-    This update is focused on changing my 'print' statments
-    to 'logging' statments, since this application is getting more
-    and more complicated.
+    CHANGES:
+
+        .Changing how Syncify creates playlists.
+    Instead of downloading all the tracks from each playlist and then creating all the playlists.
+    That changed to downloading the tracks of a playlist and then create the playlist file.
+    After this change you don't have to wait to download all the tracks to get your playlist prepared.
+"""
+
+
+"""
+    BUGS:
+    
+    1. Now Syncify deletes all of it's temporary files, to save storage.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.3.2'
+__version__ = '1.0.6.4.1'
 
 
 #importing systemFunctions
@@ -38,40 +48,14 @@ from SyncifyFunctions.trackHandeling import *
 logsSyncify("").Syncify("Imported all modules and packages.").debug()
 
 #Downloader
-def Downloads(syncifyToken):
-    downloadableObjs = getDataJSON(playlist_path, "Playlists Informations")
-    downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-    logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
+def Downloads(syncifyToken, savifySession, playlistURLs):
+    for url in playlistURLs:
+        track = trackInformation(syncifyToken, url)
+        if(isDownloaded(track) == False):
+            logsSyncify("").Syncify(f"Downloading > {track[:-4]}...").info()
+            savifySession.download(url)
+            logsSyncify("").Syncify(f"Downloaded -> {track[:-4]}.").info()
     
-    for objectCounter, element in zip(range(len(downloadableObjs)), downloadableObjs):
-        objName = str(list(element.keys())[0])
-        quality_type = DownloadSettings(Savify)[0]
-        download_format = DownloadSettings(Savify)[1]
-        
-        #Logging stuff
-        logger = Logger(log_location=convertPath("/tmp/"), log_level=None) # Silent output
-        logsSyncify("").Savify("Logger setup -> {None}.").debug()
-        logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info() #logging INFO
-        
-        #Session
-        Session = Savify(logger=logger,
-                         quality=quality_type,
-                         download_format=download_format,
-                         path_holder=PathHolder(downloads_path=downloadPath))
-        logsSyncify("").Savify(f"Savify Session has been setup.\nLogger = {logger}\nQuality = {quality_type}\nDownload format {download_format}\nPath holder = {PathHolder(downloads_path=downloadPath)}").debug()
-        
-        #Download each song individually
-        tracksPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-        for link in getTracks(syncifyToken, downloadableObjs[objectCounter][objName]["Links"]["ID"], downloadableObjs[objectCounter][objName]["Links"]["URL"]):
-            track = trackInformation(syncifyToken, link)
-            if(isDownloaded(track) == False):
-                logsSyncify("").Syncify(f"Downloading > {track[:-4]}").info()
-                Session.download(link)
-                logsSyncify("").Syncify(f"Downloaded -> {track[:-4]}").info()
-        
-        logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
-    logsSyncify("").Syncify("\n>Download is finished! All tracks are downloaded.").info()
-
 #print Playlist / Album informations
 def printObject(link, syncifyToken):
     logsSyncify("").message("\n\n_______________________________________")
@@ -146,24 +130,6 @@ def AddPlaylist(syncifyToken):
             
     AddLink(listAP)
 
-#Updating the playlists
-def PlaylistUpdate(syncifyToken):  
-    playlist_list = getDataJSON(playlist_path, "Playlists Informations")
-    playlistUrl = []
-    for playlist in playlist_list:
-        for key in playlist.keys():
-            playlistUrl.append(playlist[key]["Links"]["URL"])
-            
-    for plUrl in playlistUrl:
-        if(isLinkAlbum(plUrl) == False):
-            pl_order = PlaylistManager(syncifyToken, plUrl[plUrl.find("playlist/") + len("playlist/"):], plUrl)
-            CreatePlaylist(pl_order)
-    logsSyncify("").Syncify("\n>All playlist files are created.").info()
-    
-    #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
-    popAlbums()
-    logsSyncify("").Syncify(f"Deleted Albums links from '{playlist_path}' for optimization.").debug()
-
 #Print the load text, load the savify client
 def Load(syncifyToken):
     printLoad(0, 18)
@@ -225,17 +191,50 @@ def SelectCommand(syncifyToken):
         AddPlaylist(syncifyToken)
 
     elif(answer == "2"): 
-        #Downloads newly added songs and Refresh playlists
         #And move Outdated Playlists to the Outdated folder
         #It keeps a version of each playlist
-        logsSyncify("").Syncify("Adding and updating Playlists / Albums.").debug()
-        RefreshPlaylistFile(syncifyToken)
-        logsSyncify("").Syncify("Downloading began...").debug()
-        Downloads(syncifyToken)  
         
-        #In the next update after every playlist download create a playlist
-        logsSyncify("").Syncify(">Creating playlists...").debug()
-        PlaylistUpdate(syncifyToken)
+        logsSyncify("").Syncify("Adding and updating Playlists / Albums...").debug()
+        RefreshPlaylistFile(syncifyToken)
+        logsSyncify("").Syncify("Added and updated Playlists / Albums.").debug()
+
+        downloadableObjs = getDataJSON(playlist_path, "Playlists Informations")
+        downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
+        logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
+
+        #Logging stuff
+        logger = Logger(log_location=convertPath("/tmp/"), log_level=None) # Silent output
+        logsSyncify("").Savify("Logger setup -> {None}.").debug()
+
+        #Savify Session
+        savifySession = Savify(logger=logger,
+                         quality=DownloadSettings(Savify)[0],
+                         download_format=DownloadSettings(Savify)[1],
+                         path_holder=PathHolder(downloads_path=getDataJSON(setting_path, "Settings/Paths/Downloads")))
+        logsSyncify("").Savify(f"Savify Session has been setup.").debug()
+
+        logsSyncify("").Syncify(">Downloading began...").debug()
+        for obj, objectCounter in zip(downloadableObjs, range(len(downloadableObjs))):
+            objName = str(list(obj.keys())[0])
+            trackURLs = getTracks(syncifyToken, downloadableObjs[objectCounter][objName]["Links"]["ID"], downloadableObjs[objectCounter][objName]["Links"]["URL"])
+            
+            logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info()
+            Downloads(syncifyToken, savifySession, trackURLs)  
+            logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
+            
+            #Creating playlist
+            playlistURL = obj[list(obj.keys())[0]]["Links"]["URL"]
+            if(isLinkAlbum(playlistURL) == False):
+                plOrdered = PlaylistManager(syncifyToken, playlistURL[playlistURL.find("playlist/") + len("playlist/"):], playlistURL)
+                CreatePlaylist(plOrdered)
+
+            logsSyncify("").Syncify(f"\tCreated playlist -> {objName}").debug()
+            
+        logsSyncify("").Syncify("\n>Downloading all tracks is finished! All playlists are saved.").info()
+
+        #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
+        popAlbums()
+        logsSyncify("").Syncify(f"Deleted Albums links from '{playlist_path}' for optimization.").debug()
 
     elif(answer == "3"):
         SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
@@ -254,7 +253,7 @@ def SelectCommand(syncifyToken):
         if(answer == "1"):
             quality = Settings["Settings"]["Quality"]
             qualityList = ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
-            logsSyncify("").Syncify(f"\nCurrently the download quality is: {quality}\nAvailable qualities: {qualityList}").logs()
+            logsSyncify("").Syncify(f"\nCurrently the download quality is: {quality}\nAvailable qualities: {qualityList}").info()
             
             Settings = addInformation("Quality", quality, qualityList, Settings)
             WriteJSON(setting_path, Settings, 'w')
@@ -262,7 +261,7 @@ def SelectCommand(syncifyToken):
         elif(answer == "2"):
             formatType = Settings["Settings"]["Format"]
             formatList = ["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
-            logsSyncify("").Syncify(f"\nCurrently the download format is: {formatType}\nAvailable formats: {formatList}").logs()
+            logsSyncify("").Syncify(f"\nCurrently the download format is: {formatType}\nAvailable formats: {formatList}").info()
             
             Settings = addInformation("Format", formatType, formatList, Settings)
             WriteJSON(setting_path, Settings, 'w')

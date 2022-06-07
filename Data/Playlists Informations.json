@@ -1,36 +1,26 @@
 {
     "Playlists Informations": [
         {
-            "Feel my rage.": {
-                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273547cdd9898270f133151fcbeab67616d0000b27373334683c071cfa000319c53ab67616d0000b2739989949d5b4f76d1aa9e0304ab67616d0000b273b5836f92f626bb4fe05b016a",
+            "emo stuff": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2733b66a0844901eb01acf32b3aab67616d0000b27343dff0b3d7ef1fac7d3ad64bab67616d0000b2739ce9de7bbf5d183ca7954b33ab67616d0000b273e2614e5ffdedb55a3816946c",
                 "Links": {
-                    "URL": "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
-                    "ID": "4eBoEZ89xY9nqcVigCBoaU"
+                    "URL": "https://open.spotify.com/playlist/0g7YuUMjV6NiwshiP4sWSj",
+                    "ID": "0g7YuUMjV6NiwshiP4sWSj"
                 }
             }
         },
         {
-            "just the mood to be sad": {
-                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2730bed9affdad909c9c4baf35dab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b27367291695d95d55b5504156f1ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+            "a mood.": {
+                "Image": "https://i.scdn.co/image/ab67706c0000bebbad8086b5b80bdff8a482bb8d",
                 "Links": {
-                    "URL": "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
-                    "ID": "2kPyOGqApBFu5CuuJBsRfA"
-                }
-            }
-        },
-        {
-            "Arab Metal": {
-                "Image": "https://i.scdn.co/image/ab67706f00000003e255a7162960a614bf3933f9",
-                "Links": {
-                    "URL": "https://open.spotify.com/playlist/37i9dQZF1DXaqykGqi6KX8",
-                    "ID": "37i9dQZF1DXaqykGqi6KX8"
+                    "URL": "https://open.spotify.com/playlist/0k6jo6HdorB3wpD3082CG5",
+                    "ID": "0k6jo6HdorB3wpD3082CG5"
                 }
             }
         }
     ],
     "Playlists links": [
-        "https://open.spotify.com/playlist/4eBoEZ89xY9nqcVigCBoaU",
-        "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
-        "https://open.spotify.com/playlist/37i9dQZF1DXaqykGqi6KX8"
+        "https://open.spotify.com/playlist/0g7YuUMjV6NiwshiP4sWSj",
+        "https://open.spotify.com/playlist/0k6jo6HdorB3wpD3082CG5"
     ]
 }

@@ -84,16 +84,13 @@ def RefreshPlaylistFile(syncifyToken):
 
 #Create the playlist // supports m3a format
 def CreatePlaylist(order):
-    SavifySettings = getDataJSON(setting_path, "Settings")
-    playlistPath = getDataJSON(setting_path, "Settings/Paths/Playlist")
-    musicPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
+    downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
-    fileName = convertPath(playlistPath + '/' + order["Name"] + ".m3u")
+    fileName = convertPath(getDataJSON(setting_path, "Settings/Paths/Playlist") + '/' + order["Name"] + ".m3u")
     with open(fileName, "w") as playlistm3a:
         playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:
-            playlistm3a.write(musicPath + line + "\n")
-    logsSyncify.Syncify(f"Created playlist -> {fileName}").debug()
+            playlistm3a.write(downloadPath + line + "\n")
     
 #Manage .m3u playlists
 def PlaylistManager(syncifyToken, playlistId, playlistURL):
@@ -123,13 +120,13 @@ def PlaylistManager(syncifyToken, playlistId, playlistURL):
         
     return pl_order   
 
+#Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
 def popAlbums():
     playlistInfos = ReadFILE(playlist_path)
     for element in playlistInfos["Playlists links"]:
         if("album" in element):
             playlistInfos["Playlists links"].remove(element)
     WriteJSON(playlist_path, playlistInfos, 'w')
-    
     
 if __name__ == '__main__':
     #Setting up the logging configuration

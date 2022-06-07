@@ -38,6 +38,13 @@ class logsSyncify:
         
     #Setup logging configs
     def loggingSetup(self):
+        #Deleting "logs.log"
+        try:
+            os.remove(convertPath("Data/logs.log"))
+
+        except OSError:
+            pass  
+        
         logging.basicConfig(
             filename = convertPath("Data/logs.log"),
             level=logging.DEBUG,
@@ -164,15 +171,15 @@ def deleteTemporaryFiles(path):
         pass  
     
     try:
-        shutil.rmtree(convertPath(path + '/Functions/__pycache__'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/Functions/__pycache__')}").debug()
+        shutil.rmtree(convertPath(path + '/SyncifyFunctions/__pycache__'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/SyncifyFunctions/__pycache__')}").debug()
 
     except:
         pass
     
     try:
-        shutil.rmtree(convertPath(path + '/Functions/SyncifyFunctions/__pycache__'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/Functions/SyncifyFunctions/__pycache__')}").debug()
+        shutil.rmtree(convertPath(path + '/spotifyHandler/__pycache__'))
+        logsSyncify.Syncify(f"Deleted {convertPath(path + '/spotifyHandler/__pycache__')}").debug()
 
     except:
         pass

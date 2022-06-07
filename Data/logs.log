@@ -1,0 +1,129 @@
+[2022-06-07 15:08:06,218] - [//] - (DEBUG) - (Syncify): Function - SettingUp && Prepaths are set.
+[2022-06-07 15:08:06,365] - [//] - (DEBUG) - (Syncify): Savify imported.
+[2022-06-07 15:08:06,367] - [//] - (DEBUG) - (Syncify): Imported all modules and packages.
+[2022-06-07 15:08:06,367] - [//] - (DEBUG) - (Syncify): Getting (CLIENT_ID, CLIENT_SECRET)...
+[2022-06-07 15:08:06,367] - [//] - (DEBUG) - (Syncify): Getting Token Access...
+[2022-06-07 15:08:06,367] - [//] - (DEBUG) - (Syncify): Converted the CLIENT_ID and CLIENT_SECRET to Base 64 -> OWIwYzM5ZTQ3M2E3NGU2ZmFhNDAxYjY5ZDY2Y2FjZGY6NDBjNWRmOTdiM2RhNDgxMmFmMzkyYjkxY2ZiYWQ5ZmU=.
+[2022-06-07 15:08:06,367] - [//] - (DEBUG) - (Syncify): Sending a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess...
+[2022-06-07 15:08:06,368] - [//] - (DEBUG) - Starting new HTTPS connection (1): accounts.spotify.com:443
+[2022-06-07 15:08:06,848] - [//] - (DEBUG) - https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+[2022-06-07 15:08:06,850] - [//] - (DEBUG) - (Syncify): Sent a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess.
+[2022-06-07 15:08:06,850] - [//] - (DEBUG) - (Syncify): Got (CLIENT_ID, CLIENT_SECRET) = (9b0c39e473a74e6faa401b69d66cacdf, 40c5df97b3da4812af392b91cfbad9fe).
+[2022-06-07 15:08:11,630] - [//] - (DEBUG) - (Syncify): Added all links to Data/Playlists Informations.json
+[2022-06-07 15:08:11,631] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-06-07 15:08:11,631] - [//] - (DEBUG) - (Syncify): Deleted /home/malek/Documents/Syncify/Syncify-Developing/SyncifyFunctions/__pycache__
+[2022-06-07 15:08:11,632] - [//] - (DEBUG) - (Syncify): Deleted /home/malek/Documents/Syncify/Syncify-Developing/spotifyHandler/__pycache__
+[2022-06-07 15:08:11,632] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-06-07 15:08:12,715] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:14,624] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0g7YuUMjV6NiwshiP4sWSj HTTP/1.1" 200 None
+[2022-06-07 15:08:15,064] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:16,059] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0k6jo6HdorB3wpD3082CG5 HTTP/1.1" 200 None
+[2022-06-07 15:08:16,524] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:16,783] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/albums/4JSD9GfEAaodrPZp4sgpbe HTTP/1.1" 200 None
+[2022-06-07 15:08:18,159] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-06-07 15:08:18,159] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-06-07 15:08:21,782] - [//] - (DEBUG) - (Syncify): Adding and updating Playlists / Albums...
+[2022-06-07 15:08:21,784] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:22,040] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0g7YuUMjV6NiwshiP4sWSj HTTP/1.1" 200 None
+[2022-06-07 15:08:22,041] - [//] - (DEBUG) - (Syncify): Added https://open.spotify.com/playlist/0g7YuUMjV6NiwshiP4sWSj to Data/Playlists Informations.json
+[2022-06-07 15:08:22,042] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:22,248] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0k6jo6HdorB3wpD3082CG5 HTTP/1.1" 200 None
+[2022-06-07 15:08:22,932] - [//] - (DEBUG) - (Syncify): Added https://open.spotify.com/playlist/0k6jo6HdorB3wpD3082CG5 to Data/Playlists Informations.json
+[2022-06-07 15:08:22,933] - [//] - (DEBUG) - (Syncify): Added and updated Playlists / Albums.
+[2022-06-07 15:08:22,933] - [//] - (DEBUG) - (Syncify): downloadPath = /home/malek/Music/
+[2022-06-07 15:08:22,934] - [//] - (DEBUG) - (Savify): Logger setup -> {None}.
+[2022-06-07 15:08:22,934] - [//] - (DEBUG) - (Syncify): Quality -> 0. Format -> mp3
+[2022-06-07 15:08:22,934] - [//] - (DEBUG) - (Syncify): Quality -> 0. Format -> mp3
+[2022-06-07 15:08:22,935] - [//] - (DEBUG) - (Savify): Savify Session has been setup.
+[2022-06-07 15:08:22,935] - [//] - (DEBUG) - (Syncify): >Downloading began...
+[2022-06-07 15:08:22,937] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:23,230] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0g7YuUMjV6NiwshiP4sWSj HTTP/1.1" 200 None
+[2022-06-07 15:08:23,234] - [//] - (INFO) - (Syncify): Downloading from : emo stuff
+[2022-06-07 15:08:23,236] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:23,462] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2rAdbINYQ5KZV4teK7eKRt HTTP/1.1" 200 None
+[2022-06-07 15:08:23,481] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:23,682] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/23lGG4qxKyoZbWuI1OfLZG HTTP/1.1" 200 None
+[2022-06-07 15:08:23,700] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:23,906] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1hnU9xDMnontCeIWDhcGKO HTTP/1.1" 200 None
+[2022-06-07 15:08:23,924] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:24,444] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4qOatgAX0ktHvxXT36Btq9 HTTP/1.1" 200 None
+[2022-06-07 15:08:24,462] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:24,642] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4i5LQ7RQLzcaNQhK90A4IA HTTP/1.1" 200 None
+[2022-06-07 15:08:24,661] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:24,869] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4cGGGry4qFsFDDUrO6GaST HTTP/1.1" 200 None
+[2022-06-07 15:08:24,888] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:25,086] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2onEeEXEtcZGMZfM9xoTqV HTTP/1.1" 200 None
+[2022-06-07 15:08:25,103] - [//] - (INFO) - (Syncify): Downloaded -> emo stuff
+[2022-06-07 15:08:25,104] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:25,479] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0g7YuUMjV6NiwshiP4sWSj HTTP/1.1" 200 None
+[2022-06-07 15:08:25,483] - [//] - (DEBUG) - (Syncify): Created playlist -> emo stuff
+[2022-06-07 15:08:25,484] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:25,960] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0k6jo6HdorB3wpD3082CG5 HTTP/1.1" 200 None
+[2022-06-07 15:08:25,965] - [//] - (INFO) - (Syncify): Downloading from : a mood.
+[2022-06-07 15:08:25,966] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:26,222] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4d3QT8EyzdU5ShmEM71nRc HTTP/1.1" 200 None
+[2022-06-07 15:08:26,233] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:26,556] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0Tt3no2EnhX6Uf03Qq2BVg HTTP/1.1" 200 None
+[2022-06-07 15:08:26,622] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:26,870] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4Ouhoi2lAhrLJKFzUqEzwl HTTP/1.1" 200 None
+[2022-06-07 15:08:26,888] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:27,125] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6fyJzvHHNx8OG6WJeG0zcZ HTTP/1.1" 200 None
+[2022-06-07 15:08:27,152] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:27,456] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3ESGSptp9NUrzUGFztxm1S HTTP/1.1" 200 None
+[2022-06-07 15:08:27,466] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:27,774] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3mC9mkOx74IBNkHZk3u3lo HTTP/1.1" 200 None
+[2022-06-07 15:08:27,793] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:27,988] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2vtmY2mSccRzKGjtcHSzI3 HTTP/1.1" 200 None
+[2022-06-07 15:08:28,006] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:28,198] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/37gCWqkooik1zPmzhzxBPV HTTP/1.1" 200 None
+[2022-06-07 15:08:28,216] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:28,430] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4uhSo9cVBVpdDCNxf4MBaP HTTP/1.1" 200 None
+[2022-06-07 15:08:28,448] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:28,730] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7uAjwJ8z36UtyyISy9D0BB HTTP/1.1" 200 None
+[2022-06-07 15:08:28,749] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:29,119] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3kG6GPkDkV2RQTm9QdYN9Z HTTP/1.1" 200 None
+[2022-06-07 15:08:29,143] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:29,406] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5JKLxYwGTeKaZYOeVVf7pB HTTP/1.1" 200 None
+[2022-06-07 15:08:29,423] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:30,012] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6h3wQase6J2MPCYMGH5KFb HTTP/1.1" 200 None
+[2022-06-07 15:08:30,029] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:30,328] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1i6N76fftMZhijOzFQ5ZtL HTTP/1.1" 200 None
+[2022-06-07 15:08:30,346] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:30,620] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7zLeOgBrdrCfMf47MCyLMC HTTP/1.1" 200 None
+[2022-06-07 15:08:30,646] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:30,905] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3dYD57lRAUcMHufyqn9GcI HTTP/1.1" 200 None
+[2022-06-07 15:08:30,924] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:31,157] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2qcxAbaFai3ZXle18e7FTn HTTP/1.1" 200 None
+[2022-06-07 15:08:31,165] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:31,405] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4aYLAF6ckQ5ooGGGM7sWAa HTTP/1.1" 200 None
+[2022-06-07 15:08:31,423] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:31,839] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3TO7bbrUKrOSPGRTB5MeCz HTTP/1.1" 200 None
+[2022-06-07 15:08:31,857] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:32,069] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6DyywdbmTzlmXBzG9ym7Rt HTTP/1.1" 200 None
+[2022-06-07 15:08:32,088] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:32,358] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4rACKXWhOxIOI1o8pL7mrj HTTP/1.1" 200 None
+[2022-06-07 15:08:32,377] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:32,960] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4F9P32fMWCGH2sPC2SHPK8 HTTP/1.1" 200 None
+[2022-06-07 15:08:32,970] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:33,638] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2fY29McRgZM7oYNEjbhFNS HTTP/1.1" 200 None
+[2022-06-07 15:08:33,646] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:34,080] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1KCDsPKFISNM2YZFFAoI7s HTTP/1.1" 200 None
+[2022-06-07 15:08:34,098] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:34,284] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5kdRTWzlnsoO9cuIH1b4Ls HTTP/1.1" 200 None
+[2022-06-07 15:08:34,302] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:35,079] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0b18g3G5spr4ZCkz7Y6Q0Q HTTP/1.1" 200 None
+[2022-06-07 15:08:35,096] - [//] - (INFO) - (Syncify): Downloaded -> a mood.
+[2022-06-07 15:08:35,097] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:35,428] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0k6jo6HdorB3wpD3082CG5 HTTP/1.1" 200 None
+[2022-06-07 15:08:35,434] - [//] - (DEBUG) - (Syncify): Created playlist -> a mood.
+[2022-06-07 15:08:35,434] - [//] - (INFO) - (Syncify): >Downloading all tracks is finished! All playlists are saved.
+[2022-06-07 15:08:35,434] - [//] - (DEBUG) - (Syncify): Deleted Albums links from 'Data/Playlists Informations.json' for optimization.
+[2022-06-07 15:08:35,434] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-06-07 15:08:35,434] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-06-07 15:08:37,257] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:37,588] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0g7YuUMjV6NiwshiP4sWSj HTTP/1.1" 200 None
+[2022-06-07 15:08:38,242] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-07 15:08:38,495] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/0k6jo6HdorB3wpD3082CG5 HTTP/1.1" 200 None
+[2022-06-07 15:08:39,324] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-06-07 15:08:39,324] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-06-07 15:10:01,536] - [//] - (INFO) - (Syncify): <Exit>
