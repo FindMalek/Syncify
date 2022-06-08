@@ -102,7 +102,7 @@ def WriteJSON(filePath, toWrite, mode):
     with open(filePath, mode) as outfile:
         json.dump(toWrite, outfile, indent=4)
 
-#Create "Playlists Informations.json" and "Settings.json"
+#Create "UserData.json" and "Settings.json"
 def SettingUp():
     currentPath = os.path.abspath(os.getcwd())
     if('/' in currentPath):
@@ -127,12 +127,13 @@ def SettingUp():
         WriteJSON(currentPath + "Settings.json", Settings, 'w')
     
     playlistInformations = {
-        "Playlists Informations" : [],
-        "Playlists links": []
+        "Playlists": [],
+        "Albums" : [],
+        "Tracks": []
     }
     onlyfiles = [f for f in listdir(convertPath(currentPath + "Data/")) if isfile(join(convertPath(currentPath + "Data/"), f))]
-    if("Playlists Informations.json" not in onlyfiles):
-        WriteJSON(convertPath(currentPath + "Data/Playlists Informations.json") , playlistInformations, 'w')
+    if("userData.json" not in onlyfiles):
+        WriteJSON(convertPath(currentPath + "Data/userData.json") , playlistInformations, 'w')
     
     #Setting up the logging configuration
     logsSyncify("").loggingSetup()
@@ -146,8 +147,6 @@ def printLoad(start, end):
         print(line[:-1])
         
 #Checks if the file is a song or not from these formats
-#["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
-#<Coming soon>
 def isFilePlaylist(file):
     if(file[-3:] == "m3a"):
         return True
@@ -185,11 +184,42 @@ def deleteTemporaryFiles(path):
         pass
     
 #Checks if a link is playlist or album
-def isLinkAlbum(link):
+def whatIsLink(link):
     if("album" in link):
-        return True
-    else:
-        return False
+        return "Album"
+    elif("playlist" in link):
+        return "Playlist"
+    elif("track" in link):
+        return "Track"
+
+#Download settings
+def DownloadSettings(Savify):
+    SavifySettings = ReadFILE(setting_path)["Settings"]
+    
+    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
+    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
+    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
+    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
+    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
+    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
+    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
+    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
+
+    logsSyncify("").Syncify(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}").debug()
+    return qual, SavifySettings["Format"].lower()
+
+#Add information in settings file
+def addInformation(stroption, info, infoList, Settings):
+    while True:
+        infoEntered = input(f"{stroption} chosen (Press <Enter>, If you don't wish to change the {stroption}): ")
+        if(infoEntered == ''):
+            Settings["Settings"][stroption] = info
+            break
+        elif(infoEntered in infoList): 
+            Settings["Settings"][stroption] = infoEntered
+            break
+        
+    return Settings
 
 #Tries detector
 def triesCounter(tries):

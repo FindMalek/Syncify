@@ -1,23 +1,46 @@
 """ 
     CHANGES:
 
-        .Changing how Syncify creates playlists.
-    Instead of downloading all the tracks from each playlist and then creating all the playlists.
-    That changed to downloading the tracks of a playlist and then create the playlist file.
-    After this change you don't have to wait to download all the tracks to get your playlist prepared.
-"""
-
-
-"""
-    BUGS:
+        1.(In progress)     Changing the format of 'Playlists Information.json'.
+    It used to have duplicate information which is bad for the database.
+    It will only have unique data and  Albums and Playlists will be sperated as well.
+    {
+        "Playlists": [
+            {}
+        ],
+        
+        "Albums": [
+            {}
+        ],
+        
+        "Tracks": [
+            'link1'
+        ]
+    }
     
-    1. Now Syncify deletes all of it's temporary files, to save storage.
+        2.(In progress)      Adding traks.
+        This update is a preparation to download tracks individually.
+        In the next updates this feature will be available.
+    
+    
+        3.(In progress)      Changing how the Albums / Playlists get saved
+        in 'Playlists Information.json', they used to be saved only after choosing the download command.
+        It will be changed to; after enterning each Album / Playlist it will be automatically
+        saved to the file.
+        
+        4.(Done)     Changing 'Playlist Informations' -> 'userData.json'
+        Because it makes more sense, since the 'userData' stores; 'Albums, Playlists and Tracks' of the user,
+        not only playlists.
+        
+        5.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
+        By default it will be Playlists -> Albums -> Tracks.
+        But the user will be able to change it, using an order system.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.4.1'
+__version__ = '1.0.6.4.2'
 
 
 #importing systemFunctions
@@ -30,7 +53,7 @@ from spotifyHandler.requestsHandeling import *
 #Setting up needed files
 SettingUp()
 setting_path = "Settings.json"
-playlist_path = convertPath("Data/Playlists Informations.json")
+userdata = convertPath("Data/userData.json")
 logsSyncify("").Syncify("Function - SettingUp && Prepaths are set.").debug()
 
 #importing Savify
@@ -56,18 +79,20 @@ def Downloads(syncifyToken, savifySession, playlistURLs):
             savifySession.download(url)
             logsSyncify("").Syncify(f"Downloaded -> {track[:-4]}.").info()
     
-#print Playlist / Album informations
+#print Playlist / Album / Track informations
 def printObject(link, syncifyToken):
     logsSyncify("").message("\n\n_______________________________________")
-    if(isLinkAlbum(link) == False):
-        playlist_ID = link[link.find("playlist/") + len("playlist/"):]
+    
+    #If the link is a Playlist Link
+    if(whatIsLink(link) == "Playlist"):
+        playlistId = link[link.find("playlist/") + len("playlist/"):]
         tries = 0
         while True:
             try:
-                Result = playlist(syncifyToken, playlist_ID)
+                Result = playlist(syncifyToken, playlistId)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {playlist_ID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {playlistId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
                 
                 tries = triesCounter(tries)
                 if(tries == True):
@@ -78,14 +103,15 @@ def printObject(link, syncifyToken):
                 
         logsSyncify("").message(f"\t-(Playlist)-\nName: {Result['name']}\n\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
         
-    else:
-        album_ID = link[link.find("album/") + len("album/"):]
+    #If the link is an Album Link
+    elif(whatIsLink(link) == "Album"):
+        albumID = link[link.find("album/") + len("album/"):]
         while True:
             try:
-                Result = album(syncifyToken, album_ID)
+                Result = album(syncifyToken, albumID)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {album_ID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {albumID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
                 
                 tries = triesCounter(tries)
                 if(tries == True):
@@ -95,40 +121,82 @@ def printObject(link, syncifyToken):
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
                     
         logsSyncify("").message(f"\t-(Album)-\nName: {Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
+    
+    #If the link is a Track Link
+    elif(whatIsLink(link) == "Track"):
+        trackID = link[link.find("track/") + len("track/"):]
+        while True:
+            try:
+                Result = track(syncifyToken, trackID)
+                WriteJSON('res.json', Result, 'w')
+                break
+            except Exception:
+                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {trackID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+
+                tries = triesCounter(tries)
+                if(tries == True):
+                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    quit()
+                    
+                time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
+        logsSyncify("").message(f"\t-(Track)")
+
     logsSyncify("").message("_______________________________________")
 
-
-#Add playlist link in the json file Playlists Informations.json
-def AddLink(list):
-    playlistLinks = ReadFILE(playlist_path)
-    for link in list:
-        if(link in playlistLinks["Playlists links"]) == False:
-            playlistLinks["Playlists links"].append(link)
-
-    WriteJSON(playlist_path, playlistLinks, 'w')
-    logsSyncify("").Syncify(f"Added all links to {playlist_path}").debug()
-
-#Add playlists to the settings.json "Playlists Informations"
-def AddPlaylist(syncifyToken):
-    listAP = []
+#Add Albums, Playlists and Tracks to userData.json
+def addObject(syncifyToken, link):
+    objectResult = getObjectInformation(syncifyToken, link)
+    objects = ReadFILE(userdata)
     
+    if(whatIsLink(link) == "Album"):
+        WriteJSON('resAlb', objectResult, 'w')
+        obj = {
+            objectResult[0]["name"] : {
+                "Image" : objectResult[0]["images"][0]["url"],
+                "Links" : {
+                    "URL": objectResult[0]["external_urls"]["spotify"],
+                    "ID": objectResult[1]      
+                }
+            }
+        }
+        objects["Albums"].append(obj)
+        
+    elif(whatIsLink(link) == "Playlist"):
+        obj = {
+            objectResult[0]["name"] : {
+                "Image" : objectResult[0]["images"][0]["url"],
+                "Links" : {
+                    "URL": objectResult[0]["external_urls"]["spotify"],
+                    "ID": objectResult[1]      
+                }
+            }
+        }
+        objects["Playlists"].append(obj)
+    
+    elif(whatIsLink(link) == "Track"):
+        objects["Tracks"].append(link)
+
+    #Add the new objects
+    WriteJSON(userdata, objects, 'w')
+
+#Enter Playlist / Album / Track to the "UserData.json"
+def enterObject(syncifyToken):
     while True:
-        link = input("\n-> Enter link (Album / Playlist) or <Enter> to skip: ")
+        link = input("\n-> Enter link (Album / Playlist / Track) or <Enter> to skip: ")
         
         if(link == ''):
-            logsSyncify("").message("=> No playlist have been entered!")
+            logsSyncify("").message("=> Nothing has been entered!")
             break   
             
-        #Print the name of the playlist and the description
-        logsSyncify("").Syncify(f"Printing Album / Playlist -> {link}").debug()
+        if('?' in link):
+            link = link[:link.find('?')]
+            
+        #Print the name of the playlist / album / track and the description
+        logsSyncify("").Syncify(f"Printing Album / Playlist / Track -> {link}").debug()
         printObject(link, syncifyToken)
         
-        if('?' in link):
-            listAP.append(link[:link.find('?')])
-        else:
-            listAP.append(link)
-            
-    AddLink(listAP)
+        #Add the Object to "userData.json"
+        addObject(syncifyToken, link)
 
 #Print the load text, load the savify client
 def Load(syncifyToken):
@@ -147,39 +215,9 @@ def Load(syncifyToken):
 
     WriteJSON(setting_path, settingFile, 'w')
 
-    playlistFile = getDataJSON(playlist_path, "Playlists Informations")
-    if(playlistFile == []):
-        logsSyncify("").Syncify(f"Adding links to {playlist_path}.").debug()
-        AddPlaylist(syncifyToken)
-
-#Download settings
-def DownloadSettings(Savify):
-    SavifySettings = ReadFILE(setting_path)["Settings"]
-    
-    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
-    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
-    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
-    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
-    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
-    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
-    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
-    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
-
-    logsSyncify("").Syncify(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}").debug()
-    return qual, SavifySettings["Format"].lower()
-
-#Add information in settings file
-def addInformation(stroption, info, infoList, Settings):
-    while True:
-        infoEntered = input(f"{stroption} chosen (Press <Enter>, If you don't wish to change the {stroption}): ")
-        if(infoEntered == ''):
-            Settings["Settings"][stroption] = info
-            break
-        elif(infoEntered in infoList): 
-            Settings["Settings"][stroption] = infoEntered
-            break
-        
-    return Settings
+    if((getDataJSON(userdata, "Playlists") == []) and (getDataJSON(userdata, "Albums") ==  []) and (getDataJSON(userdata, "Tracks") == [])):
+        logsSyncify("").Syncify(f"Adding links to {userdata}.").debug()
+        enterObject(syncifyToken)
 
 #Select which action the user wants
 def SelectCommand(syncifyToken): 
@@ -188,17 +226,12 @@ def SelectCommand(syncifyToken):
     answer = input("Choose the number of the command: ")
 
     if(answer == "1"): #Enter Playlists Informations
-        AddPlaylist(syncifyToken)
+        logsSyncify("").Syncify("Adding and updating Playlists / Albums / Tracks...").debug()
+        enterObject(syncifyToken)
+        logsSyncify("").Syncify("Added and updated Playlists / Albums / Tracks.").debug()
 
     elif(answer == "2"): 
-        #And move Outdated Playlists to the Outdated folder
-        #It keeps a version of each playlist
-        
-        logsSyncify("").Syncify("Adding and updating Playlists / Albums...").debug()
-        RefreshPlaylistFile(syncifyToken)
-        logsSyncify("").Syncify("Added and updated Playlists / Albums.").debug()
-
-        downloadableObjs = getDataJSON(playlist_path, "Playlists Informations")
+        downloadableObjs = getDataJSON(userdata, "Playlists Informations")
         downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
         logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
 
@@ -223,21 +256,20 @@ def SelectCommand(syncifyToken):
             logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
             
             #Creating playlist
-            playlistURL = obj[list(obj.keys())[0]]["Links"]["URL"]
-            if(isLinkAlbum(playlistURL) == False):
-                plOrdered = PlaylistManager(syncifyToken, playlistURL[playlistURL.find("playlist/") + len("playlist/"):], playlistURL)
+            if(isLinkAlbum(obj[list(obj.keys())[0]]["Links"]["URL"]) == False):
+                plOrdered = PlaylistManager(syncifyToken, obj[list(obj.keys())[0]]["Links"]["ID"], obj[list(obj.keys())[0]]["Links"]["URL"])
                 CreatePlaylist(plOrdered)
 
-            logsSyncify("").Syncify(f"\tCreated playlist -> {objName}").debug()
+            logsSyncify("").Syncify(f"Created playlist -> {objName}").debug()
             
         logsSyncify("").Syncify("\n>Downloading all tracks is finished! All playlists are saved.").info()
 
         #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
         popAlbums()
-        logsSyncify("").Syncify(f"Deleted Albums links from '{playlist_path}' for optimization.").debug()
+        logsSyncify("").Syncify(f"Deleted Albums links from '{userdata}' for optimization.").debug()
 
     elif(answer == "3"):
-        SavifyPlaylists = ReadFILE(playlist_path)["Playlists Informations"]
+        SavifyPlaylists = ReadFILE(userdata)["Playlists Informations"]
         for playlist in SavifyPlaylists:
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
             printObject(playlistLink, syncifyToken)
@@ -278,8 +310,8 @@ def SelectCommand(syncifyToken):
             WriteJSON(setting_path, Settings, 'w')
 
         elif(answer == "4"):
-            settingplaylist_path = Settings["Paths"]["Playlist"]
-            PlaylistPath = input(f"\nCurrently the Playlist path is: {settingplaylist_path} \nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
+            settinguserdata = Settings["Paths"]["Playlist"]
+            PlaylistPath = input(f"\nCurrently the Playlist path is: {settinguserdata} \nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
             
             if(sysOs.lower() != "linux"):
                 Settings["Paths"]["Playlist"] = PlaylistPath.replace(r"\"", "\\")
@@ -290,7 +322,7 @@ def SelectCommand(syncifyToken):
 
     elif(answer == "5"):
         logsSyncify("").message("<This command is coming in the next updates...>")
-        pause = input("")
+        input("")
 
     elif(answer == "6"):
         logsSyncify("").Syncify("<Exit>").info()
@@ -304,7 +336,9 @@ if __name__ == '__main__':
 
     Load(syncifyToken)
     while(True):
+        logsSyncify("").Syncify("Selecting command...").debug()
         SelectCommand(syncifyToken)
+        
         logsSyncify("").Syncify("Deleting temporary files...").debug()
         deleteTemporaryFiles(os.getcwd())
         logsSyncify("").Syncify("Deleted temporary files.").debug()
