@@ -1,7 +1,7 @@
 """ 
     CHANGES:
 
-        1.(In progress)     Changing the format of 'Playlists Information.json'.
+        1.(Done)     Changing the format of 'Playlists Information.json'.
     It used to have duplicate information which is bad for the database.
     It will only have unique data and  Albums and Playlists will be sperated as well.
     {
@@ -14,37 +14,50 @@
         ],
         
         "Tracks": [
-            'link1'
+            {}
         ]
     }
     
-        2.(In progress)      Adding traks.
+        2.(Done)      Adding tracks.
         This update is a preparation to download tracks individually.
         In the next updates this feature will be available.
     
     
-        3.(In progress)      Changing how the Albums / Playlists get saved
+        3.(Done)      Changing how the Albums / Playlists get saved
         in 'Playlists Information.json', they used to be saved only after choosing the download command.
         It will be changed to; after enterning each Album / Playlist it will be automatically
         saved to the file.
         
-        4.(Done)     Changing 'Playlist Informations' -> 'userData.json'
-        Because it makes more sense, since the 'userData' stores; 'Albums, Playlists and Tracks' of the user,
-        not only playlists.
-        
-        5.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
+        4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
         By default it will be Playlists -> Albums -> Tracks.
         But the user will be able to change it, using an order system.
+        Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"]
+
+        5.(No progress)     Change how to print for the user the saved Albums / Tracks / Playlists.
+        It will be changed to choose which one of these you want to be printed (Albums / Tracks / Playlists)
+        and the print will be in the 3 colomus.
+        
+        6.(No progress)     Change the object of 'userData.json' format.
+        (Those elements inside the 'Playlists', 'Albums' and 'Tracks')
+        It will be:
+        {
+            "ID": {
+                "Image": link,
+                "Owner": name,
+                "Creation date": date
+            }
+        }
+    
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.4.2'
+__version__ = '1.0.6.4.3'
 
 
 #importing systemFunctions
-import logging, json, shutil, os, fnmatch
+import logging, json, shutil, os, fnmatch, datetime
 from SyncifyFunctions.systemFunctions import * 
 
 #Importing spotifyHandeler
@@ -53,7 +66,7 @@ from spotifyHandler.requestsHandeling import *
 #Setting up needed files
 SettingUp()
 setting_path = "Settings.json"
-userdata = convertPath("Data/userData.json")
+userdata_path = convertPath("Data/userData.json")
 logsSyncify("").Syncify("Function - SettingUp && Prepaths are set.").debug()
 
 #importing Savify
@@ -128,7 +141,6 @@ def printObject(link, syncifyToken):
         while True:
             try:
                 Result = track(syncifyToken, trackID)
-                WriteJSON('res.json', Result, 'w')
                 break
             except Exception:
                 logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {trackID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
@@ -139,17 +151,17 @@ def printObject(link, syncifyToken):
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
-        logsSyncify("").message(f"\t-(Track)")
+                
+        logsSyncify("").message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
 
     logsSyncify("").message("_______________________________________")
 
 #Add Albums, Playlists and Tracks to userData.json
 def addObject(syncifyToken, link):
     objectResult = getObjectInformation(syncifyToken, link)
-    objects = ReadFILE(userdata)
+    objects = ReadFILE(userdata_path)
     
     if(whatIsLink(link) == "Album"):
-        WriteJSON('resAlb', objectResult, 'w')
         obj = {
             objectResult[0]["name"] : {
                 "Image" : objectResult[0]["images"][0]["url"],
@@ -174,10 +186,19 @@ def addObject(syncifyToken, link):
         objects["Playlists"].append(obj)
     
     elif(whatIsLink(link) == "Track"):
-        objects["Tracks"].append(link)
+        obj = {
+            str(objectResult[0]["album"]["artists"][0]["name"] + ' - ' + objectResult[0]["name"]) : {
+                "Image" : objectResult[0]["album"]["images"][0]["url"],
+                "Links" : {
+                    "URL": link,
+                    "ID": link[link.find("track/") + len("track/"):]
+                }
+            }
+        }
+        objects["Tracks"].append(obj)
 
     #Add the new objects
-    WriteJSON(userdata, objects, 'w')
+    WriteJSON(userdata_path, objects, 'w')
 
 #Enter Playlist / Album / Track to the "UserData.json"
 def enterObject(syncifyToken):
@@ -215,9 +236,25 @@ def Load(syncifyToken):
 
     WriteJSON(setting_path, settingFile, 'w')
 
-    if((getDataJSON(userdata, "Playlists") == []) and (getDataJSON(userdata, "Albums") ==  []) and (getDataJSON(userdata, "Tracks") == [])):
-        logsSyncify("").Syncify(f"Adding links to {userdata}.").debug()
+    if((getDataJSON(userdata_path, "Playlists") == []) and (getDataJSON(userdata_path, "Albums") ==  []) and (getDataJSON(userdata_path, "Tracks") == [])):
+        logsSyncify("").Syncify(f"Adding links to {userdata_path}.").debug()
         enterObject(syncifyToken)
+
+#Download settings
+def DownloadSettings(Savify):
+    SavifySettings = ReadFILE(setting_path)["Settings"]
+    
+    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
+    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
+    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
+    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
+    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
+    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
+    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
+    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
+
+    logsSyncify("").Syncify(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}").debug()
+    return qual, SavifySettings["Format"].lower()
 
 #Select which action the user wants
 def SelectCommand(syncifyToken): 
@@ -225,51 +262,63 @@ def SelectCommand(syncifyToken):
     
     answer = input("Choose the number of the command: ")
 
-    if(answer == "1"): #Enter Playlists Informations
+    if(answer == "1"):
         logsSyncify("").Syncify("Adding and updating Playlists / Albums / Tracks...").debug()
         enterObject(syncifyToken)
         logsSyncify("").Syncify("Added and updated Playlists / Albums / Tracks.").debug()
 
     elif(answer == "2"): 
-        downloadableObjs = getDataJSON(userdata, "Playlists Informations")
         downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
         logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
-
+        
         #Logging stuff
         logger = Logger(log_location=convertPath("/tmp/"), log_level=None) # Silent output
         logsSyncify("").Savify("Logger setup -> {None}.").debug()
-
+        
         #Savify Session
         savifySession = Savify(logger=logger,
                          quality=DownloadSettings(Savify)[0],
                          download_format=DownloadSettings(Savify)[1],
                          path_holder=PathHolder(downloads_path=getDataJSON(setting_path, "Settings/Paths/Downloads")))
         logsSyncify("").Savify(f"Savify Session has been setup.").debug()
-
-        logsSyncify("").Syncify(">Downloading began...").debug()
-        for obj, objectCounter in zip(downloadableObjs, range(len(downloadableObjs))):
-            objName = str(list(obj.keys())[0])
-            trackURLs = getTracks(syncifyToken, downloadableObjs[objectCounter][objName]["Links"]["ID"], downloadableObjs[objectCounter][objName]["Links"]["URL"])
+        
+        """
+            4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
+            By default it will be Playlists -> Albums -> Tracks.
+            But the user will be able to change it, using an order system.
+            Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"] (Default)
+        """
+        #This is by default
+        downloadOrder = ["Playlists", "Albums", "Tracks"]
+        
+        for elementOrder in downloadOrder:
+            downloadableObjs = getDataJSON(userdata_path, elementOrder)
             
-            logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info()
-            Downloads(syncifyToken, savifySession, trackURLs)  
-            logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
+            logsSyncify("").Syncify(f"> Downloading {elementOrder} began...").debug()
+            for obj in downloadableObjs:
+                objName = str(list(obj.keys())[0])
+                trackURLs = getTracks(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
+                
+                logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info()
+                Downloads(syncifyToken, savifySession, trackURLs)  
+                logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
             
-            #Creating playlist
-            if(isLinkAlbum(obj[list(obj.keys())[0]]["Links"]["URL"]) == False):
-                plOrdered = PlaylistManager(syncifyToken, obj[list(obj.keys())[0]]["Links"]["ID"], obj[list(obj.keys())[0]]["Links"]["URL"])
-                CreatePlaylist(plOrdered)
-
-            logsSyncify("").Syncify(f"Created playlist -> {objName}").debug()
+                #Creating playlist
+                if(whatIsLink(obj[objName]["Links"]["URL"]) == "Playlist"):
+                    plOrdered = PlaylistManager(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
+                    CreatePlaylist(plOrdered)
+                logsSyncify("").Syncify(f"Created playlist -> {objName}").debug()
             
         logsSyncify("").Syncify("\n>Downloading all tracks is finished! All playlists are saved.").info()
 
         #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
-        popAlbums()
-        logsSyncify("").Syncify(f"Deleted Albums links from '{userdata}' for optimization.").debug()
+        popTmpObject()
+        logsSyncify("").Syncify(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.").debug()
 
     elif(answer == "3"):
-        SavifyPlaylists = ReadFILE(userdata)["Playlists Informations"]
+        logsSyncify("").Syncify(f"")
+        answer = input("Choose")
+        SavifyPlaylists = ReadFILE(userdata_path)["Playlists Informations"]
         for playlist in SavifyPlaylists:
             playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
             printObject(playlistLink, syncifyToken)

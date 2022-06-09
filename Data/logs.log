@@ -1,0 +1,168 @@
+[2022-06-09 16:41:38,008] - [//] - (DEBUG) - (Syncify): Function - SettingUp && Prepaths are set.
+[2022-06-09 16:41:38,157] - [//] - (DEBUG) - (Syncify): Savify imported.
+[2022-06-09 16:41:38,158] - [//] - (DEBUG) - (Syncify): Imported all modules and packages.
+[2022-06-09 16:41:38,158] - [//] - (DEBUG) - (Syncify): Getting (CLIENT_ID, CLIENT_SECRET)...
+[2022-06-09 16:41:38,158] - [//] - (DEBUG) - (Syncify): Getting Token Access...
+[2022-06-09 16:41:38,158] - [//] - (DEBUG) - (Syncify): Converted the CLIENT_ID and CLIENT_SECRET to Base 64 -> OWIwYzM5ZTQ3M2E3NGU2ZmFhNDAxYjY5ZDY2Y2FjZGY6NDBjNWRmOTdiM2RhNDgxMmFmMzkyYjkxY2ZiYWQ5ZmU=.
+[2022-06-09 16:41:38,158] - [//] - (DEBUG) - (Syncify): Sending a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess...
+[2022-06-09 16:41:38,159] - [//] - (DEBUG) - Starting new HTTPS connection (1): accounts.spotify.com:443
+[2022-06-09 16:41:38,440] - [//] - (DEBUG) - https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+[2022-06-09 16:41:38,443] - [//] - (DEBUG) - (Syncify): Sent a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess.
+[2022-06-09 16:41:38,444] - [//] - (DEBUG) - (Syncify): Got (CLIENT_ID, CLIENT_SECRET) = (9b0c39e473a74e6faa401b69d66cacdf, 40c5df97b3da4812af392b91cfbad9fe).
+[2022-06-09 16:41:38,445] - [//] - (DEBUG) - (Syncify): Selecting command...
+[2022-06-09 16:41:39,591] - [//] - (DEBUG) - (Syncify): downloadPath = /home/malek/Music/
+[2022-06-09 16:41:39,591] - [//] - (DEBUG) - (Savify): Logger setup -> {None}.
+[2022-06-09 16:41:39,592] - [//] - (DEBUG) - (Syncify): Quality -> 0. Format -> mp3
+[2022-06-09 16:41:39,592] - [//] - (DEBUG) - (Syncify): Quality -> 0. Format -> mp3
+[2022-06-09 16:41:39,592] - [//] - (DEBUG) - (Savify): Savify Session has been setup.
+[2022-06-09 16:41:39,592] - [//] - (DEBUG) - (Syncify): > Downloading Playlists began...
+[2022-06-09 16:41:39,593] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:47,027] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/7sZPLbpT69BVVilpYe5p6O HTTP/1.1" 200 None
+[2022-06-09 16:41:47,112] - [//] - (INFO) - (Syncify): Downloading from : A mixed mood
+[2022-06-09 16:41:47,113] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:47,597] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2mxHlvLpHtWcMYhiMgOAcb HTTP/1.1" 200 None
+[2022-06-09 16:41:47,614] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:48,547] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0f1G5SHFoFC9lO03gHCGVS HTTP/1.1" 200 None
+[2022-06-09 16:41:48,566] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:48,760] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0SUDiaR0qm30fXVGPjPvRp HTTP/1.1" 200 None
+[2022-06-09 16:41:48,778] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:48,989] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5txzKcySsIIIrsciNliAoL HTTP/1.1" 200 None
+[2022-06-09 16:41:49,008] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:49,220] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4d3QT8EyzdU5ShmEM71nRc HTTP/1.1" 200 None
+[2022-06-09 16:41:49,239] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:49,428] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/13nqSnXz9VOVEZT5gwCRgf HTTP/1.1" 200 None
+[2022-06-09 16:41:49,438] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:49,647] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/42ZrMq4BKsWDrrbMnMRYaK HTTP/1.1" 200 None
+[2022-06-09 16:41:49,667] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:49,859] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3JTjLyrnevl9ASw3ayGO2P HTTP/1.1" 200 None
+[2022-06-09 16:41:49,879] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:50,084] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5R65WfxdtxpTNSIloTfIdM HTTP/1.1" 200 None
+[2022-06-09 16:41:50,105] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:50,337] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1hrK8TsJ2uB4jqeZq92ecD HTTP/1.1" 200 None
+[2022-06-09 16:41:50,356] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:50,542] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0AdgBBXBsqotbhX8WsMvZF HTTP/1.1" 200 None
+[2022-06-09 16:41:50,550] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:50,994] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7yFMhCJOsH7khgpdnyrZAZ HTTP/1.1" 200 None
+[2022-06-09 16:41:51,006] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:51,237] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7g3MAqtM249rJuKhEJBzhi HTTP/1.1" 200 None
+[2022-06-09 16:41:51,246] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:51,435] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4j7lADGinXaitKatp8HNrx HTTP/1.1" 200 None
+[2022-06-09 16:41:51,457] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:52,080] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1i6N76fftMZhijOzFQ5ZtL HTTP/1.1" 200 None
+[2022-06-09 16:41:52,090] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:52,272] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1ZpuuCYZAhY6Ec01WLZnEg HTTP/1.1" 200 None
+[2022-06-09 16:41:52,289] - [//] - (INFO) - (Syncify): Downloading > Pomsky - Will You Still Love Me? (Wyslmt)...
+[2022-06-09 16:41:52,290] - [//] - (DEBUG) - Attempting to acquire lock 140427742576160 on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/publicsuffix.org-tlds/de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+[2022-06-09 16:41:52,290] - [//] - (DEBUG) - Lock 140427742576160 acquired on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/publicsuffix.org-tlds/de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+[2022-06-09 16:41:52,290] - [//] - (DEBUG) - Attempting to acquire lock 140427742681072 on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/urls/62bf135d1c2f3d4db4228b9ecaf507a2.tldextract.json.lock
+[2022-06-09 16:41:52,290] - [//] - (DEBUG) - Lock 140427742681072 acquired on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/urls/62bf135d1c2f3d4db4228b9ecaf507a2.tldextract.json.lock
+[2022-06-09 16:41:52,292] - [//] - (DEBUG) - Attempting to release lock 140427742681072 on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/urls/62bf135d1c2f3d4db4228b9ecaf507a2.tldextract.json.lock
+[2022-06-09 16:41:52,292] - [//] - (DEBUG) - Lock 140427742681072 released on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/urls/62bf135d1c2f3d4db4228b9ecaf507a2.tldextract.json.lock
+[2022-06-09 16:41:52,298] - [//] - (DEBUG) - Attempting to release lock 140427742576160 on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/publicsuffix.org-tlds/de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+[2022-06-09 16:41:52,298] - [//] - (DEBUG) - Lock 140427742576160 released on /home/malek/.cache/python-tldextract/3.9.7.final__usr__7d8fdf__tldextract-3.1.2/publicsuffix.org-tlds/de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+[2022-06-09 16:41:52,299] - [//] - (DEBUG) - cache does not exist at: .cache
+[2022-06-09 16:41:52,299] - [//] - (DEBUG) - sending POST request to https://accounts.spotify.com/api/token with Headers: {'Authorization': 'Basic OWIwYzM5ZTQ3M2E3NGU2ZmFhNDAxYjY5ZDY2Y2FjZGY6NDBjNWRmOTdiM2RhNDgxMmFmMzkyYjkxY2ZiYWQ5ZmU='} and Body: {'grant_type': 'client_credentials'}
+[2022-06-09 16:41:52,299] - [//] - (DEBUG) - Starting new HTTPS connection (1): accounts.spotify.com:443
+[2022-06-09 16:41:52,485] - [//] - (DEBUG) - https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+[2022-06-09 16:41:52,486] - [//] - (DEBUG) - Sending GET to https://api.spotify.com/v1/tracks/1ZpuuCYZAhY6Ec01WLZnEg with Params: {'market': None} Headers: {'Authorization': 'Bearer BQAAcFn56zBshNBvgMaIiG3A6PAXhUME8xVc3OcdbIHhxf4wEjIBbgs_H-oHbazAJ9g-XfiMA1RJo-DW3bJdFj4DwAJCF2dlpi5osAbckYP1-eml3ux5', 'Content-Type': 'application/json'} and Body: None 
+[2022-06-09 16:41:52,487] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:52,678] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1ZpuuCYZAhY6Ec01WLZnEg HTTP/1.1" 200 None
+[2022-06-09 16:41:52,679] - [//] - (DEBUG) - RESULTS: {'album': {'album_type': 'single', 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/2v0ZHwSNiABKoCJzvlr1pQ'}, 'href': 'https://api.spotify.com/v1/artists/2v0ZHwSNiABKoCJzvlr1pQ', 'id': '2v0ZHwSNiABKoCJzvlr1pQ', 'name': 'Pomsky', 'type': 'artist', 'uri': 'spotify:artist:2v0ZHwSNiABKoCJzvlr1pQ'}], 'available_markets': ['AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MO', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TJ', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VC', 'VE', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'], 'external_urls': {'spotify': 'https://open.spotify.com/album/6mUjcYtH4XlTKwwkDg5gXj'}, 'href': 'https://api.spotify.com/v1/albums/6mUjcYtH4XlTKwwkDg5gXj', 'id': '6mUjcYtH4XlTKwwkDg5gXj', 'images': [{'height': 640, 'url': 'https://i.scdn.co/image/ab67616d0000b2739bbedd44a21ed5c63975c5d9', 'width': 640}, {'height': 300, 'url': 'https://i.scdn.co/image/ab67616d00001e029bbedd44a21ed5c63975c5d9', 'width': 300}, {'height': 64, 'url': 'https://i.scdn.co/image/ab67616d000048519bbedd44a21ed5c63975c5d9', 'width': 64}], 'name': 'Will You Still Love Me? (Wyslmt)', 'release_date': '2020-01-30', 'release_date_precision': 'day', 'total_tracks': 1, 'type': 'album', 'uri': 'spotify:album:6mUjcYtH4XlTKwwkDg5gXj'}, 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/2v0ZHwSNiABKoCJzvlr1pQ'}, 'href': 'https://api.spotify.com/v1/artists/2v0ZHwSNiABKoCJzvlr1pQ', 'id': '2v0ZHwSNiABKoCJzvlr1pQ', 'name': 'Pomsky', 'type': 'artist', 'uri': 'spotify:artist:2v0ZHwSNiABKoCJzvlr1pQ'}], 'available_markets': ['AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MO', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TJ', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VC', 'VE', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'], 'disc_number': 1, 'duration_ms': 104119, 'explicit': True, 'external_ids': {'isrc': 'QZFYY2017818'}, 'external_urls': {'spotify': 'https://open.spotify.com/track/1ZpuuCYZAhY6Ec01WLZnEg'}, 'href': 'https://api.spotify.com/v1/tracks/1ZpuuCYZAhY6Ec01WLZnEg', 'id': '1ZpuuCYZAhY6Ec01WLZnEg', 'is_local': False, 'name': 'Will You Still Love Me? (Wyslmt)', 'popularity': 37, 'preview_url': 'https://p.scdn.co/mp3-preview/5405a2698ffe10fbd7f411b34728dcbec8335bf8?cid=9b0c39e473a74e6faa401b69d66cacdf', 'track_number': 1, 'type': 'track', 'uri': 'spotify:track:1ZpuuCYZAhY6Ec01WLZnEg'}
+[2022-06-09 16:41:52,680] - [//] - (INFO) - Downloading 1 songs...
+[2022-06-09 16:41:52,684] - [//] - (INFO) - Pomsky - Will You Still Love Me? (Wyslmt) -> is already downloaded. Skipping...
+[2022-06-09 16:41:52,685] - [//] - (INFO) - Cleaning up...
+[2022-06-09 16:41:52,685] - [//] - (INFO) - Download Finished!
+	Completed 1/1 songs in 0s
+
+[2022-06-09 16:41:52,685] - [//] - (INFO) - (Syncify): Downloaded -> Pomsky - Will You Still Love Me? (Wyslmt).
+[2022-06-09 16:41:52,687] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:53,138] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3KUx4W2ElRXGafPYlwzIRM HTTP/1.1" 200 None
+[2022-06-09 16:41:53,156] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:53,373] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4uhSo9cVBVpdDCNxf4MBaP HTTP/1.1" 200 None
+[2022-06-09 16:41:53,384] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:53,603] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3dYD57lRAUcMHufyqn9GcI HTTP/1.1" 200 None
+[2022-06-09 16:41:53,621] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:53,840] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0b18g3G5spr4ZCkz7Y6Q0Q HTTP/1.1" 200 None
+[2022-06-09 16:41:53,859] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:54,040] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6h3wQase6J2MPCYMGH5KFb HTTP/1.1" 200 None
+[2022-06-09 16:41:54,059] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:54,283] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1UznNa1XW3mnkEo7Ngr2gR HTTP/1.1" 200 None
+[2022-06-09 16:41:54,303] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:54,773] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4rCKRVJZKVysScn2piDuOT HTTP/1.1" 200 None
+[2022-06-09 16:41:54,792] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:54,989] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3ZffQgmPwP1xxRGHCza4fJ HTTP/1.1" 200 None
+[2022-06-09 16:41:55,008] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:55,189] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6WkJ2OK163XXS2oARUC9JM HTTP/1.1" 200 None
+[2022-06-09 16:41:55,211] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:55,439] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7KWXWjiJBCBpoD4NiUTdtq HTTP/1.1" 200 None
+[2022-06-09 16:41:55,457] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:55,677] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7kjsCbksOZotNNHOvKsJJh HTTP/1.1" 200 None
+[2022-06-09 16:41:55,697] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:56,173] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7j43FohbLVulScL7S9sQZk HTTP/1.1" 200 None
+[2022-06-09 16:41:56,193] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:56,411] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1zmgEIHE0eXH0IhBGuoTkP HTTP/1.1" 200 None
+[2022-06-09 16:41:56,431] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:56,927] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7wCmS9TTVUcIhRalDYFgPy HTTP/1.1" 200 None
+[2022-06-09 16:41:56,936] - [//] - (INFO) - (Syncify): Downloading > Pixies - Where Is My Mind? - Remastered...
+[2022-06-09 16:41:56,936] - [//] - (DEBUG) - Sending GET to https://api.spotify.com/v1/tracks/7wCmS9TTVUcIhRalDYFgPy with Params: {'market': None} Headers: {'Authorization': 'Bearer BQAAcFn56zBshNBvgMaIiG3A6PAXhUME8xVc3OcdbIHhxf4wEjIBbgs_H-oHbazAJ9g-XfiMA1RJo-DW3bJdFj4DwAJCF2dlpi5osAbckYP1-eml3ux5', 'Content-Type': 'application/json'} and Body: None 
+[2022-06-09 16:41:57,149] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7wCmS9TTVUcIhRalDYFgPy HTTP/1.1" 200 None
+[2022-06-09 16:41:57,150] - [//] - (DEBUG) - RESULTS: {'album': {'album_type': 'album', 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT'}, 'href': 'https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT', 'id': '6zvul52xwTWzilBZl6BUbT', 'name': 'Pixies', 'type': 'artist', 'uri': 'spotify:artist:6zvul52xwTWzilBZl6BUbT'}], 'available_markets': ['AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MO', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TJ', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VC', 'VE', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'], 'external_urls': {'spotify': 'https://open.spotify.com/album/50j4Wm1b9hLpSpPIA39Vp9'}, 'href': 'https://api.spotify.com/v1/albums/50j4Wm1b9hLpSpPIA39Vp9', 'id': '50j4Wm1b9hLpSpPIA39Vp9', 'images': [{'height': 640, 'url': 'https://i.scdn.co/image/ab67616d0000b273626ad9bb7d5f84c59652b161', 'width': 640}, {'height': 300, 'url': 'https://i.scdn.co/image/ab67616d00001e02626ad9bb7d5f84c59652b161', 'width': 300}, {'height': 64, 'url': 'https://i.scdn.co/image/ab67616d00004851626ad9bb7d5f84c59652b161', 'width': 64}], 'name': 'Surfer Rosa', 'release_date': '1988-03-21', 'release_date_precision': 'day', 'total_tracks': 13, 'type': 'album', 'uri': 'spotify:album:50j4Wm1b9hLpSpPIA39Vp9'}, 'artists': [{'external_urls': {'spotify': 'https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT'}, 'href': 'https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT', 'id': '6zvul52xwTWzilBZl6BUbT', 'name': 'Pixies', 'type': 'artist', 'uri': 'spotify:artist:6zvul52xwTWzilBZl6BUbT'}], 'available_markets': ['AD', 'AE', 'AG', 'AL', 'AM', 'AO', 'AR', 'AT', 'AU', 'AZ', 'BA', 'BB', 'BD', 'BE', 'BF', 'BG', 'BH', 'BI', 'BJ', 'BN', 'BO', 'BR', 'BS', 'BT', 'BW', 'BY', 'BZ', 'CA', 'CD', 'CG', 'CH', 'CI', 'CL', 'CM', 'CO', 'CR', 'CV', 'CW', 'CY', 'CZ', 'DE', 'DJ', 'DK', 'DM', 'DO', 'DZ', 'EC', 'EE', 'EG', 'ES', 'FI', 'FJ', 'FM', 'FR', 'GA', 'GB', 'GD', 'GE', 'GH', 'GM', 'GN', 'GQ', 'GR', 'GT', 'GW', 'GY', 'HK', 'HN', 'HR', 'HT', 'HU', 'ID', 'IE', 'IL', 'IN', 'IQ', 'IS', 'IT', 'JM', 'JO', 'JP', 'KE', 'KG', 'KH', 'KI', 'KM', 'KN', 'KR', 'KW', 'KZ', 'LA', 'LB', 'LC', 'LI', 'LK', 'LR', 'LS', 'LT', 'LU', 'LV', 'LY', 'MA', 'MC', 'MD', 'ME', 'MG', 'MH', 'MK', 'ML', 'MN', 'MO', 'MR', 'MT', 'MU', 'MV', 'MW', 'MX', 'MY', 'MZ', 'NA', 'NE', 'NG', 'NI', 'NL', 'NO', 'NP', 'NR', 'NZ', 'OM', 'PA', 'PE', 'PG', 'PH', 'PK', 'PL', 'PS', 'PT', 'PW', 'PY', 'QA', 'RO', 'RS', 'RW', 'SA', 'SB', 'SC', 'SE', 'SG', 'SI', 'SK', 'SL', 'SM', 'SN', 'SR', 'ST', 'SV', 'SZ', 'TD', 'TG', 'TH', 'TJ', 'TL', 'TN', 'TO', 'TR', 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'US', 'UY', 'UZ', 'VC', 'VE', 'VN', 'VU', 'WS', 'XK', 'ZA', 'ZM', 'ZW'], 'disc_number': 1, 'duration_ms': 234973, 'explicit': False, 'external_ids': {'isrc': 'GBAFL0700145'}, 'external_urls': {'spotify': 'https://open.spotify.com/track/7wCmS9TTVUcIhRalDYFgPy'}, 'href': 'https://api.spotify.com/v1/tracks/7wCmS9TTVUcIhRalDYFgPy', 'id': '7wCmS9TTVUcIhRalDYFgPy', 'is_local': False, 'name': 'Where Is My Mind? - Remastered', 'popularity': 76, 'preview_url': 'https://p.scdn.co/mp3-preview/834c3028bb045caaed9f971351f8a6e2adc86f8d?cid=9b0c39e473a74e6faa401b69d66cacdf', 'track_number': 7, 'type': 'track', 'uri': 'spotify:track:7wCmS9TTVUcIhRalDYFgPy'}
+[2022-06-09 16:41:57,150] - [//] - (INFO) - Downloading 1 songs...
+[2022-06-09 16:41:57,153] - [//] - (INFO) - Pixies - Where Is My Mind? - Remastered -> is already downloaded. Skipping...
+[2022-06-09 16:41:57,155] - [//] - (INFO) - Cleaning up...
+[2022-06-09 16:41:57,155] - [//] - (INFO) - Download Finished!
+	Completed 1/1 songs in 0s
+
+[2022-06-09 16:41:57,155] - [//] - (INFO) - (Syncify): Downloaded -> Pixies - Where Is My Mind? - Remastered.
+[2022-06-09 16:41:57,158] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:57,384] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/07zVQBJfbOuaAhpT3stRFL HTTP/1.1" 200 None
+[2022-06-09 16:41:57,408] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:57,655] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/51GIj6bGodHUoFEJowQ8kn HTTP/1.1" 200 None
+[2022-06-09 16:41:57,674] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:57,901] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7elOV6vbPnxAFWZCPe7Hnt HTTP/1.1" 200 None
+[2022-06-09 16:41:57,922] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:58,149] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3HxVFs6qajS3IqgX78Gzh9 HTTP/1.1" 200 None
+[2022-06-09 16:41:58,168] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:58,414] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2cJqyyXxBpJjKWTDQKRScn HTTP/1.1" 200 None
+[2022-06-09 16:41:58,432] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:58,617] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/69n6cPuFYvUAz0nlnE98KF HTTP/1.1" 200 None
+[2022-06-09 16:41:58,634] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:58,831] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/1Vfp1TfqIAbFhyQY7jlykK HTTP/1.1" 200 None
+[2022-06-09 16:41:58,845] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:59,176] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3I5azi0831uNpYQsfYsW7G HTTP/1.1" 200 None
+[2022-06-09 16:41:59,195] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:59,407] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7zLeOgBrdrCfMf47MCyLMC HTTP/1.1" 200 None
+[2022-06-09 16:41:59,426] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:41:59,959] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/62Z0zh0nncuNYfU3UD9a6q HTTP/1.1" 200 None
+[2022-06-09 16:41:59,978] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:00,214] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0VjIjW4GlUZAMYd2vXMi3b HTTP/1.1" 200 None
+[2022-06-09 16:42:00,242] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:00,457] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5QO79kh1waicV47BqGRL3g HTTP/1.1" 200 None
+[2022-06-09 16:42:00,477] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:00,748] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0y1QJc3SJVPKJ1OvFmFqe6 HTTP/1.1" 200 None
+[2022-06-09 16:42:00,775] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:00,992] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3jjsRKEsF42ccXf8kWR3nu HTTP/1.1" 200 None
+[2022-06-09 16:42:01,004] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:01,208] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4PUT0cH2iggaje5hTJZeGe HTTP/1.1" 200 None
+[2022-06-09 16:42:01,227] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:01,700] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/74D7CbXRDozIvqolRpPWvd HTTP/1.1" 200 None
+[2022-06-09 16:42:01,711] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:01,997] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5qeJXYebX0xy6S23N9H7YM HTTP/1.1" 200 None
+[2022-06-09 16:42:02,017] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:02,247] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4sWSuROKd45ThlELmdwFYB HTTP/1.1" 200 None
+[2022-06-09 16:42:02,264] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:02,517] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6d67Xv8ms2noA8wWFLiPDN HTTP/1.1" 200 None
+[2022-06-09 16:42:02,535] - [//] - (INFO) - (Syncify): Downloaded -> A mixed mood
+[2022-06-09 16:42:02,537] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-06-09 16:42:02,986] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/7sZPLbpT69BVVilpYe5p6O HTTP/1.1" 200 None
+[2022-06-09 16:42:03,034] - [//] - (DEBUG) - (Syncify): Created playlist -> A mixed mood
+[2022-06-09 16:42:03,034] - [//] - (DEBUG) - (Syncify): > Downloading Albums began...
+[2022-06-09 16:42:03,034] - [//] - (DEBUG) - (Syncify): > Downloading Tracks began...
+[2022-06-09 16:42:03,034] - [//] - (INFO) - (Syncify): >Downloading all tracks is finished! All playlists are saved.
+[2022-06-09 16:42:03,035] - [//] - (DEBUG) - (Syncify): Deleted Albums / Tracks links from 'Data/userData.json' for optimization.
+[2022-06-09 16:42:03,037] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-06-09 16:42:03,038] - [//] - (DEBUG) - (Syncify): Deleted /home/malek/Documents/Syncify/Syncify-Developing/.cache
+[2022-06-09 16:42:03,038] - [//] - (DEBUG) - (Syncify): Deleted /home/malek/Documents/Syncify/Syncify-Developing/SyncifyFunctions/__pycache__
+[2022-06-09 16:42:03,038] - [//] - (DEBUG) - (Syncify): Deleted /home/malek/Documents/Syncify/Syncify-Developing/spotifyHandler/__pycache__
+[2022-06-09 16:42:03,038] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-06-09 16:42:03,038] - [//] - (DEBUG) - (Syncify): Selecting command...

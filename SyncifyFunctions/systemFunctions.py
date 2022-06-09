@@ -116,6 +116,7 @@ def SettingUp():
             "Quality": "BEST",
             "Format": "MP3",
             "Sleep": 1.25,
+            "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",
                 "Playlist": ""
@@ -157,28 +158,28 @@ def isFilePlaylist(file):
 def deleteTemporaryFiles(path):
     try:
         shutil.rmtree(convertPath(path + '/tmp/'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/tmp/')}").debug()
+        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/tmp/')}").debug()
 
     except OSError:
         pass
     
     try:
         os.remove(convertPath(path + '/.cache'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/.cache')}").debug()
+        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/.cache')}").debug()
 
     except OSError:
         pass  
     
     try:
         shutil.rmtree(convertPath(path + '/SyncifyFunctions/__pycache__'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/SyncifyFunctions/__pycache__')}").debug()
+        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/SyncifyFunctions/__pycache__')}").debug()
 
     except:
         pass
     
     try:
         shutil.rmtree(convertPath(path + '/spotifyHandler/__pycache__'))
-        logsSyncify.Syncify(f"Deleted {convertPath(path + '/spotifyHandler/__pycache__')}").debug()
+        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/spotifyHandler/__pycache__')}").debug()
 
     except:
         pass
@@ -191,22 +192,6 @@ def whatIsLink(link):
         return "Playlist"
     elif("track" in link):
         return "Track"
-
-#Download settings
-def DownloadSettings(Savify):
-    SavifySettings = ReadFILE(setting_path)["Settings"]
-    
-    if(SavifySettings["Quality"] == "BEST"):    qual=Quality.BEST
-    elif(SavifySettings["Quality"] == "Q320K"): qual=Quality.Q320K
-    elif(SavifySettings["Quality"] == "Q256K"): qual=Quality.Q256K
-    elif(SavifySettings["Quality"] == "Q192K"): qual=Quality.Q192K
-    elif(SavifySettings["Quality"] == "Q128K"): qual=Quality.Q128K
-    elif(SavifySettings["Quality"] == "Q96K"):  qual=Quality.Q96K
-    elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
-    elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
-
-    logsSyncify("").Syncify(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}").debug()
-    return qual, SavifySettings["Format"].lower()
 
 #Add information in settings file
 def addInformation(stroption, info, infoList, Settings):

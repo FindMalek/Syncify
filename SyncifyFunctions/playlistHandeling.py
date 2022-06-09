@@ -12,7 +12,7 @@ from spotifyHandler.requestsHandeling import *
 
 
 setting_path = "Settings.json"
-userdata = convertPath("Data/userData.json")
+userdata_path = convertPath("Data/userData.json")
 
 
 #get the needed informations to fill up the Playlist / Album / Track JSON file
@@ -23,14 +23,14 @@ def getObjectInformation(syncifyToken, objLink):
         tries = 0
         while True:
             try:
-                spotipyResult = album(syncifyToken, spotifyObjId)
+                spotifyResult = album(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logMessage.Syncify(f"({nbTries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logMessage.Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify.Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -41,20 +41,20 @@ def getObjectInformation(syncifyToken, objLink):
         tries = 0
         while True:
             try:
-                spotipyResult = playlist(syncifyToken, spotifyObjId)
+                spotifyResult = playlist(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logMessage.Syncify(f"({nbTries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logMessage.Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify.Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
     
     elif(whatIsLink(objLink) == "Track"):
-        spotifyObjId = objLink[objLink.find("playlist/") + len("playlist/"):]
+        spotifyObjId = objLink[objLink.find("track/") + len("track/"):]
         
         tries = 0
         while True:
@@ -62,16 +62,16 @@ def getObjectInformation(syncifyToken, objLink):
                 spotifyResult = track(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logMessage.Syncify(f"({nbTries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify("").Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify.Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
     
-    return spotipyResult, spotifyObjId
+    return spotifyResult, spotifyObjId
 
 #Create the playlist // supports m3a format
 def CreatePlaylist(order):
@@ -111,13 +111,14 @@ def PlaylistManager(syncifyToken, playlistId, playlistURL):
         
     return pl_order   
 
-#Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
-def popAlbums():
-    playlistInfos = ReadFILE(userdata)
-    for element in playlistInfos["Playlists links"]:
-        if("album" in element):
-            playlistInfos["Playlists links"].remove(element)
-    WriteJSON(userdata, playlistInfos, 'w')
+#Deleting Albums / Tracks from "userdata.json" to optimize the speed of the execution
+def popTmpObject():
+    userdata = ReadFILE(userdata_path)
+    for element in userdata["Albums"]:
+        userdata["Albums"].remove(element)
+    for element in userdata["Tracks"]:
+        userdata["Tracks"].remove(element)
+    WriteJSON(userdata_path, userdata, 'w')
     
 if __name__ == '__main__':
     #Setting up the logging configuration
