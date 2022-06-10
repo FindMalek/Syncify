@@ -1,43 +1,15 @@
 """ 
     CHANGES:
-
-        1.(Done)     Changing the format of 'Playlists Information.json'.
-    It used to have duplicate information which is bad for the database.
-    It will only have unique data and  Albums and Playlists will be sperated as well.
-    {
-        "Playlists": [
-            {}
-        ],
         
-        "Albums": [
-            {}
-        ],
-        
-        "Tracks": [
-            {}
-        ]
-    }
-    
-        2.(Done)      Adding tracks.
-        This update is a preparation to download tracks individually.
-        In the next updates this feature will be available.
-    
-    
-        3.(Done)      Changing how the Albums / Playlists get saved
-        in 'Playlists Information.json', they used to be saved only after choosing the download command.
-        It will be changed to; after enterning each Album / Playlist it will be automatically
-        saved to the file.
-        
-        4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
+        1.(Done)     Change the order of downloading Albums / Tracks / Playlists.
         By default it will be Playlists -> Albums -> Tracks.
-        But the user will be able to change it, using an order system.
+        (Next updates...) The user will be able to change it, using an order system.
         Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"]
 
-        5.(No progress)     Change how to print for the user the saved Albums / Tracks / Playlists.
-        It will be changed to choose which one of these you want to be printed (Albums / Tracks / Playlists)
-        and the print will be in the 3 colomus.
-        
-        6.(No progress)     Change the object of 'userData.json' format.
+        2.(No progress)     Change how to print for the user the saved Albums / Tracks / Playlists.
+        It will be changed to choose which one of these you want to be printed (Albums / Tracks / Playlists).
+                
+        3.(No progress)     Change the object of 'userData.json' format.
         (Those elements inside the 'Playlists', 'Albums' and 'Tracks')
         It will be:
         {
@@ -53,7 +25,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.4.3'
+__version__ = '1.0.6.4.5'
 
 
 #importing systemFunctions
@@ -258,7 +230,7 @@ def DownloadSettings(Savify):
 
 #Select which action the user wants
 def SelectCommand(syncifyToken): 
-    printLoad(19, 42) #Printing for the CLI
+    printLoad(19, 44) #Printing for the CLI
     
     answer = input("Choose the number of the command: ")
 
@@ -285,11 +257,10 @@ def SelectCommand(syncifyToken):
         """
             4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
             By default it will be Playlists -> Albums -> Tracks.
-            But the user will be able to change it, using an order system.
+            (Next updates...) But the user will be able to change it, using an order system.
             Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"] (Default)
         """
-        #This is by default
-        downloadOrder = ["Playlists", "Albums", "Tracks"]
+        downloadOrder = getDataJSON(setting_path, "Settings/Download Order")
         
         for elementOrder in downloadOrder:
             downloadableObjs = getDataJSON(userdata_path, elementOrder)
@@ -325,7 +296,7 @@ def SelectCommand(syncifyToken):
             input()
 
     elif(answer == "4"):
-        printLoad(29, 37)
+        printLoad(29, 39)
 
         answer = input("Choose the number of the command: ")
         Settings = ReadFILE(setting_path)
@@ -357,8 +328,17 @@ def SelectCommand(syncifyToken):
                 Settings["Paths"]["Downloads"] = downloadPath
             
             WriteJSON(setting_path, Settings, 'w')
-
+            
         elif(answer == "4"):
+            """
+            1. Playlists  |
+            2. Albums     |
+            3. Tracks     |
+            """
+            downloadOrder = input(f"\nCurrently the Download Order is: {Settings['Settings']['Download Order']}\nNew download order (Press <Enter>, If you don't wish to change the order): \n")
+            logsSyncify("").Syncify("<This command is coming in the next updates...>").message()
+        
+        elif(answer == "5"):
             settinguserdata = Settings["Paths"]["Playlist"]
             PlaylistPath = input(f"\nCurrently the Playlist path is: {settinguserdata} \nNew Playlist path (Press <Enter>, If you don't wish to change the path): ")
             
