@@ -1,12 +1,10 @@
 """ 
     CHANGES:
         
-        1.(Done)     Change the order of downloading Albums / Tracks / Playlists.
-        By default it will be Playlists -> Albums -> Tracks.
-        (Next updates...) The user will be able to change it, using an order system.
+        1.(Next updates...) The user will be able to change it, using an order system.
         Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"]
 
-        2.(No progress)     Change how to print for the user the saved Albums / Tracks / Playlists.
+        2.(Done)     Change how to print for the user the saved Albums / Tracks / Playlists.
         It will be changed to choose which one of these you want to be printed (Albums / Tracks / Playlists).
                 
         3.(No progress)     Change the object of 'userData.json' format.
@@ -25,7 +23,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.4.5'
+__version__ = '1.0.6.4.6'
 
 
 #importing systemFunctions
@@ -287,13 +285,27 @@ def SelectCommand(syncifyToken):
         logsSyncify("").Syncify(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.").debug()
 
     elif(answer == "3"):
-        logsSyncify("").Syncify(f"")
-        answer = input("Choose")
-        SavifyPlaylists = ReadFILE(userdata_path)["Playlists Informations"]
-        for playlist in SavifyPlaylists:
-            playlistLink = playlist[list(playlist.keys())[0]]["Links"]["URL"]
-            printObject(playlistLink, syncifyToken)
-            input()
+        answer = input("These are your options:\n\t1. Playlists\n\t2. Albums\n\t3. Tracks\nChoose the number of the command: ")
+        syncifyObjs = ReadFILE(userdata_path)
+        
+        if(answer == "1"):
+            if(syncifyObjs["Playlists"] == []):
+                logsSyncify("").message("It's empty!")
+            for obj in syncifyObjs["Playlists"]:
+                printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
+        
+        elif(answer == "2"):
+            if(syncifyObjs["Albums"] == []):
+                logsSyncify("").message("It's empty!")
+            for obj in syncifyObjs["Albums"]:
+                printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
+        
+        elif(answer == "3"):
+            if(syncifyObjs["Tracks"] == []):
+                logsSyncify("").message("It's empty!")
+            for obj in syncifyObjs["Tracks"]:
+                printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
+        input()
 
     elif(answer == "4"):
         printLoad(29, 39)
