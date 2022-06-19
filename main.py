@@ -4,10 +4,7 @@
         1.(Next updates...) The user will be able to change it, using an order system.
         Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"]
 
-        2.(Done)     Change how to print for the user the saved Albums / Tracks / Playlists.
-        It will be changed to choose which one of these you want to be printed (Albums / Tracks / Playlists).
-                
-        3.(No progress)     Change the object of 'userData.json' format.
+        2.(No progress)     Change the object of 'userData.json' format.
         (Those elements inside the 'Playlists', 'Albums' and 'Tracks')
         It will be:
         {
@@ -17,13 +14,16 @@
                 "Creation date": date
             }
         }
+        
+        3. (In progress) Windows compatibility.
+        In these updates (1.0.6.5.x), Syncify will be able to run smoothly on Windows.
     
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.4.6'
+__version__ = '1.0.6.5'
 
 
 #importing systemFunctions
