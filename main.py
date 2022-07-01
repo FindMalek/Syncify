@@ -18,11 +18,11 @@
         3. (In progress) Windows compatibility.
         In these updates (1.1.x.x), Syncify will be able to run smoothly on Windows.
         
-        4. (No progress) Replacing Savify library.
+        4. (In progress) Replacing Savify library.
         There's a lot of problems using Savify. Sometimes it downloads tracks without the cover-art.
         Sometimes it download wrong tracks, with wrong titles.
         
-        5. (In progress) Replacing FFMPEG.
+        5. (Done) Replacing FFMPEG.
         In older version of Syncify, I used to use FFMPEG to change the meta-data for the tracks.
     
 """
@@ -30,7 +30,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.0.1'
+__version__ = '1.1.0.1.1'
 
 
 #importing systemFunctions
