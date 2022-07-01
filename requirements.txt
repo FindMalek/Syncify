@@ -1,5 +1,2 @@
-<<<<<<< HEAD
 savify==v2.3.4
-=======
-savify==v2.3.4
->>>>>>> 232e12588d7657f7f6340c4995d07198c0edfdec
+music-tag==0.4.3

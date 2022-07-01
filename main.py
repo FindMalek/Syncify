@@ -16,14 +16,21 @@
         }
         
         3. (In progress) Windows compatibility.
-        In these updates (1.0.6.5.x), Syncify will be able to run smoothly on Windows.
+        In these updates (1.1.x.x), Syncify will be able to run smoothly on Windows.
+        
+        4. (No progress) Replacing Savify library.
+        There's a lot of problems using Savify. Sometimes it downloads tracks without the cover-art.
+        Sometimes it download wrong tracks, with wrong titles.
+        
+        5. (In progress) Replacing FFMPEG.
+        In older version of Syncify, I used to use FFMPEG to change the meta-data for the tracks.
     
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.0.6.5'
+__version__ = '1.1.0.1'
 
 
 #importing systemFunctions
@@ -38,6 +45,13 @@ SettingUp()
 setting_path = "Settings.json"
 userdata_path = convertPath("Data/userData.json")
 logsSyncify("").Syncify("Function - SettingUp && Prepaths are set.").debug()
+
+#Importing Syncify downloadHandler
+#from downloadHandler import fileEditer
+#from downloadHandler import youtubeDownloader
+#Still working on this module
+#from downloadHandler import spotifyDownloader
+#logsSyncify("").Syncify("Syncify downloadHandler imported.").debug()
 
 #importing Savify
 from savify import Savify
@@ -102,7 +116,6 @@ def printObject(link, syncifyToken):
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
-                    
         logsSyncify("").message(f"\t-(Album)-\nName: {Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
     
     #If the link is a Track Link
@@ -121,8 +134,8 @@ def printObject(link, syncifyToken):
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
-                
         logsSyncify("").message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
+        WriteJSON('resTrRust.json', Result, 'w')
 
     logsSyncify("").message("_______________________________________")
 
@@ -166,7 +179,7 @@ def addObject(syncifyToken, link):
             }
         }
         objects["Tracks"].append(obj)
-
+        
     #Add the new objects
     WriteJSON(userdata_path, objects, 'w')
 
@@ -367,6 +380,9 @@ def SelectCommand(syncifyToken):
 
     elif(answer == "6"):
         logsSyncify("").Syncify("<Exit>").info()
+        logsSyncify("").Syncify("Deleting temporary files...").debug()
+        deleteTemporaryFiles(os.getcwd())
+        logsSyncify("").Syncify("Deleted temporary files.").debug()
         quit()
 
 

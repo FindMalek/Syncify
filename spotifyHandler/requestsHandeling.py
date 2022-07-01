@@ -21,7 +21,7 @@ def getAccessToken(CLIENT_ID, CLIENT_SECRET):
     authHeader = {}
     authData = {}
     base64Client = convertBase64(f"{CLIENT_ID}:{CLIENT_SECRET}")
-    logsSyncify.Syncify(f"Converted the CLIENT_ID and CLIENT_SECRET to Base 64 -> {base64Client}.").debug()
+    logsSyncify.Syncify(f"Converted the CLIENT_ID and CLIENT_SECRET to Base 64.").debug()
     
     authHeader["Authorization"] = "Basic " + base64Client
     authData["grant_type"] = "client_credentials"
@@ -51,6 +51,14 @@ def playlist(token, id):
 #Gets Tracks result 
 def track(token, id):
     return spotifyInformations(token, "tracks", id)    
+
+#Downloads the art of an Object
+def downloadArt(link):
+    response = requests.get(link)
+    with open(convertPath("Data/tmpArt.jpg"), "wb") as tmpArt:
+        tmpArt.write(response.content)
+    
+    return convertPath("Data/tmpArt.jpg")
 
 if __name__ == '__main__':
     logsSyncify("").loggingSetup()
