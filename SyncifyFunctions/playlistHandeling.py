@@ -1,9 +1,5 @@
 import time
 
-#importing Spotipy
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
-
 #importing systemFunctions
 from SyncifyFunctions.systemFunctions import *
 

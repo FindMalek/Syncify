@@ -7,7 +7,7 @@ def addEnv():
     
     os.environ['SYNCIFY_CLIENT_ID'] = clientId
     os.environ['SYNCIFY_CLIENT_SECRET'] = clientSecret
-
+    
 #Checks if the env variables exists
 def checkExist():
     if((os.getenv('SYNCIFY_CLIENT_ID')) == None or (os.environ.get('SYNCIFY_CLIENT_SECRET') == None)):

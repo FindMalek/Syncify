@@ -116,6 +116,7 @@ def SettingUp():
             "Quality": "BEST",
             "Format": "MP3",
             "Sleep": 1.25,
+            "Time Difference": 6,
             "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",

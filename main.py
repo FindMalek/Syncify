@@ -21,16 +21,12 @@
         4. (In progress) Replacing Savify library.
         There's a lot of problems using Savify. Sometimes it downloads tracks without the cover-art.
         Sometimes it download wrong tracks, with wrong titles.
-        
-        5. (Done) Replacing FFMPEG.
-        In older version of Syncify, I used to use FFMPEG to change the meta-data for the tracks.
-    
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.0.1.1'
+__version__ = '1.1.0.2'
 
 
 #importing systemFunctions
