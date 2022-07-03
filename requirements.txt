@@ -3,4 +3,4 @@ music-tag==0.4.3
 pytube==12.1.0
 regex
 urllib3==1.26.9
-requests==2.6.0
+requests==2.20.0
