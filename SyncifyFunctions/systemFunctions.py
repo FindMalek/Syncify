@@ -213,3 +213,11 @@ def triesCounter(tries):
     if(tries > 5):
         return True
     return tries + 1
+
+#Convert audio files from '.mp4' -> '.mp3'
+def convertAudio(path, data):
+    base, ext = os.path.splitext(path)
+    outputPath = convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
+    os.rename(path, outputPath)
+    
+    return outputPath

@@ -3,9 +3,6 @@
     Search and Download Audio from Youtube, using Youtube-DLL
 """
 
-#Importing youtube DLL to download from youtube
-import youtube_dl
-
 #Import Syncify System Functions
 from SyncifyFunctions.systemFunctions import *
 import re
@@ -18,6 +15,13 @@ from pytube import YouTube
 
 #Needed paths
 setting_path = "Settings.json"
+
+#Returns if video exists in Youtube or not from the output of the function searchTrack
+def trackInYoutube(searchTrack):
+    if(searchTrack == False):
+        return searchTrack
+    else:
+        return True
 
 #Search for video using the Spotify Data
 #A good search algorithm, to get the exact track
@@ -37,37 +41,38 @@ def searchTrack(data):
 
     #Filtering videos by duration
     counter = 0
-    while (counter < len(videoIds)):
+    while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
         if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
             counter += 1
         else:
             videoIds.remove(videoIds[counter])
-    
+
     """ Add other filters in the future """
     
     if(len(videoIds) == 0):
-        return None, False
+        """
+            In the future send the 'data' to a server to download it using the module 'spotifyDownloader' 
+        and upload it on Youtube to help the 'Syncify' community.
+        """
+        """ Use the 'spotifyDownloader' when it's finished. """
+        return False
     
     else:
-        return videoIds, True
+        #Filtering videos by most reliable using views count
+        mostViewsId = videoIds[0]
+        mostViewsElement =  YouTube('https://www.youtube.com/watch?v=' + mostViewsId)
+        for videoId in videoIds:
+            if(YouTube('https://www.youtube.com/watch?v=' + videoId).views > mostViewsElement.views):
+                mostViewsId = videoId
+                
+        return mostViewsId
 
 #Download track from youtube
-#Change this with Pytube
-def downloadTrack(url, data):
-    videoInfo = youtube_dl.YoutubeDL().extract_info(url, download=False)
-    options = {
-        'format': 'bestaudio/best', 
-        'keepvideo': False,
-        'outtmpl': 'tmpAudio.mp3'
-    }
+def downloadTrack(videoId):
+    pytubeElement = YouTube('https://www.youtube.com/watch?v=' + videoId)
+    trackName = pytubeElement.title
+    availableAudios = pytubeElement.streams.filter(only_audio=True)
+    availableAudios[0].download(convertPath('Data/'))
     
-    with youtube_dl.YoutubeDL(options) as yDL:
-        yDL.download([videoInfo['webpage_url']])
-        #yDL.download(convertPath("Data/" + [videoInfo['webpage_url']]))
-        
-    return "" #The path of the downloaded video
-
-if __name__ == '__main__':
-    data = ReadFILE('resTrStar.json')
-    searchTrack(data)
+    return convertPath('Data/' + trackName + '.mp4')

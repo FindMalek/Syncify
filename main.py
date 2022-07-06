@@ -15,18 +15,22 @@
             }
         }
         
-        3. (In progress) Windows compatibility.
+        3. (Done) Windows compatibility.
         In these updates (1.1.x.x), Syncify will be able to run smoothly on Windows.
         
-        4. (In progress) Replacing Savify library.
+        4. (Done) Replacing Savify library.
         There's a lot of problems using Savify. Sometimes it downloads tracks without the cover-art.
         Sometimes it download wrong tracks, with wrong titles.
+        
+        5. (No progress) Fixing some issues.
+        While changing the metadata, it dosen't change.
+        With other minor issues that'll be fixed in the next few updates
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.0.2'
+__version__ = '1.1.0.3'
 
 
 #importing systemFunctions
@@ -43,18 +47,18 @@ userdata_path = convertPath("Data/userData.json")
 logsSyncify("").Syncify("Function - SettingUp && Prepaths are set.").debug()
 
 #Importing Syncify downloadHandler
-#from downloadHandler import fileEditer
-#from downloadHandler import youtubeDownloader
+from downloadHandler.audioManager import *
+from downloadHandler.youtubeDownloader import *
 #Still working on this module
-#from downloadHandler import spotifyDownloader
-#logsSyncify("").Syncify("Syncify downloadHandler imported.").debug()
+from downloadHandler.spotifyDownloader import *
+logsSyncify("").Syncify("Syncify downloadHandler module is imported.").debug()
 
 #importing Savify
-from savify import Savify
-from savify.types import Type, Format, Quality
-from savify.utils import PathHolder
-from savify.logger import Logger
-logsSyncify("").Syncify("Savify imported.").debug()
+#from savify import Savify
+#from savify.types import Type, Format, Quality
+#from savify.utils import PathHolder
+#from savify.logger import Logger
+#logsSyncify("").Syncify("Savify imported.").debug()
 
 #Importing playlistHandeling
 from SyncifyFunctions.playlistHandeling import *
@@ -64,13 +68,14 @@ from SyncifyFunctions.trackHandeling import *
 logsSyncify("").Syncify("Imported all modules and packages.").debug()
 
 #Downloader
-def Downloads(syncifyToken, savifySession, playlistURLs):
+def Downloads(syncifyToken, playlistURLs):
     for url in playlistURLs:
-        track = trackInformation(syncifyToken, url)
-        if(isDownloaded(track) == False):
-            logsSyncify("").Syncify(f"Downloading > {track[:-4]}...").info()
-            savifySession.download(url)
-            logsSyncify("").Syncify(f"Downloaded -> {track[:-4]}.").info()
+        trackFormat = trackInformation(syncifyToken, url)
+        trackData = track(syncifyToken, url[url.find('track/') + len('track/'):])
+        if(isDownloaded(trackFormat) == False):
+            logsSyncify("").Syncify(f"Downloading > {trackFormat[:-4]}...").info()
+            downloadSyncify(trackData)
+            logsSyncify("").Syncify(f"Downloaded -> {trackFormat[:-4]}.").info()
     
 #print Playlist / Album / Track informations
 def printObject(link, syncifyToken):
@@ -131,7 +136,6 @@ def printObject(link, syncifyToken):
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
         logsSyncify("").message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
-        WriteJSON('resTrRust.json', Result, 'w')
 
     logsSyncify("").message("_______________________________________")
 
@@ -250,17 +254,6 @@ def SelectCommand(syncifyToken):
         downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
         logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
         
-        #Logging stuff
-        logger = Logger(log_location=convertPath("/tmp/"), log_level=None) # Silent output
-        logsSyncify("").Savify("Logger setup -> {None}.").debug()
-        
-        #Savify Session
-        savifySession = Savify(logger=logger,
-                         quality=DownloadSettings(Savify)[0],
-                         download_format=DownloadSettings(Savify)[1],
-                         path_holder=PathHolder(downloads_path=getDataJSON(setting_path, "Settings/Paths/Downloads")))
-        logsSyncify("").Savify(f"Savify Session has been setup.").debug()
-        
         """
             4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
             By default it will be Playlists -> Albums -> Tracks.
@@ -278,7 +271,7 @@ def SelectCommand(syncifyToken):
                 trackURLs = getTracks(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
                 
                 logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info()
-                Downloads(syncifyToken, savifySession, trackURLs)  
+                Downloads(syncifyToken, trackURLs)  
                 logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
             
                 #Creating playlist
@@ -385,7 +378,7 @@ def SelectCommand(syncifyToken):
 if __name__ == '__main__':
     logsSyncify("").Syncify("Getting (CLIENT_ID, CLIENT_SECRET)...").debug()
     syncifyToken = getAccessToken(CLIENT_ID, CLIENT_SECRET)
-    logsSyncify("").Syncify(f"Got (CLIENT_ID, CLIENT_SECRET) = ({CLIENT_ID}, {CLIENT_SECRET}).").debug()
+    logsSyncify("").Syncify(f"Got (CLIENT_ID, CLIENT_SECRET).").debug()
 
     Load(syncifyToken)
     while(True):
