@@ -15,22 +15,15 @@
             }
         }
         
-        3. (Done) Windows compatibility.
-        In these updates (1.1.x.x), Syncify will be able to run smoothly on Windows.
-        
-        4. (Done) Replacing Savify library.
-        There's a lot of problems using Savify. Sometimes it downloads tracks without the cover-art.
-        Sometimes it download wrong tracks, with wrong titles.
-        
-        5. (No progress) Fixing some issues.
-        While changing the metadata, it dosen't change.
-        With other minor issues that'll be fixed in the next few updates
+        3. (Done) Replacing the module 'music-tag' with 'mutagen'
+        I had faced an error, that comes really from nowhere, when calling the function ' music_tag.load_file(path)'
+        So I gave up and replaced 'music-tag' with 'mutagen'
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.0.3'
+__version__ = '1.1.1.0'
 
 
 #importing systemFunctions
@@ -52,13 +45,6 @@ from downloadHandler.youtubeDownloader import *
 #Still working on this module
 from downloadHandler.spotifyDownloader import *
 logsSyncify("").Syncify("Syncify downloadHandler module is imported.").debug()
-
-#importing Savify
-#from savify import Savify
-#from savify.types import Type, Format, Quality
-#from savify.utils import PathHolder
-#from savify.logger import Logger
-#logsSyncify("").Syncify("Savify imported.").debug()
 
 #Importing playlistHandeling
 from SyncifyFunctions.playlistHandeling import *
