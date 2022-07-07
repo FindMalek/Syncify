@@ -18,12 +18,15 @@
         3. (Done) Replacing the module 'music-tag' with 'mutagen'
         I had faced an error, that comes really from nowhere, when calling the function ' music_tag.load_file(path)'
         So I gave up and replaced 'music-tag' with 'mutagen'
+        
+        4. (No progress) Add genre.
+        Add genre in the meta-data of each track, using an API.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.1.0'
+__version__ = '1.1.1.1'
 
 
 #importing systemFunctions
@@ -122,7 +125,6 @@ def printObject(link, syncifyToken):
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
         logsSyncify("").message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
-
     logsSyncify("").message("_______________________________________")
 
 #Add Albums, Playlists and Tracks to userData.json
@@ -359,7 +361,6 @@ def SelectCommand(syncifyToken):
         deleteTemporaryFiles(os.getcwd())
         logsSyncify("").Syncify("Deleted temporary files.").debug()
         quit()
-
 
 if __name__ == '__main__':
     logsSyncify("").Syncify("Getting (CLIENT_ID, CLIENT_SECRET)...").debug()

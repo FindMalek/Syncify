@@ -6,9 +6,8 @@
 
 #Importing the module mutagen to change the metadata of the audio tracks
 import mutagen
-from mutagen.easyid3 import EasyID3
 from mutagen.id3 import ID3, APIC
-from moviepy.editor import *
+from mutagen.easyid3 import EasyID3
 
 #Importing the Syncify Youtube Downloader
 from downloadHandler.youtubeDownloader import *
@@ -37,36 +36,34 @@ def changeMetaData(path, data):
     path = convertAudio(path, data)
     logsSyncify("").Syncify(f"Converted and renamed {path} to MP3 file.").debug()
     
-    """ Fix : KeyError: 'covr' --> Replaced 'music-tag' module with 'mutagen'. """
-    
     #Change the meta-data
     logsSyncify("").Syncify(f"Updating the metadata of {path}...").debug()
-
+    """ Fix : Its not updating the values """
     try:
         audioFile = EasyID3(path)
-        
     except mutagen.id3.ID3NoHeaderError:
         audioFile = mutagen.File(path, easy=True)
         audioFile.add_tags()
-    audioFile.save()
-    
-    
-    """ Fix : Its not updating the values"""
-    audioFile = ID3(path)
+        
     audioFile['title'] = data['name']
     audioFile['artist'] = getArtists(data)
     audioFile['album'] = data['album']['name']
     audioFile['tracknumber'] = str(data['track_number'])
     audioFile['discnumber'] = str(data['disc_number'])
     audioFile['date'] = data['album']['release_date']
-    """ Genre is coming soon... I'm going to use an API request """
+    """
+    Coming soon : Genre
     audioFile['genre'] = ""
+    """
     audioFile.save()
-    logsSyncify("").Syncify(f"Updatedt he metadata of {path}.").debug()
-
-    #Set the artwork
+    logsSyncify("").Syncify(f"Updated he metadata of {path}.").debug()
+    
+    """ Fix : Set Artwork"""
+    
+    #Set artwork
+    artPath = downloadArt(data['album']['images'][0]['url'])
     audioFile = ID3(path)
-    with open(tmpTracks + 'tmpArt.jpg', 'rb') as art:
+    with open(artPath, 'rb') as albumart:
         audioFile['APIC'] = APIC(
                         encoding=3,
                         mime='image/jpeg',
@@ -74,14 +71,6 @@ def changeMetaData(path, data):
                         data=albumart.read()
                         )
     audioFile.save()
-    
-    """
-    logsSyncify("").Syncify(f"Setting the artwork of {path}...").debug()
-    artPath = downloadArt(data['album']['images'][0]['url'])
-    with open(artPath, 'rb') as img:
-        audioFile['artwork'] = img.read()
-    logsSyncify("").Syncify(f"Set the artwork of {path}.").debug()
-    """
     
     #Delete the tmpArt
     os.remove(artPath)

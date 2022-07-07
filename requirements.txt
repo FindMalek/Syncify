@@ -2,3 +2,4 @@ mutagen==1.45.1
 pytube==12.1.0
 urllib3==1.26.9
 requests==2.20.0
+moviepy==1.0.3

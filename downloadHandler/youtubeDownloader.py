@@ -72,7 +72,7 @@ def searchTrack(data):
 def downloadTrack(videoId):
     pytubeElement = YouTube('https://www.youtube.com/watch?v=' + videoId)
     trackName = pytubeElement.title
-    availableAudios = pytubeElement.streams.filter(only_audio=True)
-    availableAudios[0].download(convertPath('Data/'))
+    availableAudios = pytubeElement.streams.get_by_itag(140)
+    availableAudios.download(convertPath('Data/'))
     
     return convertPath('Data/' + trackName + '.mp4')

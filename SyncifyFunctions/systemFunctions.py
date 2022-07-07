@@ -1,6 +1,10 @@
+#Importing Os modules
 import json, os, shutil, platform, sys, logging, re
 from os import listdir
 from os.path import isfile, join
+
+#Importing Moviepy for audio conversion
+from moviepy.editor import *
 
  
 #read JSON and TXT files
@@ -216,8 +220,12 @@ def triesCounter(tries):
 
 #Convert audio files from '.mp4' -> '.mp3'
 def convertAudio(path, data):
-    base, ext = os.path.splitext(path)
-    outputPath = convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
-    os.rename(path, outputPath)
+    #Convert from '.mp4' -> '.mp3'
+    videoClip = AudioFileClip(path)
+    videoClip.write_audiofile(convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3'), verbose=False, logger=None)
+    videoClip.close()
     
-    return outputPath
+    #Deleting the old 'mp4' file
+    os.remove(path)
+    
+    return convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
