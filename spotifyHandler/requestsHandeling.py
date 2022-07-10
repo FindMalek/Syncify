@@ -16,18 +16,18 @@ def convertBase64(string):
 
 #Get access token
 def getAccessToken(CLIENT_ID, CLIENT_SECRET):
-    logsSyncify.Syncify(f"Getting Token Access...").debug()
+    logsSyncify.debug(f"Getting Token Access...")
     authURL = "https://accounts.spotify.com/api/token"
     authHeader = {}
     authData = {}
     base64Client = convertBase64(f"{CLIENT_ID}:{CLIENT_SECRET}")
-    logsSyncify.Syncify(f"Converted the CLIENT_ID and CLIENT_SECRET to Base 64.").debug()
+    logsSyncify.debug(f"Converted the CLIENT_ID and CLIENT_SECRET to Base 64.")
     
     authHeader["Authorization"] = "Basic " + base64Client
     authData["grant_type"] = "client_credentials"
-    logsSyncify.Syncify(f"Sending a POST REQUEST to {authURL} for Token Acess...").debug()
+    logsSyncify.debug(f"Sending a POST REQUEST to {authURL} for Token Acess...")
     responseObj = requests.post(authURL, headers=authHeader, data=authData).json()
-    logsSyncify.Syncify(f"Sent a POST REQUEST to {authURL} for Token Acess.").debug()
+    logsSyncify.debug(f"Sent a POST REQUEST to {authURL} for Token Acess.")
     return responseObj['access_token']
 
 #Gets the result of the API
@@ -54,12 +54,12 @@ def track(token, id):
 
 #Downloads the art of an Object
 def downloadArt(link):
-    response = requests.get(link)
-    with open(convertPath("Data/tmpArt.jpg"), "wb") as tmpArt:
-        tmpArt.write(response.content)
-    
+    response = requests.get(link, stream=True)
+    with open(convertPath("Data/tmpArt.jpg"), 'wb') as tmpArt:
+        shutil.copyfileobj(response.raw, tmpArt)
+    del response
     return convertPath("Data/tmpArt.jpg")
 
 if __name__ == '__main__':
-    logsSyncify("").loggingSetup()
+    logsSyncify.loggingSetup()
     token = getAccessToken(CLIENT_ID, CLIENT_SECRET)

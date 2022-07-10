@@ -22,11 +22,11 @@ def getObjectInformation(syncifyToken, objLink):
                 spotifyResult = album(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logMessage.Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -40,11 +40,11 @@ def getObjectInformation(syncifyToken, objLink):
                 spotifyResult = playlist(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logMessage.Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -58,11 +58,11 @@ def getObjectInformation(syncifyToken, objLink):
                 spotifyResult = track(syncifyToken, spotifyObjId)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {spotifyObjId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -118,4 +118,4 @@ def popTmpObject():
     
 if __name__ == '__main__':
     #Setting up the logging configuration
-    logsSyncify("").loggingSetup()
+    logsSyncify.loggingSetup()

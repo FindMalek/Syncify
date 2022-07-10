@@ -31,10 +31,17 @@ def convertPath(path):
         return path
     else:
         return path.replace('/', '\\')
-    
+
+#Remove '\n' and '\t' from the message
+def removeNewLines(msg):
+    while('\n' in msg) or ('\t' in msg):
+        msg = msg.strip()
+        msg = re.sub('\s+', ' ', msg)
+    return msg
+
 #Logging class that prints and also logs
 class logsSyncify: 
-    def __init__(self, infos):
+    def __init__(self, infos=""):
         #Fix for the next update!!
         self.filename = ""          #infos.split('/')[0]
         self.funcName = ""          #infos.split('/')[1]
@@ -45,7 +52,6 @@ class logsSyncify:
         #Deleting "logs.log"
         try:
             os.remove(convertPath("Data/logs.log"))
-
         except OSError:
             pass  
         
@@ -55,51 +61,22 @@ class logsSyncify:
             format="[%(asctime)s] - [" + self.filename + "/" + self.funcName + "/"  + self.line + "] - (%(levelname)s) - %(message)s"
         )
         
-    #Print the message simply, without logging it
-    def message(self, msg):
-        print(msg) 
-    
-    #Remove '\n' and '\t' from the message
-    def removeNewLines(self, msg):
-        while('\n' in msg) or ('\t' in msg):
-            msg = msg.strip()
-            msg = re.sub('\s+', ' ', msg)
-        return msg
-               
-    #Savify class
-    class Savify:
-        def __init__(self, msg):
-            self.module = "Savify"
-            self.orgMsg = msg
-            self.msg = logsSyncify.removeNewLines(self, msg)
-            
-        def info(self):
-            print(self.orgMsg)
-            logging.info(f'({self.module}): {self.msg}')
-        def debug(self):
-            logging.debug(f'({self.module}): {self.msg}')
-        def warning(self):
-            logging.warning(f'({self.module}): {self.msg}')
-        def critical(self):
-            print(f'(CRITICAL) -> ({self.module}): {self.msg}')
-            logging.critical(f'({self.module}): {self.msg}')
-
-    class Syncify:
-        def __init__(self, msg):
-            self.module = "Syncify"
-            self.orgMsg = msg
-            self.msg = logsSyncify.removeNewLines(self, msg)
-            
-        def info(self):
-            print(self.orgMsg)
-            logging.info(f'({self.module}): {self.msg}')
-        def debug(self):
-            logging.debug(f'({self.module}): {self.msg}')
-        def warning(self):
-            logging.warning(f'({self.module}): {self.msg}')
-        def critical(self):
-            print(f'(CRITICAL) -> ({self.module}): {self.msg}')
-            logging.critical(f'({self.module}): {self.msg}')
+    def message(msg):
+        print(removeNewLines(msg))
+         
+    def info(msg):
+        print(msg)
+        logging.info(f'(Syncify): {removeNewLines(msg)}')
+        
+    def debug(msg):
+        logging.debug(f'(Syncify): {removeNewLines(msg)}')
+        
+    def warning(msg):
+        logging.warning(f'(Syncify): {removeNewLines(msg)}')
+        
+    def critical(msg):
+        print(f'(CRITICAL) -> (Syncify): {removeNewLines(msg)}')
+        logging.critical(f'(Syncify): {removeNewLines(msg)}')
             
 #Write on JSON files
 def WriteJSON(filePath, toWrite, mode):
@@ -143,7 +120,7 @@ def SettingUp():
         WriteJSON(convertPath(currentPath + "Data/userData.json") , playlistInformations, 'w')
     
     #Setting up the logging configuration
-    logsSyncify("").loggingSetup()
+    logsSyncify().loggingSetup()
     
 setting_path = "Settings.json"
 
@@ -164,28 +141,35 @@ def isFilePlaylist(file):
 def deleteTemporaryFiles(path):
     try:
         shutil.rmtree(convertPath(path + '/tmp/'))
-        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/tmp/')}").debug()
+        logsSyncify().debug(f"Deleted {convertPath(path + '/tmp/')}")
 
     except OSError:
         pass
     
     try:
         os.remove(convertPath(path + '/.cache'))
-        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/.cache')}").debug()
+        logsSyncify().debug(f"Deleted {convertPath(path + '/.cache')}")
 
     except OSError:
         pass  
     
     try:
         shutil.rmtree(convertPath(path + '/SyncifyFunctions/__pycache__'))
-        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/SyncifyFunctions/__pycache__')}").debug()
+        logsSyncify().debug(f"Deleted {convertPath(path + '/SyncifyFunctions/__pycache__')}")
 
     except:
         pass
     
     try:
         shutil.rmtree(convertPath(path + '/spotifyHandler/__pycache__'))
-        logsSyncify("").Syncify(f"Deleted {convertPath(path + '/spotifyHandler/__pycache__')}").debug()
+        logsSyncify().debug(f"Deleted {convertPath(path + '/spotifyHandler/__pycache__')}")
+
+    except:
+        pass
+    
+    try:
+        shutil.rmtree(convertPath(path + '/downloadHandler/__pycache__'))
+        logsSyncify().debug(f"Deleted {convertPath(path + '/downloadHandler/__pycache__')}")
 
     except:
         pass

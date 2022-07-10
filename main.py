@@ -15,18 +15,20 @@
             }
         }
         
-        3. (Done) Replacing the module 'music-tag' with 'mutagen'
-        I had faced an error, that comes really from nowhere, when calling the function ' music_tag.load_file(path)'
-        So I gave up and replaced 'music-tag' with 'mutagen'
-        
-        4. (No progress) Add genre.
+        3. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
+        
+        4. (In progress) Fix setting the artwork meta-data
+        There seem a problem to setting the artwork for a track using 'mutagen'.
+        
+        5. (Done) Updated the logging module.
+        I removed the 'Savify' Class since I removed that module from 'Syncify'.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.1.1'
+__version__ = '1.1.1.2'
 
 
 #importing systemFunctions
@@ -40,21 +42,21 @@ from spotifyHandler.requestsHandeling import *
 SettingUp()
 setting_path = "Settings.json"
 userdata_path = convertPath("Data/userData.json")
-logsSyncify("").Syncify("Function - SettingUp && Prepaths are set.").debug()
+logsSyncify.debug("Function - SettingUp & & Prepaths are set.")
 
 #Importing Syncify downloadHandler
 from downloadHandler.audioManager import *
 from downloadHandler.youtubeDownloader import *
 #Still working on this module
 from downloadHandler.spotifyDownloader import *
-logsSyncify("").Syncify("Syncify downloadHandler module is imported.").debug()
+logsSyncify.debug("Syncify downloadHandler module is imported.")
 
 #Importing playlistHandeling
 from SyncifyFunctions.playlistHandeling import *
 
 #Importing trackHandeling
 from SyncifyFunctions.trackHandeling import *
-logsSyncify("").Syncify("Imported all modules and packages.").debug()
+logsSyncify.debug("Imported all modules and packages.")
 
 #Downloader
 def Downloads(syncifyToken, playlistURLs):
@@ -62,13 +64,13 @@ def Downloads(syncifyToken, playlistURLs):
         trackFormat = trackInformation(syncifyToken, url)
         trackData = track(syncifyToken, url[url.find('track/') + len('track/'):])
         if(isDownloaded(trackFormat) == False):
-            logsSyncify("").Syncify(f"Downloading > {trackFormat[:-4]}...").info()
+            logsSyncify.info(f"Downloading > {trackFormat[:-4]}...")
             downloadSyncify(trackData)
-            logsSyncify("").Syncify(f"Downloaded -> {trackFormat[:-4]}.").info()
+            logsSyncify.info(f"Downloaded -> {trackFormat[:-4]}.")
     
 #print Playlist / Album / Track informations
 def printObject(link, syncifyToken):
-    logsSyncify("").message("\n\n_______________________________________")
+    logsSyncify.message("\n\n_______________________________________")
     
     #If the link is a Playlist Link
     if(whatIsLink(link) == "Playlist"):
@@ -79,16 +81,16 @@ def printObject(link, syncifyToken):
                 Result = playlist(syncifyToken, playlistId)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {playlistId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {playlistId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
                 
-        logsSyncify("").message(f"\t-(Playlist)-\nName: {Result['name']}\n\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
+        logsSyncify.message(f"\t-(Playlist)-\nName: {Result['name']}\n\n{Result['description']}\n{Result['owner']['display_name']} • {len(Result['tracks']['items'])} songs.")
         
     #If the link is an Album Link
     elif(whatIsLink(link) == "Album"):
@@ -98,15 +100,15 @@ def printObject(link, syncifyToken):
                 Result = album(syncifyToken, albumID)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {albumID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {albumID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
-        logsSyncify("").message(f"\t-(Album)-\nName: {Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
+        logsSyncify.message(f"\t-(Album)-\nName: {Result['name']}\n{Result['artists'][0]['name']} • {len(Result['tracks']['items'])} songs.")
     
     #If the link is a Track Link
     elif(whatIsLink(link) == "Track"):
@@ -116,16 +118,16 @@ def printObject(link, syncifyToken):
                 Result = track(syncifyToken, trackID)
                 break
             except Exception:
-                logsSyncify("").Syncify(f"({nbTries}) Error -> Couldn't get result of {trackID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {trackID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))  
-        logsSyncify("").message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
-    logsSyncify("").message("_______________________________________")
+        logsSyncify.message(f"\t-(Track)-\nName: {Result['name']}\nArtist(s): {getArtists(Result)}\nTrack number: {Result['track_number']}\nDuration: {datetime.datetime.fromtimestamp(int(Result['duration_ms']) / 1000).strftime('%M:%S')}")
+    logsSyncify.message("_______________________________________")
 
 #Add Albums, Playlists and Tracks to userData.json
 def addObject(syncifyToken, link):
@@ -177,14 +179,14 @@ def enterObject(syncifyToken):
         link = input("\n-> Enter link (Album / Playlist / Track) or <Enter> to skip: ")
         
         if(link == ''):
-            logsSyncify("").message("=> Nothing has been entered!")
+            logsSyncify.message("=> Nothing has been entered!")
             break   
             
         if('?' in link):
             link = link[:link.find('?')]
             
         #Print the name of the playlist / album / track and the description
-        logsSyncify("").Syncify(f"Printing Album / Playlist / Track -> {link}").debug()
+        logsSyncify.debug(f"Printing Album / Playlist / Track -> {link}")
         printObject(link, syncifyToken)
         
         #Add the Object to "userData.json"
@@ -198,17 +200,17 @@ def Load(syncifyToken):
     if(settingFile["Settings"]["Paths"]["Downloads"] == ""):
         downloadPath = input(".Enter a path where to store downloaded music: ")
         settingFile["Settings"]["Paths"]["Downloads"] = downloadPath
-        logsSyncify("").Syncify(f"Changed the download path -> {downloadPath}").debug()
+        logsSyncify.debug(f"Changed the download path -> {downloadPath}")
 
     if(settingFile["Settings"]["Paths"]["Playlist"] == ""):
         playlistPath = input(".Enter a path where to store playlist files <.m3a>: ")
         settingFile["Settings"]["Paths"]["Playlist"] = playlistPath
-        logsSyncify("").Syncify(f"Changed the playlist path -> {playlistPath}").debug()
+        logsSyncify.debug(f"Changed the playlist path -> {playlistPath}")
 
     WriteJSON(setting_path, settingFile, 'w')
 
     if((getDataJSON(userdata_path, "Playlists") == []) and (getDataJSON(userdata_path, "Albums") ==  []) and (getDataJSON(userdata_path, "Tracks") == [])):
-        logsSyncify("").Syncify(f"Adding links to {userdata_path}.").debug()
+        logsSyncify.debug(f"Adding links to {userdata_path}.")
         enterObject(syncifyToken)
 
 #Download settings
@@ -224,7 +226,7 @@ def DownloadSettings(Savify):
     elif(SavifySettings["Quality"] == "Q32K"):  qual=Quality.Q32K
     elif(SavifySettings["Quality"] == "WORST"): qual=Quality.WORST  
 
-    logsSyncify("").Syncify(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}").debug()
+    logsSyncify.debug(f"Quality -> {qual}. Format -> {SavifySettings['Format'].lower()}")
     return qual, SavifySettings["Format"].lower()
 
 #Select which action the user wants
@@ -234,13 +236,13 @@ def SelectCommand(syncifyToken):
     answer = input("Choose the number of the command: ")
 
     if(answer == "1"):
-        logsSyncify("").Syncify("Adding and updating Playlists / Albums / Tracks...").debug()
+        logsSyncify.debug("Adding and updating Playlists / Albums / Tracks...")
         enterObject(syncifyToken)
-        logsSyncify("").Syncify("Added and updated Playlists / Albums / Tracks.").debug()
+        logsSyncify.debug("Added and updated Playlists / Albums / Tracks.")
 
     elif(answer == "2"): 
         downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
-        logsSyncify("").Syncify(f"downloadPath = {downloadPath}").debug()
+        logsSyncify.debug(f"downloadPath = {downloadPath}")
         
         """
             4.(No progress)     Change the order of downloading Albums / Tracks / Playlists.
@@ -253,26 +255,26 @@ def SelectCommand(syncifyToken):
         for elementOrder in downloadOrder:
             downloadableObjs = getDataJSON(userdata_path, elementOrder)
             
-            logsSyncify("").Syncify(f"> Downloading {elementOrder} began...").debug()
+            logsSyncify.debug(f"> Downloading {elementOrder} began...")
             for obj in downloadableObjs:
                 objName = str(list(obj.keys())[0])
                 trackURLs = getTracks(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
                 
-                logsSyncify("").Syncify(f"\n\n\tDownloading from : {objName}").info()
+                logsSyncify.info(f"\n\n\tDownloading from : {objName}")
                 Downloads(syncifyToken, trackURLs)  
-                logsSyncify("").Syncify(f"\tDownloaded -> {objName}\n").info()
+                logsSyncify.info(f"\tDownloaded -> {objName}\n")
             
                 #Creating playlist
                 if(whatIsLink(obj[objName]["Links"]["URL"]) == "Playlist"):
                     plOrdered = PlaylistManager(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
                     CreatePlaylist(plOrdered)
-                logsSyncify("").Syncify(f"Created playlist -> {objName}").debug()
+                logsSyncify.debug(f"Created playlist -> {objName}")
             
-        logsSyncify("").Syncify("\n>Downloading all tracks is finished! All playlists are saved.").info()
+        logsSyncify.info("\n>Downloading all tracks is finished! All playlists are saved.")
 
         #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
         popTmpObject()
-        logsSyncify("").Syncify(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.").debug()
+        logsSyncify.debug(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.")
 
     elif(answer == "3"):
         answer = input("These are your options:\n\t1. Playlists\n\t2. Albums\n\t3. Tracks\nChoose the number of the command: ")
@@ -280,19 +282,19 @@ def SelectCommand(syncifyToken):
         
         if(answer == "1"):
             if(syncifyObjs["Playlists"] == []):
-                logsSyncify("").message("It's empty!")
+                logsSyncify.message("-> There's 0 Playlists! Add Playlists first.")
             for obj in syncifyObjs["Playlists"]:
                 printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
         
         elif(answer == "2"):
             if(syncifyObjs["Albums"] == []):
-                logsSyncify("").message("It's empty!")
+                logsSyncify.message("-> There's 0 Albums! Add Albums first.")
             for obj in syncifyObjs["Albums"]:
                 printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
         
         elif(answer == "3"):
             if(syncifyObjs["Tracks"] == []):
-                logsSyncify("").message("It's empty!")
+                logsSyncify.message("-> There's 0 Tracks! Add Tracks first.")
             for obj in syncifyObjs["Tracks"]:
                 printObject(obj[str(list(obj.keys())[0])]["Links"]["URL"], syncifyToken)
         input()
@@ -307,7 +309,7 @@ def SelectCommand(syncifyToken):
         if(answer == "1"):
             quality = Settings["Settings"]["Quality"]
             qualityList = ["BEST", "320K", "256K", "192K", "128K", "96K", "32K", "WORST"]
-            logsSyncify("").Syncify(f"\nCurrently the download quality is: {quality}\nAvailable qualities: {qualityList}").info()
+            logsSyncify.info(f"\nCurrently the download quality is: {quality}\nAvailable qualities: {qualityList}")
             
             Settings = addInformation("Quality", quality, qualityList, Settings)
             WriteJSON(setting_path, Settings, 'w')
@@ -315,7 +317,7 @@ def SelectCommand(syncifyToken):
         elif(answer == "2"):
             formatType = Settings["Settings"]["Format"]
             formatList = ["WAV", "VORBIS", "OPUS", "M4A", "FLAC", "AAC", "MP3"]
-            logsSyncify("").Syncify(f"\nCurrently the download format is: {formatType}\nAvailable formats: {formatList}").info()
+            logsSyncify.info(f"\nCurrently the download format is: {formatType}\nAvailable formats: {formatList}")
             
             Settings = addInformation("Format", formatType, formatList, Settings)
             WriteJSON(setting_path, Settings, 'w')
@@ -338,7 +340,7 @@ def SelectCommand(syncifyToken):
             3. Tracks     |
             """
             downloadOrder = input(f"\nCurrently the Download Order is: {Settings['Settings']['Download Order']}\nNew download order (Press <Enter>, If you don't wish to change the order): \n")
-            logsSyncify("").Syncify("<This command is coming in the next updates...>").message()
+            logsSyncify.message("<This command is coming in the next updates...>")
         
         elif(answer == "5"):
             settinguserdata = Settings["Paths"]["Playlist"]
@@ -352,26 +354,26 @@ def SelectCommand(syncifyToken):
             WriteJSON(setting_path, Settings, 'w')
 
     elif(answer == "5"):
-        logsSyncify("").message("<This command is coming in the next updates...>")
+        logsSyncify.message("<This command is coming in the next updates...>")
         input("")
 
     elif(answer == "6"):
-        logsSyncify("").Syncify("<Exit>").info()
-        logsSyncify("").Syncify("Deleting temporary files...").debug()
+        logsSyncify.info("<Exit>")
+        logsSyncify.debug("Deleting temporary files...")
         deleteTemporaryFiles(os.getcwd())
-        logsSyncify("").Syncify("Deleted temporary files.").debug()
+        logsSyncify.debug("Deleted temporary files.")
         quit()
 
 if __name__ == '__main__':
-    logsSyncify("").Syncify("Getting (CLIENT_ID, CLIENT_SECRET)...").debug()
+    logsSyncify.debug("Getting (CLIENT_ID, CLIENT_SECRET)...")
     syncifyToken = getAccessToken(CLIENT_ID, CLIENT_SECRET)
-    logsSyncify("").Syncify(f"Got (CLIENT_ID, CLIENT_SECRET).").debug()
+    logsSyncify.debug("Got (CLIENT_ID, CLIENT_SECRET).")
 
     Load(syncifyToken)
     while(True):
-        logsSyncify("").Syncify("Selecting command...").debug()
+        logsSyncify.debug("Selecting command...")
         SelectCommand(syncifyToken)
         
-        logsSyncify("").Syncify("Deleting temporary files...").debug()
+        logsSyncify.debug("Deleting temporary files...")
         deleteTemporaryFiles(os.getcwd())
-        logsSyncify("").Syncify("Deleted temporary files.").debug()
+        logsSyncify.debug("Deleted temporary files.")

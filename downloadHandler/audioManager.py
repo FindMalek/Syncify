@@ -32,13 +32,12 @@ tmpTracks = convertPath("Data/" + os.path.abspath(os.getcwd()))
 #Changes all of the metadata of the track
 def changeMetaData(path, data):
     #Convert the extension and change the name
-    logsSyncify("").Syncify(f"Converting {path} to MP3 file...").debug()
+    logsSyncify.debug(f"Converting {path} to MP3 file...")
     path = convertAudio(path, data)
-    logsSyncify("").Syncify(f"Converted and renamed {path} to MP3 file.").debug()
+    logsSyncify.debug(f"Converted and renamed {path} to MP3 file.")
     
     #Change the meta-data
-    logsSyncify("").Syncify(f"Updating the metadata of {path}...").debug()
-    """ Fix : Its not updating the values """
+    logsSyncify.debug(f"Updating the metadata of {path}...")
     try:
         audioFile = EasyID3(path)
     except mutagen.id3.ID3NoHeaderError:
@@ -56,24 +55,28 @@ def changeMetaData(path, data):
     audioFile['genre'] = ""
     """
     audioFile.save()
-    logsSyncify("").Syncify(f"Updated he metadata of {path}.").debug()
+    logsSyncify.debug(f"Updated he metadata of {path}.")
     
     """ Fix : Set Artwork"""
-    
     #Set artwork
+    logsSyncify.debug(f"Setting the artwork of {path}...")
+    logsSyncify.debug(f"Downloaded the artwork of {path}...")
     artPath = downloadArt(data['album']['images'][0]['url'])
+    logsSyncify.debug(f"Downloaded the artwork of {path}...")
+    
     audioFile = ID3(path)
     with open(artPath, 'rb') as albumart:
         audioFile['APIC'] = APIC(
-                        encoding=3,
-                        mime='image/jpeg',
-                        type=3, desc=u'Cover',
-                        data=albumart.read()
-                        )
+                          encoding=3,
+                          mime='image/jpeg',
+                          type=3, desc=u'Cover',
+                          data=albumart.read()
+                        )            
     audioFile.save()
+    logsSyncify.debug(f"Art work is set of {path}.")
     
     #Delete the tmpArt
-    os.remove(artPath)
+    #os.remove(artPath)
     
     return path
     
@@ -90,18 +93,20 @@ def trackDownloaded(data):
 
 #The main function that changes the metadata of the track and move the track to it's destination
 def downloadSyncify(trackData):
+    logsSyncify.debug("Waiting for response from Youtube about the search request...")
     searchTrachData = searchTrack(trackData)
+    logsSyncify.debug("Response recieved from Youtube about the search request.")
     
     if((trackInYoutube(searchTrachData) == True) and (trackDownloaded(trackData) == False)):
+        logsSyncify.debug("Track exists in Youtube and downloading is about to start...")
         trackPath = downloadTrack(searchTrachData)
+        logsSyncify.debug(f"Track is downloaded in {trackPath}.")
         
         trackPath = changeMetaData(trackPath, trackData)
         #moveTrack(trackPath, destinationPath)
         
     elif((trackInYoutube(searchTrachData) == False) and (trackDownloaded(trackData) == False)):
-        #use the spotifyDownloader or raise an error for now
-        pass
+        logsSyncify.debug("Track does'nt exists in Youtube and spotifyDownloader is about to start...")
     
     else:
-        #Track is already downloaded
-        pass
+        logsSyncify.debug("Track already exists in your Music Library.")

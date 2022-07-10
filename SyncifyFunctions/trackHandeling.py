@@ -15,11 +15,11 @@ def trackInformation(syncifyToken, trackLink):
             trackResult = track(syncifyToken, spotifyTrackFormat)
             break
         except Exception:
-            logsSyncify("").Syncify(f"({tries}) Error -> Couldn't get result of {spotifyTrackFormat}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+            logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {spotifyTrackFormat}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
             
             tries = triesCounter(tries)
             if(tries == True):
-                logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                 quit()
                 
             time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))    
@@ -35,11 +35,11 @@ def getTracks(syncifyToken, objId, objURL):
                 resultTrackItems = album(syncifyToken, objId)["tracks"]["items"]
                 break
             except KeyError:
-                logsSyncify("").Syncify(f"({tries}) Error -> Couldn't get result of {objId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {objId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -50,11 +50,11 @@ def getTracks(syncifyToken, objId, objURL):
                 resultTrackItems = playlist(syncifyToken, objId)["tracks"]["items"]
                 break
             except KeyError:
-                logsSyncify("").Syncify(f"({tries}) Error -> Couldn't get result of {objId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}").warning()
+                logsSyncify.warning(f"({tries}) Error -> Couldn't get result of {objId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
                 if(tries == True):
-                    logsSyncify("").Syncify(f"Number of tries exceeded 5. Quitting").critical()
+                    logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
                 time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
@@ -69,7 +69,7 @@ def getTracks(syncifyToken, objId, objURL):
             elif(whatIsLink(objURL) == "Playlist"):
                 track_links.append(item["track"]["external_urls"]["spotify"])
         except KeyError:
-            logsSyncify("").Syncify(f"Error in getting track_links").critical() 
+            logsSyncify.critical(f"Error in getting track_links") 
             quit()
         
     return track_links
@@ -101,4 +101,4 @@ def getArtists(trackRes):
     
 if __name__ == '__main__':
     #Setting up the logging configuration
-    logsSyncify("").loggingSetup()
+    logsSyncify.loggingSetup()
