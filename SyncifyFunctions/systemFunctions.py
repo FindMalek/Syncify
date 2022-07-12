@@ -62,7 +62,7 @@ class logsSyncify:
         )
         
     def message(msg):
-        print(removeNewLines(msg))
+        print(msg)
          
     def info(msg):
         print(msg)

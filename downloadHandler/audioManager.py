@@ -13,7 +13,7 @@ from mutagen.easyid3 import EasyID3
 from downloadHandler.youtubeDownloader import *
 
 #Importing the Syncify System Functions
-import os
+import os, shutil
 from SyncifyFunctions.systemFunctions import *
 
 #Import getArtist and isDownloaded function from trackHandeling
@@ -57,56 +57,43 @@ def changeMetaData(path, data):
     audioFile.save()
     logsSyncify.debug(f"Updated he metadata of {path}.")
     
-    """ Fix : Set Artwork"""
-    #Set artwork
     logsSyncify.debug(f"Setting the artwork of {path}...")
     logsSyncify.debug(f"Downloaded the artwork of {path}...")
     artPath = downloadArt(data['album']['images'][0]['url'])
     logsSyncify.debug(f"Downloaded the artwork of {path}...")
     
     audioFile = ID3(path)
-    with open(artPath, 'rb') as albumart:
-        audioFile['APIC'] = APIC(
-                          encoding=3,
-                          mime='image/jpeg',
-                          type=3, desc=u'Cover',
-                          data=albumart.read()
-                        )            
-    audioFile.save()
+    artCover = open(artPath, 'rb').read()
+    audioFile.add(APIC(3, 'image/jpeg', 3, 'Front cover', artCover))
+          
+    audioFile.save(v2_version=3)
     logsSyncify.debug(f"Art work is set of {path}.")
     
     #Delete the tmpArt
-    #os.remove(artPath)
+    os.remove(artPath)
     
     return path
     
 #Move the track from /tmp/ to the destination
-def moveTrack(currPath, des):
-    pass
+def moveTrack(currPath, trackData):
+    destiPath = convertPath(download_path + '/' + trackData['album']['artists'][0]['name'] + ' - ' +  trackData['name'] + '.mp3')
+    shutil.move(currPath, destiPath)
 
 #Checks if a track is already downloaded or not using the track data
 def trackDownloaded(data):
-    if(isDownloaded(data['album']['artists'][0]['name'] + ' - ' + data['name'])):
+    if(isDownloaded(data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')):
         return True
     else:
         return False
 
 #The main function that changes the metadata of the track and move the track to it's destination
-def downloadSyncify(trackData):
-    logsSyncify.debug("Waiting for response from Youtube about the search request...")
-    searchTrachData = searchTrack(trackData)
-    logsSyncify.debug("Response recieved from Youtube about the search request.")
+def downloadSyncify(searchTrachData, trackData):
+    logsSyncify.debug(f"{trackData['uri']} exists in Youtube ID:{searchTrachData} and downloading is about to start...")
+    trackPath = downloadTrack(searchTrachData)
+    logsSyncify.debug(f"Track Youtube ID:{searchTrachData} is downloaded in {trackPath}.")
     
-    if((trackInYoutube(searchTrachData) == True) and (trackDownloaded(trackData) == False)):
-        logsSyncify.debug("Track exists in Youtube and downloading is about to start...")
-        trackPath = downloadTrack(searchTrachData)
-        logsSyncify.debug(f"Track is downloaded in {trackPath}.")
-        
-        trackPath = changeMetaData(trackPath, trackData)
-        #moveTrack(trackPath, destinationPath)
-        
-    elif((trackInYoutube(searchTrachData) == False) and (trackDownloaded(trackData) == False)):
-        logsSyncify.debug("Track does'nt exists in Youtube and spotifyDownloader is about to start...")
+    trackPath = changeMetaData(trackPath, trackData)
     
-    else:
-        logsSyncify.debug("Track already exists in your Music Library.")
+    logsSyncify.debug(f"Moving {trackPath} to {download_path}...")
+    moveTrack(trackPath, trackData)
+    logsSyncify.debug(f"Moved {trackPath} to {download_path}.")

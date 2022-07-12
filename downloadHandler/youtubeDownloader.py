@@ -26,9 +26,11 @@ def trackInYoutube(searchTrack):
 #Search for video using the Spotify Data
 #A good search algorithm, to get the exact track
 def searchTrack(data):
+    """ The algorithm is still weak, it must be improved in the next updates... """
+    
     searchTitle = data['album']['artists'][0]['name'] + ' ' +  data['name'] + ' audio'
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle.replace(" ", "_"))
-    videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+    videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:11]
     
     #Filtering videos by title
     counter = 0

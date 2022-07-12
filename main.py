@@ -6,6 +6,7 @@
 
         2.(No progress)     Change the object of 'userData.json' format.
         (Those elements inside the 'Playlists', 'Albums' and 'Tracks')
+        This will automatically fix unique data as well.
         It will be:
         {
             "ID": {
@@ -18,17 +19,24 @@
         3. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        4. (In progress) Fix setting the artwork meta-data
+        4. (Done) Fix setting the artwork meta-data
         There seem a problem to setting the artwork for a track using 'mutagen'.
         
-        5. (Done) Updated the logging module.
-        I removed the 'Savify' Class since I removed that module from 'Syncify'.
+        5. (No progress) Write a better search algorithm.
+        The algorithm I'm currently using is very basic and limited.
+        
+        6. (Done) Move the tracks.
+        Move the tracks to their destination folder. 
+        
+        7. (In progress) Faster search.
+        Instead of searching 30+ Youtube Video Id, I changed it to just 10 video Ids.
+        Make other changes to solve the really slow search.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.1.2'
+__version__ = '1.1.1.3'
 
 
 #importing systemFunctions
@@ -63,10 +71,22 @@ def Downloads(syncifyToken, playlistURLs):
     for url in playlistURLs:
         trackFormat = trackInformation(syncifyToken, url)
         trackData = track(syncifyToken, url[url.find('track/') + len('track/'):])
-        if(isDownloaded(trackFormat) == False):
-            logsSyncify.info(f"Downloading > {trackFormat[:-4]}...")
-            downloadSyncify(trackData)
-            logsSyncify.info(f"Downloaded -> {trackFormat[:-4]}.")
+        
+        logsSyncify.debug(f"(Youtube Request) - Searching for {trackData['uri']}...")
+        searchTrachData = searchTrack(trackData)
+        logsSyncify.debug(f"(Youtube Request) - Response recieved about the search request of {trackData['uri']}.")
+        
+        if(trackDownloaded(trackData) == False):
+            if(trackInYoutube(searchTrachData) == True):
+                logsSyncify.info(f"Downloading > {trackFormat[:-4]}...")
+                downloadSyncify(searchTrachData, trackData)
+                logsSyncify.info(f"Downloaded -> {trackFormat[:-4]}.")
+                
+            elif(trackInYoutube(searchTrachData) == False):
+                logsSyncify.warning(f"{trackData['uri']} Track does'nt exists in Youtube and spotifyDownloader is about to start...")
+
+        else:
+            logsSyncify.debug("Track already exists in your Music Library.")   
     
 #print Playlist / Album / Track informations
 def printObject(link, syncifyToken):
