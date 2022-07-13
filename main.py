@@ -19,16 +19,10 @@
         3. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        4. (Done) Fix setting the artwork meta-data
-        There seem a problem to setting the artwork for a track using 'mutagen'.
-        
-        5. (No progress) Write a better search algorithm.
+        4. (No progress) Write a better search algorithm.
         The algorithm I'm currently using is very basic and limited.
         
-        6. (Done) Move the tracks.
-        Move the tracks to their destination folder. 
-        
-        7. (In progress) Faster search.
+        5. (In progress) Faster search.
         Instead of searching 30+ Youtube Video Id, I changed it to just 10 video Ids.
         Make other changes to solve the really slow search.
 """
@@ -36,7 +30,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.1.3'
+__version__ = '1.1.2.0'
 
 
 #importing systemFunctions
