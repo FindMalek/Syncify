@@ -1,10 +1,7 @@
 """ 
     CHANGES:
         
-        1.(Next updates...) The user will be able to change it, using an order system.
-        Add in the 'Settings.json' ->  "Download Order": ["Playlists", "Albums", "Tracks"]
-
-        2.(No progress)     Change the object of 'userData.json' format.
+        1.(No progress)     Change the object of 'userData.json' format.
         (Those elements inside the 'Playlists', 'Albums' and 'Tracks')
         This will automatically fix unique data as well.
         It will be:
@@ -16,21 +13,36 @@
             }
         }
         
-        3. (No progress) Add genre.
+        2. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        4. (No progress) Write a better search algorithm.
-        The algorithm I'm currently using is very basic and limited.
+        3. (Done) Write a better search algorithm.
+        The algorithm I'm currently using is very basic and limited. Mixing all filters together. 
+        I used to send a REQUEST to Spotify and then to do all the Youtube Filtering and then check if the
+        track is downloaded or not, But I could just send a Spotify REQUEST and determine if the track
+        is downloaded or not, I felt so stupid thinking about it (Laughs).
+        It made 'Syncify', 6 times faster.
         
-        5. (In progress) Faster search.
+        4. (Done) Faster search.
         Instead of searching 30+ Youtube Video Id, I changed it to just 10 video Ids.
         Make other changes to solve the really slow search.
+        
+        5. (In progress) Improves logging.
+        I added more 'logging' module, to track the errors / bugs better.
+        
+        6. (No progress) Add the option to modify the 'Settings.json'
+        There are a lot of settings, the user can't change, through Syncify CLI.
+        "Sleep" : Sleeping between an error,
+        "Time Difference" : The search interval of a track (+- Time Difference),
+        "Search Accuracy" : Recommended to keep it at 5 or 6,
+        "Download Order" : The order of downloading.
+        
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.2.0'
+__version__ = '1.1.2.1'
 
 
 #importing systemFunctions
@@ -66,11 +78,12 @@ def Downloads(syncifyToken, playlistURLs):
         trackFormat = trackInformation(syncifyToken, url)
         trackData = track(syncifyToken, url[url.find('track/') + len('track/'):])
         
-        logsSyncify.debug(f"(Youtube Request) - Searching for {trackData['uri']}...")
-        searchTrachData = searchTrack(trackData)
-        logsSyncify.debug(f"(Youtube Request) - Response recieved about the search request of {trackData['uri']}.")
-        
         if(trackDownloaded(trackData) == False):
+            
+            logsSyncify.debug(f"(Youtube Request) - Searching for {trackData['uri']}...")
+            searchTrachData = searchTrack(trackData)
+            logsSyncify.debug(f"(Youtube Request) - Response recieved about the search request of {trackData['uri']}.")
+            
             if(trackInYoutube(searchTrachData) == True):
                 logsSyncify.info(f"Downloading > {trackFormat[:-4]}...")
                 downloadSyncify(searchTrachData, trackData)
@@ -385,9 +398,9 @@ if __name__ == '__main__':
 
     Load(syncifyToken)
     while(True):
-        logsSyncify.debug("Selecting command...")
-        SelectCommand(syncifyToken)
-        
         logsSyncify.debug("Deleting temporary files...")
         deleteTemporaryFiles(os.getcwd())
         logsSyncify.debug("Deleted temporary files.")
+        
+        logsSyncify.debug("Selecting command...")
+        SelectCommand(syncifyToken)

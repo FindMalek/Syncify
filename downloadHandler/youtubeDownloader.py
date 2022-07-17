@@ -30,29 +30,43 @@ def searchTrack(data):
     
     searchTitle = data['album']['artists'][0]['name'] + ' ' +  data['name'] + ' audio'
     html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle.replace(" ", "_"))
-    videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:11]
     
-    #Filtering videos by title
-    counter = 0
-    while(counter < len(videoIds)):
-        titleElement = str(YouTube('https://www.youtube.com/watch?v=' + videoIds[counter]).title).lower()
-        if((titleElement.find(data['album']['artists'][0]['name'].lower()) >= 0) and (titleElement.find(data['name'].lower()) >= 0)):
-            counter += 1
-        else:
-            videoIds.remove(videoIds[counter])
+    logsSyncify.debug("(Regex): Searching began for Video Ids...")
+    videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:getDataJSON(setting_path, "Settings/Search Accuracy")]
+    logsSyncify.debug(f"(Regex): Found {len(videoIds)} Video Id.")
 
-    #Filtering videos by duration
-    counter = 0
+    """
+        New : Search for the most viewed video Id, while searching with the title filter and duration filter.
+        for maximum efficiency. 
+    """
+
+    #Filtering videos by title -> duration -> views
+    """ Add other filters in the future """
+    logsSyncify.debug(f"(Filtering): Started with {len(videoIds)} Video Id...")
+    counter, mostViews = 0, 0
     while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
-        if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
-            counter += 1
+        if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0)):
+            logsSyncify.debug(f"(Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
+            
+            if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
+                logsSyncify.debug(f"(Filtering): Filter by Duration - Video ID {videoIds[counter]} approved.")
+
+                if(youtubeElement.views > mostViews):
+                    logsSyncify.debug(f"(Filtering): Filter by Most Views - Video ID {videoIds[counter]} approved.")
+                    mostViewedId = videoIds[counter]
+                counter += 1
+                
+            else:
+                videoIds.remove(videoIds[counter])
+            
         else:
             videoIds.remove(videoIds[counter])
-
-    """ Add other filters in the future """
+            
+    logsSyncify.debug(f"(Filtering): Result with {len(videoIds)} Video Id.")
     
     if(len(videoIds) == 0):
+        logsSyncify.warning("(Filtering): Couldn't find any Video with the specific filter. 'spotifyDownloader' will resume...")
         """
             In the future send the 'data' to a server to download it using the module 'spotifyDownloader' 
         and upload it on Youtube to help the 'Syncify' community.
@@ -60,21 +74,13 @@ def searchTrack(data):
         """ Use the 'spotifyDownloader' when it's finished. """
         return False
     
-    else:
-        #Filtering videos by most reliable using views count
-        mostViewsId = videoIds[0]
-        mostViewsElement =  YouTube('https://www.youtube.com/watch?v=' + mostViewsId)
-        for videoId in videoIds:
-            if(YouTube('https://www.youtube.com/watch?v=' + videoId).views > mostViewsElement.views):
-                mostViewsId = videoId
-                
-        return mostViewsId
+    else:   
+        return mostViewedId
 
 #Download track from youtube
 def downloadTrack(videoId):
     pytubeElement = YouTube('https://www.youtube.com/watch?v=' + videoId)
-    trackName = pytubeElement.title
     availableAudios = pytubeElement.streams.get_by_itag(140)
     availableAudios.download(convertPath('Data/'))
     
-    return convertPath('Data/' + trackName + '.mp4')
+    return convertPath('Data/' + pytubeElement.title + '.mp4')

@@ -75,7 +75,12 @@ def changeMetaData(path, data):
     return path
     
 #Move the track from /tmp/ to the destination
-def moveTrack(currPath, trackData):
+def moveTrack(trackData):
+    onlyfiles = [f for f in listdir(convertPath(path + "/Data/")) if isfile(join(convertPath(path + "/Data/"), f))]
+    for file in onlyfiles:
+        if('.mp4' in file):
+            currPath = convertPath(path + "/Data/" + file)
+    print(currPath)
     destiPath = convertPath(download_path + '/' + trackData['album']['artists'][0]['name'] + ' - ' +  trackData['name'] + '.mp3')
     shutil.move(currPath, destiPath)
 
@@ -95,5 +100,5 @@ def downloadSyncify(searchTrachData, trackData):
     trackPath = changeMetaData(trackPath, trackData)
     
     logsSyncify.debug(f"Moving {trackPath} to {download_path}...")
-    moveTrack(trackPath, trackData)
+    moveTrack(trackData)
     logsSyncify.debug(f"Moved {trackPath} to {download_path}.")

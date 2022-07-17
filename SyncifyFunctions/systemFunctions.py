@@ -98,6 +98,7 @@ def SettingUp():
             "Format": "MP3",
             "Sleep": 1.25,
             "Time Difference": 6,
+            "Search Accuracy": 5,
             "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",
@@ -174,6 +175,16 @@ def deleteTemporaryFiles(path):
     except:
         pass
     
+    try:
+        onlyfiles = [f for f in listdir(convertPath(path + "/Data/")) if isfile(join(convertPath(path + "/Data/"), f))]
+        for file in onlyfiles:
+            if('.mp3' in file) or ('.mp4' in file):
+                os.remove(convertPath(path + "/Data/" + file))
+        logsSyncify.debug(f"Deleted '.mp4' and '.mp3' files.")
+    
+    except:
+        pass
+
 #Checks if a link is playlist or album
 def whatIsLink(link):
     if("album" in link):
@@ -204,12 +215,18 @@ def triesCounter(tries):
 
 #Convert audio files from '.mp4' -> '.mp3'
 def convertAudio(path, data):
+    print(path +'00000000000000000000')
+    
+    onlyfiles = [f for f in listdir(convertPath(path)) if isfile(join(convertPath(path), f))]
+    for file in onlyfiles:
+        if('.mp4' in file):
+            path = convertPath(path + "/Data/" + file)
     #Convert from '.mp4' -> '.mp3'
-    videoClip = AudioFileClip(path)
+    videoClip = AudioFileClip(path[:-4].replace('.', '') + '.mp4')
     videoClip.write_audiofile(convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3'), verbose=False, logger=None)
     videoClip.close()
     
     #Deleting the old 'mp4' file
-    os.remove(path)
+    os.remove(path[:-4].replace('.', '') + '.mp4')
     
     return convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
