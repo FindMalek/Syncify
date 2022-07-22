@@ -29,23 +29,17 @@
         6. (In progress) Add not-found tracks.
         They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
         catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
-        
+    
     BUGS:
-
-        1. (Done) Moving tracks.
-        You will always get 'NotADirectoryError: [WinError 267]'.
     
-    ERRORS:
-    
-        1. (Done) Fixing the HÄMATON Error.
-        This Error is caused by the 'Ä', I must find a way to convert to a regular 'A',
-        So Youtube search won't find any trouble searching for the Tracks.
+        1. (In progress) In playlist creation.
+        It calls non-existant tracks. When calling for a track, their path is wrong.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.2.2'
+__version__ = '1.1.2.3.1'
 
 
 #importing systemFunctions

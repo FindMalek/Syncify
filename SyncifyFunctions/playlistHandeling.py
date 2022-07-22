@@ -74,10 +74,10 @@ def CreatePlaylist(order):
     downloadPath = getDataJSON(setting_path, "Settings/Paths/Downloads")
     
     fileName = convertPath(getDataJSON(setting_path, "Settings/Paths/Playlist") + '/' + order["Name"] + ".m3u")
-    with open(fileName, "w") as playlistm3a:
+    with open(fileName, "w", encoding='utf-8') as playlistm3a:
         playlistm3a.write("#EXTM3U\n#EXTIMG: \n")
         for line in order["Order"]:
-            playlistm3a.write(downloadPath + line + "\n")
+            playlistm3a.write(convertPath(downloadPath + '/' + line + "\n"))
     
 #Manage .m3u playlists
 def PlaylistManager(syncifyToken, playlistId, playlistURL):
