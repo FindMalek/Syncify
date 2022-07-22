@@ -97,8 +97,8 @@ def SettingUp():
             "Quality": "BEST",
             "Format": "MP3",
             "Sleep": 1.25,
-            "Time Difference": 6,
-            "Search Accuracy": 5,
+            "Time Difference": 15,
+            "Search Accuracy": 6,
             "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",
@@ -209,18 +209,17 @@ def addInformation(stroption, info, infoList, Settings):
 
 #Tries detector
 def triesCounter(tries):
-    if(tries > 5):
-        return True
+    if(tries >= 5):
+        return False
     return tries + 1
 
 #Convert audio files from '.mp4' -> '.mp3'
 def convertAudio(path, data):
-    print(path +'00000000000000000000')
-    
-    onlyfiles = [f for f in listdir(convertPath(path)) if isfile(join(convertPath(path), f))]
+    onlyfiles = [f for f in listdir(convertPath('Data/')) if isfile(join(convertPath('Data/'), f))]
     for file in onlyfiles:
         if('.mp4' in file):
-            path = convertPath(path + "/Data/" + file)
+            path = convertPath("Data/" + file)
+            
     #Convert from '.mp4' -> '.mp3'
     videoClip = AudioFileClip(path[:-4].replace('.', '') + '.mp4')
     videoClip.write_audiofile(convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3'), verbose=False, logger=None)

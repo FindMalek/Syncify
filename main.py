@@ -16,33 +16,36 @@
         2. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        3. (Done) Write a better search algorithm.
-        The algorithm I'm currently using is very basic and limited. Mixing all filters together. 
-        I used to send a REQUEST to Spotify and then to do all the Youtube Filtering and then check if the
-        track is downloaded or not, But I could just send a Spotify REQUEST and determine if the track
-        is downloaded or not, I felt so stupid thinking about it (Laughs).
-        It made 'Syncify', 6 times faster.
-        
-        4. (Done) Faster search.
-        Instead of searching 30+ Youtube Video Id, I changed it to just 10 video Ids.
-        Make other changes to solve the really slow search.
-        
-        5. (In progress) Improves logging.
+        4. (In progress) Improves logging.
         I added more 'logging' module, to track the errors / bugs better.
         
-        6. (No progress) Add the option to modify the 'Settings.json'
+        5. (No progress) Add the option to modify the 'Settings.json'
         There are a lot of settings, the user can't change, through Syncify CLI.
         "Sleep" : Sleeping between an error,
         "Time Difference" : The search interval of a track (+- Time Difference),
         "Search Accuracy" : Recommended to keep it at 5 or 6,
         "Download Order" : The order of downloading.
         
+        6. (In progress) Add not-found tracks.
+        They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
+        catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
+        
+    BUGS:
+
+        1. (Done) Moving tracks.
+        You will always get 'NotADirectoryError: [WinError 267]'.
+    
+    ERRORS:
+    
+        1. (Done) Fixing the HÄMATON Error.
+        This Error is caused by the 'Ä', I must find a way to convert to a regular 'A',
+        So Youtube search won't find any trouble searching for the Tracks.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.2.1'
+__version__ = '1.1.2.2'
 
 
 #importing systemFunctions
@@ -111,7 +114,7 @@ def printObject(link, syncifyToken):
                 logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {playlistId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
-                if(tries == True):
+                if(tries == False):
                     logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
@@ -130,7 +133,7 @@ def printObject(link, syncifyToken):
                 logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {albumID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
                 
                 tries = triesCounter(tries)
-                if(tries == True):
+                if(tries == False):
                     logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     
@@ -148,7 +151,7 @@ def printObject(link, syncifyToken):
                 logsSyncify.warning(f"({nbTries}) Error -> Couldn't get result of {trackID}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
 
                 tries = triesCounter(tries)
-                if(tries == True):
+                if(tries == False):
                     logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
                     quit()
                     

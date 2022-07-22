@@ -76,11 +76,10 @@ def changeMetaData(path, data):
     
 #Move the track from /tmp/ to the destination
 def moveTrack(trackData):
-    onlyfiles = [f for f in listdir(convertPath(path + "/Data/")) if isfile(join(convertPath(path + "/Data/"), f))]
+    onlyfiles = [f for f in listdir(convertPath("Data/")) if isfile(join(convertPath("Data/"), f))]
     for file in onlyfiles:
-        if('.mp4' in file):
-            currPath = convertPath(path + "/Data/" + file)
-    print(currPath)
+        if('.mp3' in file):
+            currPath = convertPath("Data/" + file)
     destiPath = convertPath(download_path + '/' + trackData['album']['artists'][0]['name'] + ' - ' +  trackData['name'] + '.mp3')
     shutil.move(currPath, destiPath)
 

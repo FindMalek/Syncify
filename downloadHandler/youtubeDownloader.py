@@ -5,7 +5,7 @@
 
 #Import Syncify System Functions
 from SyncifyFunctions.systemFunctions import *
-import re
+import re, time, codecs
   
 #Importing the request module from url library
 import urllib.request
@@ -28,17 +28,24 @@ def trackInYoutube(searchTrack):
 def searchTrack(data):
     """ The algorithm is still weak, it must be improved in the next updates... """
     
-    searchTitle = data['album']['artists'][0]['name'] + ' ' +  data['name'] + ' audio'
-    html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle.replace(" ", "_"))
+    searchTitle = urllib.parse.quote(data['album']['artists'][0]['name'].replace(" ", "+") + '-' +  data['name'].replace(" ", "+") + '-audio')
     
+    tries = 0
+    while True:
+        try:
+            html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle)
+            break
+        except Exception:
+            logsSyncify.warning(f"({tries}) Error -> Couldn't Request {'https://www.youtube.com/results?search_query=' + searchTitle.replace(' ', '-')}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
+            tries = triesCounter(tries)
+            if(tries == False):
+                logsSyncify.critical(f"Number of tries exceeded 5. Quitting.")
+                quit()
+            time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
+
     logsSyncify.debug("(Regex): Searching began for Video Ids...")
     videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:getDataJSON(setting_path, "Settings/Search Accuracy")]
     logsSyncify.debug(f"(Regex): Found {len(videoIds)} Video Id.")
-
-    """
-        New : Search for the most viewed video Id, while searching with the title filter and duration filter.
-        for maximum efficiency. 
-    """
 
     #Filtering videos by title -> duration -> views
     """ Add other filters in the future """
@@ -46,7 +53,7 @@ def searchTrack(data):
     counter, mostViews = 0, 0
     while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
-        if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0)):
+        if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0)) or (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0):
             logsSyncify.debug(f"(Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
             
             if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
