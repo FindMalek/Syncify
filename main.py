@@ -16,7 +16,7 @@
         2. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        4. (In progress) Improves logging.
+        4. (Done) Improves logging.
         I added more 'logging' module, to track the errors / bugs better.
         
         5. (No progress) Add the option to modify the 'Settings.json'
@@ -29,17 +29,24 @@
         6. (In progress) Add not-found tracks.
         They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
         catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
+        
+        7. (In progress) A search algorithm for 'Yewtu.be'.
+        Creating a search for track module for 'Yewtu.be' to avoid the bug of Age-Restricted.
+    
     
     BUGS:
     
         1. (In progress) In playlist creation.
         It calls non-existant tracks. When calling for a track, their path is wrong.
+        
+        2. (In progress) Bypass Age-Restricted Videos.
+        Some Youtube videos are Age-Restricted and to get away with that you must Login.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.2.3.1'
+__version__ = '1.1.3.0'
 
 
 #importing systemFunctions
@@ -57,9 +64,7 @@ logsSyncify.debug("Function - SettingUp & & Prepaths are set.")
 
 #Importing Syncify downloadHandler
 from downloadHandler.audioManager import *
-from downloadHandler.youtubeDownloader import *
-#Still working on this module
-from downloadHandler.spotifyDownloader import *
+from downloadHandler.audioDownloader import *
 logsSyncify.debug("Syncify downloadHandler module is imported.")
 
 #Importing playlistHandeling
@@ -74,20 +79,13 @@ def Downloads(syncifyToken, playlistURLs):
     for url in playlistURLs:
         trackFormat = trackInformation(syncifyToken, url)
         trackData = track(syncifyToken, url[url.find('track/') + len('track/'):])
-        
+
         if(trackDownloaded(trackData) == False):
-            
-            logsSyncify.debug(f"(Youtube Request) - Searching for {trackData['uri']}...")
-            searchTrachData = searchTrack(trackData)
-            logsSyncify.debug(f"(Youtube Request) - Response recieved about the search request of {trackData['uri']}.")
-            
-            if(trackInYoutube(searchTrachData) == True):
+            searchTrachData = algorithmSearchTrack(trackData)
+            if(searchTrachData["Result"][0] == True):
                 logsSyncify.info(f"Downloading > {trackFormat[:-4]}...")
-                downloadSyncify(searchTrachData, trackData)
+                downloadTrack(searchTrachData, trackData)
                 logsSyncify.info(f"Downloaded -> {trackFormat[:-4]}.")
-                
-            elif(trackInYoutube(searchTrachData) == False):
-                logsSyncify.warning(f"{trackData['uri']} Track does'nt exists in Youtube and spotifyDownloader is about to start...")
 
         else:
             logsSyncify.debug("Track already exists in your Music Library.")   

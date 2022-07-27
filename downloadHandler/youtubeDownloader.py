@@ -1,12 +1,12 @@
 """
-    This module:
-    Search and Download Audio from Youtube, using Youtube-DLL
+    This module, searchs and downloads tracks from 'Youtube'
+    using 'pytube' and 'Youtube-DLL'
 """
 
 #Import Syncify System Functions
 from SyncifyFunctions.systemFunctions import *
 import re, time, codecs
-  
+
 #Importing the request module from url library
 import urllib.request
 
@@ -22,14 +22,12 @@ def trackInYoutube(searchTrack):
         return searchTrack
     else:
         return True
-
-#Search for video using the Spotify Data
-#A good search algorithm, to get the exact track
-def searchTrack(data):
+    
+#Searchs for the track, using Spotify Data
+def youtubeSearchTrack(data):
     """ The algorithm is still weak, it must be improved in the next updates... """
-    
+
     searchTitle = urllib.parse.quote(data['album']['artists'][0]['name'].replace(" ", "+") + '-' +  data['name'].replace(" ", "+") + '-audio')
-    
     tries = 0
     while True:
         try:
@@ -43,25 +41,25 @@ def searchTrack(data):
                 quit()
             time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
 
-    logsSyncify.debug("(Regex): Searching began for Video Ids...")
+    logsSyncify.debug("(Youtube/Regex): Searching began for Video Ids...")
     videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:getDataJSON(setting_path, "Settings/Search Accuracy")]
-    logsSyncify.debug(f"(Regex): Found {len(videoIds)} Video Id.")
+    logsSyncify.debug(f"(Youtube/Regex): Found {len(videoIds)} Video Id.")
 
     #Filtering videos by title -> duration -> views
     """ Add other filters in the future """
-    logsSyncify.debug(f"(Filtering): Started with {len(videoIds)} Video Id...")
+    logsSyncify.debug(f"(Youtube/Filtering): Started with {len(videoIds)} Video Id...")
     counter, mostViews = 0, 0
     while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
         if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0)) or (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0):
-            logsSyncify.debug(f"(Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
+            logsSyncify.debug(f"(Youtube/Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
             
             if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
-                logsSyncify.debug(f"(Filtering): Filter by Duration - Video ID {videoIds[counter]} approved.")
+                logsSyncify.debug(f"Youtube/(Filtering): Filter by Duration - Video ID {videoIds[counter]} approved.")
 
                 if(youtubeElement.views > mostViews):
-                    logsSyncify.debug(f"(Filtering): Filter by Most Views - Video ID {videoIds[counter]} approved.")
-                    mostViewedId = videoIds[counter]
+                    logsSyncify.debug(f"(Youtube/Filtering): Filter by Most Views - Video ID {videoIds[counter]} approved.")
+                    mostViewedDict, mostViews = {"Video ID": videoIds[counter], "Age Restriction": youtubeElement.age_restricted}, youtubeElement.views
                 counter += 1
                 
             else:
@@ -70,24 +68,53 @@ def searchTrack(data):
         else:
             videoIds.remove(videoIds[counter])
             
-    logsSyncify.debug(f"(Filtering): Result with {len(videoIds)} Video Id.")
-    
+    logsSyncify.debug(f"(Youtube/Filtering): Result with {len(videoIds)} Video Id.")
     if(len(videoIds) == 0):
-        logsSyncify.warning("(Filtering): Couldn't find any Video with the specific filter. 'spotifyDownloader' will resume...")
+        logsSyncify.warning("(Youtube/Filtering): Couldn't find any Video with the specific filter.")
+        """ Use the 'yewtubeDownloader' when it's finished. """
         """
             In the future send the 'data' to a server to download it using the module 'spotifyDownloader' 
         and upload it on Youtube to help the 'Syncify' community.
         """
-        """ Use the 'spotifyDownloader' when it's finished. """
-        return False
+        return False, 'Spotify'
     
     else:   
-        return mostViewedId
-
+        if(mostViewedDict["Age Restriction"] == True):
+            logsSyncify.warning(f"(Youtube/Filtering): Youtube Id: {mostViewedDict['Video ID']}, is Age-Restricted.")
+            """ Use the 'yewtubeDownloader' when it's finished. """
+            return False, 'Yewtube'
+        
+        else:
+            return True, mostViewedDict["Video ID"]
+        
 #Download track from youtube
-def downloadTrack(videoId):
+def youtubeDownloadTrack(videoId):
     pytubeElement = YouTube('https://www.youtube.com/watch?v=' + videoId)
-    availableAudios = pytubeElement.streams.get_by_itag(140)
-    availableAudios.download(convertPath('Data/'))
+    
+    tries = 0
+    while True:
+        try:
+            availableAudios = pytubeElement.streams.get_by_itag(140)
+            break
+        except KeyError:
+            logsSyncify.warning(f"({tries}) Error -> Couldn't get streams of Youtube Id: {videoId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
+            tries = triesCounter(tries)
+            if(tries == False):
+                logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
+                quit()
+            time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
+    
+    tries = 0
+    while True:
+        try:
+            availableAudios.download(convertPath('Data/'))
+            break
+        except Exception:
+            logsSyncify.warning(f"({tries}) Error -> Couldn't download {videoId}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
+            tries = triesCounter(tries)
+            if(tries == False):
+                logsSyncify.critical(f"Number of tries exceeded 5. Quitting")
+                quit()
+            time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
     
     return convertPath('Data/' + pytubeElement.title + '.mp4')

@@ -1,16 +1,14 @@
 """
     This module replaces FFMPEG.
-    It uses the 'youtubeDownloader' to download and changes the metadata of
-    the downloaded track using 'music_tag' and then move it to it's destination
+    It uses the 'youtubeDownloader', 'yewtubeDownloader' and 'spotifyDownloader' to
+    download and changes the metadata of the downloaded track using 'mutagen'
+    and then move it to it's destination
 """
 
 #Importing the module mutagen to change the metadata of the audio tracks
 import mutagen
 from mutagen.id3 import ID3, APIC
 from mutagen.easyid3 import EasyID3
-
-#Importing the Syncify Youtube Downloader
-from downloadHandler.youtubeDownloader import *
 
 #Importing the Syncify System Functions
 import os, shutil
@@ -82,22 +80,3 @@ def moveTrack(trackData):
             currPath = convertPath("Data/" + file)
     destiPath = convertPath(download_path + '/' + trackData['album']['artists'][0]['name'] + ' - ' +  trackData['name'] + '.mp3')
     shutil.move(currPath, destiPath)
-
-#Checks if a track is already downloaded or not using the track data
-def trackDownloaded(data):
-    if(isDownloaded(data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')):
-        return True
-    else:
-        return False
-
-#The main function that changes the metadata of the track and move the track to it's destination
-def downloadSyncify(searchTrachData, trackData):
-    logsSyncify.debug(f"{trackData['uri']} exists in Youtube ID:{searchTrachData} and downloading is about to start...")
-    trackPath = downloadTrack(searchTrachData)
-    logsSyncify.debug(f"Track Youtube ID:{searchTrachData} is downloaded in {trackPath}.")
-    
-    trackPath = changeMetaData(trackPath, trackData)
-    
-    logsSyncify.debug(f"Moving {trackPath} to {download_path}...")
-    moveTrack(trackData)
-    logsSyncify.debug(f"Moved {trackPath} to {download_path}.")
