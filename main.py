@@ -16,23 +16,22 @@
         2. (No progress) Add genre.
         Add genre in the meta-data of each track, using an API.
         
-        4. (Done) Improves logging.
-        I added more 'logging' module, to track the errors / bugs better.
-        
-        5. (No progress) Add the option to modify the 'Settings.json'
+        3. (No progress) Add the option to modify the 'Settings.json'
         There are a lot of settings, the user can't change, through Syncify CLI.
         "Sleep" : Sleeping between an error,
         "Time Difference" : The search interval of a track (+- Time Difference),
         "Search Accuracy" : Recommended to keep it at 5 or 6,
         "Download Order" : The order of downloading.
         
-        6. (In progress) Add not-found tracks.
+        4. (In progress) Add not-found tracks.
         They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
         catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
         
-        7. (In progress) A search algorithm for 'Yewtu.be'.
+        5. (In progress) A search algorithm for 'Yewtu.be'.
         Creating a search for track module for 'Yewtu.be' to avoid the bug of Age-Restricted.
-    
+        
+        6. (In progress) Improving the 'Youtube' search algorithm.
+        If the Track name in Spotify matches by 80% (or more) the one in 'Youtube', it will approve it.
     
     BUGS:
     
@@ -41,12 +40,15 @@
         
         2. (In progress) Bypass Age-Restricted Videos.
         Some Youtube videos are Age-Restricted and to get away with that you must Login.
+        
+        3. (Done) Deleting Albums and Tracks after downloading.
+        Syncify is now able to delete them, because it's useless to keep them.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.3.0'
+__version__ = '1.1.3.1'
 
 
 #importing systemFunctions
@@ -290,12 +292,13 @@ def SelectCommand(syncifyToken):
                 if(whatIsLink(obj[objName]["Links"]["URL"]) == "Playlist"):
                     plOrdered = PlaylistManager(syncifyToken, obj[objName]["Links"]["ID"], obj[objName]["Links"]["URL"])
                     CreatePlaylist(plOrdered)
-                logsSyncify.debug(f"Created playlist -> {objName}")
+                    logsSyncify.debug(f"Created playlist -> {objName}")
+
+                #Deleting Albums from "userData.json" to optimize the speed of the execution
+                if(elementOrder in ['Tracks', 'Albums']):
+                    popTmpObject(obj, elementOrder)
             
         logsSyncify.info("\n>Downloading all tracks is finished! All playlists are saved.")
-
-        #Deleting Albums from "Playlist Information.json" to optimize the speed of the execution
-        popTmpObject()
         logsSyncify.debug(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.")
 
     elif(answer == "3"):
