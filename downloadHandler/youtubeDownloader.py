@@ -28,6 +28,7 @@ def youtubeSearchTrack(data):
     """ The algorithm is still weak, it must be improved in the next updates... """
 
     searchTitle = urllib.parse.quote(data['album']['artists'][0]['name'].replace(" ", "+") + '-' +  data['name'].replace(" ", "+") + '-audio')
+    print(searchTitle)
     tries = 0
     while True:
         try:
@@ -49,9 +50,18 @@ def youtubeSearchTrack(data):
     """ Add other filters in the future """
     logsSyncify.debug(f"(Youtube/Filtering): Started with {len(videoIds)} Video Id...")
     counter, mostViews = 0, 0
+    print(len(videoIds), videoIds)
     while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
-        if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0)) or (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0):
+
+        titleYoutube = str(youtubeElement.title).lower()
+        artistYoutube = str(youtubeElement.author).lower()
+        artist = data['album']['artists'][0]['name'].lower()
+        title = data['name'].lower()
+
+        print(f"titleYoutube = {titleYoutube}\nartistYoutube = {artistYoutube}\nartist = {artist}\ntitle = {title}")
+
+        if(((artist.find(titleYoutube) >= 0) or artist.find(artistYoutube) >= 0) and (title.find(titleYoutube) >= 0)):
             logsSyncify.debug(f"(Youtube/Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
             
             if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
@@ -67,6 +77,7 @@ def youtubeSearchTrack(data):
             
         else:
             videoIds.remove(videoIds[counter])
+        print(len(videoIds), videoIds)
             
     logsSyncify.debug(f"(Youtube/Filtering): Result with {len(videoIds)} Video Id.")
     if(len(videoIds) == 0):
