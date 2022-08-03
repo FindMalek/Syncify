@@ -108,12 +108,9 @@ def PlaylistManager(syncifyToken, playlistId, playlistURL):
     return pl_order   
 
 #Deleting Albums / Tracks from "userdata.json" to optimize the speed of the execution
-def popTmpObject():
-    userdata = ReadFILE(userdata_path)
-    for element in userdata["Albums"]:
-        userdata["Albums"].remove(element)
-    for element in userdata["Tracks"]:
-        userdata["Tracks"].remove(element)
+def popTmpObject(objDelete, objType):
+    userdata = ReadFILE(userdata_path)   
+    userdata[objType].remove(objDelete)
     WriteJSON(userdata_path, userdata, 'w')
     
 if __name__ == '__main__':
