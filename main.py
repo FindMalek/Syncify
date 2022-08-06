@@ -8,7 +8,7 @@
         {
             "ID": {
                 "Image": link,
-                "Owner": name,
+                "Owner/Artist": name,
                 "Creation date": date
             }
         }
@@ -23,32 +23,41 @@
         "Search Accuracy" : Recommended to keep it at 5 or 6,
         "Download Order" : The order of downloading.
         
-        4. (In progress) Add not-found tracks.
+        4. (No progress) Add not-found tracks.
         They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
         catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
         
-        5. (In progress) A search algorithm for 'Yewtu.be'.
+        5. (No progress) A search algorithm for 'Yewtu.be'.
         Creating a search for track module for 'Yewtu.be' to avoid the bug of Age-Restricted.
         
-        6. (In progress) Improving the 'Youtube' search algorithm.
-        If the Track name in Spotify matches by 80% (or more) the one in 'Youtube', it will approve it.
+    UPDATES:
+    
+        1. (Done) Better Youtube search algorithm.
+        Improved the algorithm for Youtube search.
+        
+        2. (Done) Logging module.
+        Improved the logging module to log everything.
     
     BUGS:
     
-        1. (In progress) In playlist creation.
+        1. (No progress) In playlist creation.
         It calls non-existant tracks. When calling for a track, their path is wrong.
         
-        2. (In progress) Bypass Age-Restricted Videos.
+        2. (Done) Bypass Age-Restricted Videos.
         Some Youtube videos are Age-Restricted and to get away with that you must Login.
+        Solved by 'Yewtu.be' to bypass the Age-Restricted.
         
-        3. (Done) Deleting Albums and Tracks after downloading.
-        Syncify is now able to delete them, because it's useless to keep them.
+    ERROR:
+    
+        1. (No progress) Failed to convert Video to Audio.
+        'MoviePy error: FFMPEG encountered the following error while writing file', This occured while converting from
+        the file '.mp4' to '.mp3'.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.3.1'
+__version__ = '1.1.3.2'
 
 
 #importing systemFunctions

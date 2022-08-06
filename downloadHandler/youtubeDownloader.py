@@ -25,17 +25,19 @@ def trackInYoutube(searchTrack):
     
 #Searchs for the track, using Spotify Data
 def youtubeSearchTrack(data):
-    """ The algorithm is still weak, it must be improved in the next updates... """
+    """ The algorithm is good now, but it always can get a little better. I'll always be improving the search algorithm... """
 
-    searchTitle = urllib.parse.quote(data['album']['artists'][0]['name'].replace(" ", "+") + '-' +  data['name'].replace(" ", "+") + '-audio')
-    print(searchTitle)
+    searchTitle = data['album']['artists'][0]['name'].replace(" ", "+") + '+-+' +  data['name'].replace(" ", "+") + '+-+audio'
     tries = 0
     while True:
         try:
-            html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle)
+            html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + searchTitle.replace(' ', '+'))
+            logsSyncify.debug(f"Requesting {'https://www.youtube.com/results?search_query=' + searchTitle.replace(' ', '+')}.")
             break
         except Exception:
-            logsSyncify.warning(f"({tries}) Error -> Couldn't Request {'https://www.youtube.com/results?search_query=' + searchTitle.replace(' ', '-')}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
+            searchTitle = urllib.parse.quote(data['album']['artists'][0]['name'].replace(" ", "+") + '+-+' +  data['name'].replace(" ", "+") + '+-+audio')
+            
+            logsSyncify.warning(f"({tries}) Error -> Couldn't Request {'https://www.youtube.com/results?search_query=' + searchTitle.replace(' ', '+')}. Sleeping for {getDataJSON(setting_path, 'Settings/Sleep')}")
             tries = triesCounter(tries)
             if(tries == False):
                 logsSyncify.critical(f"Number of tries exceeded 5. Quitting.")
@@ -43,32 +45,24 @@ def youtubeSearchTrack(data):
             time.sleep(getDataJSON("Settings.json", "Settings/Sleep"))
 
     logsSyncify.debug("(Youtube/Regex): Searching began for Video Ids...")
-    videoIds = re.findall(r"watch\?v=(\S{11})", html.read().decode())[:getDataJSON(setting_path, "Settings/Search Accuracy")]
-    logsSyncify.debug(f"(Youtube/Regex): Found {len(videoIds)} Video Id.")
+    videoIds = [*set(re.findall(r"watch\?v=(\S{11})", html.read().decode())[:getDataJSON(setting_path, "Settings/Search Accuracy")])]
+    logsSyncify.debug(f"(Youtube/Regex): Found {len(videoIds)} Video Ids : {videoIds} .")
 
     #Filtering videos by title -> duration -> views
     """ Add other filters in the future """
     logsSyncify.debug(f"(Youtube/Filtering): Started with {len(videoIds)} Video Id...")
     counter, mostViews = 0, 0
-    print(len(videoIds), videoIds)
     while(counter < len(videoIds)):
         youtubeElement = YouTube('https://www.youtube.com/watch?v=' + videoIds[counter])
 
-        titleYoutube = str(youtubeElement.title).lower()
-        artistYoutube = str(youtubeElement.author).lower()
-        artist = data['album']['artists'][0]['name'].lower()
-        title = data['name'].lower()
-
-        print(f"titleYoutube = {titleYoutube}\nartistYoutube = {artistYoutube}\nartist = {artist}\ntitle = {title}")
-
-        if(((artist.find(titleYoutube) >= 0) or artist.find(artistYoutube) >= 0) and (title.find(titleYoutube) >= 0)):
-            logsSyncify.debug(f"(Youtube/Filtering): Filter by Title - Video ID {videoIds[counter]} approved.")
+        if((str(youtubeElement.title).lower().find(data['album']['artists'][0]['name'].lower()) >= 0) or (str(youtubeElement.author).lower().find(data['album']['artists'][0]['name'].lower()) >= 0)) and (str(youtubeElement.title).lower().find(data['name'].lower()) >= 0) and XNOR(str(youtubeElement.title).lower().find('acoustic'), data['name'].lower().find('acoustic')):
+            logsSyncify.debug(f"(Youtube/Filtering): Filter by Title - Video link {'https://www.youtube.com/watch?v=' + videoIds[counter]} approved.")
             
             if(youtubeElement.length in range(int(data["duration_ms"] / 1000) - getDataJSON(setting_path, "Settings/Time Difference"), int(data["duration_ms"] / 1000) + getDataJSON(setting_path, "Settings/Time Difference"))):
-                logsSyncify.debug(f"Youtube/(Filtering): Filter by Duration - Video ID {videoIds[counter]} approved.")
+                logsSyncify.debug(f"(Youtube/Filtering): Filter by Duration - Video link {'https://www.youtube.com/watch?v=' + videoIds[counter]} approved.")
 
                 if(youtubeElement.views > mostViews):
-                    logsSyncify.debug(f"(Youtube/Filtering): Filter by Most Views - Video ID {videoIds[counter]} approved.")
+                    logsSyncify.debug(f"(Youtube/Filtering): Filter by Most Views - Video link {'https://www.youtube.com/watch?v=' + videoIds[counter]} approved.")
                     mostViewedDict, mostViews = {"Video ID": videoIds[counter], "Age Restriction": youtubeElement.age_restricted}, youtubeElement.views
                 counter += 1
                 
@@ -77,7 +71,6 @@ def youtubeSearchTrack(data):
             
         else:
             videoIds.remove(videoIds[counter])
-        print(len(videoIds), videoIds)
             
     logsSyncify.debug(f"(Youtube/Filtering): Result with {len(videoIds)} Video Id.")
     if(len(videoIds) == 0):
@@ -91,11 +84,12 @@ def youtubeSearchTrack(data):
     
     else:   
         if(mostViewedDict["Age Restriction"] == True):
-            logsSyncify.warning(f"(Youtube/Filtering): Youtube Id: {mostViewedDict['Video ID']}, is Age-Restricted.")
+            logsSyncify.warning(f"(Youtube/Filtering): Video link: {'https://www.youtube.com/watch?v=' + mostViewedDict['Video ID']}, is Age-Restricted.")
             """ Use the 'yewtubeDownloader' when it's finished. """
             return False, 'Yewtube'
         
         else:
+            logsSyncify.debug(f"(Youtube/Filtering): Filter by Most Reliable - Video link {'https://www.youtube.com/watch?v=' + mostViewedDict['Video ID']} approved.")
             return True, mostViewedDict["Video ID"]
         
 #Download track from youtube

@@ -98,7 +98,7 @@ def SettingUp():
             "Format": "MP3",
             "Sleep": 1.25,
             "Time Difference": 15,
-            "Search Accuracy": 6,
+            "Search Accuracy": 8,
             "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",
@@ -229,3 +229,9 @@ def convertAudio(path, data):
     os.remove(path[:-4].replace('.', '') + '.mp4')
     
     return convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
+
+def XNOR(cond1, cond2):
+    if((cond1 < 0) and (cond2 < 0)) or ((cond1 > 0) and (cond2 > 0)):
+        return True
+    else:
+        return False
