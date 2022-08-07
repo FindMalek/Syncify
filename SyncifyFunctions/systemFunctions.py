@@ -254,3 +254,8 @@ def notFoundTracks(searchLink, data, platform, videoId=None):
         }
     
         WriteJSON(convertPath('Data/notFoundTracks.json'), notFoundFile, 'w')
+
+#Will convert a string with parenthese to a string without them
+#Example " Invincible (feat. Joe Pringle)" -> "Invincible"
+def removeExtras(string):
+    return re.sub(r'\([\s\S]*\)', '', string).replace('"', "").replace("'", "").strip()

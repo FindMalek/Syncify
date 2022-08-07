@@ -23,16 +23,17 @@
         "Search Accuracy" : Recommended to keep it at 5 or 6,
         "Download Order" : The order of downloading.
         
-        4. (Done) Add not-found tracks.
-        They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
-        catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
-        
-        5. (No progress) A search algorithm for 'Yewtu.be'.
+        4. (No progress) A search algorithm for 'Yewtu.be'.
         Creating a search for track module for 'Yewtu.be' to avoid the bug of Age-Restricted.
         
-        6. (In progress) Better 'Youtube' video picker.
+        5. (In progress) Better 'Youtube' video picker.
         I'm going to use a different approach for picking the exact video, putting views on a higher
         priority and using a better Title Searcher.
+        
+        6. (No progress) Album optimization.
+        When downloading an Album, Syncify will only download the Cover Art once.
+        Because it used to download the cover art everytime it's downloading a 
+        track from an Album.
     
     BUGS:
     
@@ -49,7 +50,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.3.3'
+__version__ = '1.1.3.4'
 
 
 #importing systemFunctions
@@ -296,8 +297,10 @@ def SelectCommand(syncifyToken):
                     logsSyncify.debug(f"Created playlist -> {objName}")
 
                 #Deleting Albums from "userData.json" to optimize the speed of the execution
+                """
                 if(elementOrder in ['Tracks', 'Albums']):
                     popTmpObject(obj, elementOrder)
+                """
             
         logsSyncify.info("\n>Downloading all tracks is finished! All playlists are saved.")
         logsSyncify.debug(f"Deleted Albums / Tracks links from '{userdata_path}' for optimization.")
