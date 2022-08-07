@@ -23,29 +23,21 @@
         "Search Accuracy" : Recommended to keep it at 5 or 6,
         "Download Order" : The order of downloading.
         
-        4. (No progress) Add not-found tracks.
+        4. (Done) Add not-found tracks.
         They are some tracks are in 'Spotify' and not in 'Youtube' or they are in 'Youtube' but my algorithm did'nt
         catch them. So I'll make a file that will store every Spotify Id of these tracks and their Youtube search.
         
         5. (No progress) A search algorithm for 'Yewtu.be'.
         Creating a search for track module for 'Yewtu.be' to avoid the bug of Age-Restricted.
         
-    UPDATES:
-    
-        1. (Done) Better Youtube search algorithm.
-        Improved the algorithm for Youtube search.
-        
-        2. (Done) Logging module.
-        Improved the logging module to log everything.
+        6. (In progress) Better 'Youtube' video picker.
+        I'm going to use a different approach for picking the exact video, putting views on a higher
+        priority and using a better Title Searcher.
     
     BUGS:
     
         1. (No progress) In playlist creation.
         It calls non-existant tracks. When calling for a track, their path is wrong.
-        
-        2. (Done) Bypass Age-Restricted Videos.
-        Some Youtube videos are Age-Restricted and to get away with that you must Login.
-        Solved by 'Yewtu.be' to bypass the Age-Restricted.
         
     ERROR:
     
@@ -57,7 +49,7 @@
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.3.2'
+__version__ = '1.1.3.3'
 
 
 #importing systemFunctions

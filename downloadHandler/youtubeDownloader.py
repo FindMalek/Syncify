@@ -75,17 +75,19 @@ def youtubeSearchTrack(data):
     logsSyncify.debug(f"(Youtube/Filtering): Result with {len(videoIds)} Video Id.")
     if(len(videoIds) == 0):
         logsSyncify.warning("(Youtube/Filtering): Couldn't find any Video with the specific filter.")
-        """ Use the 'yewtubeDownloader' when it's finished. """
-        """
-            In the future send the 'data' to a server to download it using the module 'spotifyDownloader' 
-        and upload it on Youtube to help the 'Syncify' community.
-        """
+
+        logsSyncify.debug(f"(Not-Found-Track): Spotify ID {data['uri']} is not found in Youtube, added to 'notFoundTracks.json' for the Syncify Community.")
+        notFoundTracks("https://www.youtube.com/results?search_query=" + searchTitle.replace(' ', '+'), data, 'Spotify')
+        
         return False, 'Spotify'
     
     else:   
         if(mostViewedDict["Age Restriction"] == True):
             logsSyncify.warning(f"(Youtube/Filtering): Video link: {'https://www.youtube.com/watch?v=' + mostViewedDict['Video ID']}, is Age-Restricted.")
-            """ Use the 'yewtubeDownloader' when it's finished. """
+            
+            logsSyncify.debug(f"(Not-Found-Track): Spotify ID {data['uri']} is not found in Youtube, added to 'notFoundTracks.json' for the Syncify Community.")
+            notFoundTracks("https://www.youtube.com/results?search_query=" + searchTitle.replace(' ', '+'), data, 'Yewtube', 'https://www.youtube.com/watch?v=' + mostViewedDict['Video ID'])
+            
             return False, 'Yewtube'
         
         else:

@@ -1,7 +1,7 @@
 #Importing Os modules
 import json, os, shutil, platform, sys, logging, re
 from os import listdir
-from os.path import isfile, join
+from os.path import isfile, join, exists
 
 #Importing Moviepy for audio conversion
 from moviepy.editor import *
@@ -230,8 +230,27 @@ def convertAudio(path, data):
     
     return convertPath('Data/' + data['album']['artists'][0]['name'] + ' - ' + data['name'] + '.mp3')
 
+#XNOR logic gate
 def XNOR(cond1, cond2):
     if((cond1 < 0) and (cond2 < 0)) or ((cond1 > 0) and (cond2 > 0)):
         return True
     else:
         return False
+    
+#Add not-found tracks to 'notFoundTracks.json' so later they can be recorded and uploaded to Youtube
+def notFoundTracks(searchLink, data, platform, videoId=None):
+    if(os.path.exists(convertPath('Data/notFoundTracks.json'))):
+        notFoundFile = ReadFILE(convertPath('Data/notFoundTracks.json'))
+        
+    else:
+        notFoundFile = {}
+    
+    if(data['id'] not in notFoundFile.keys()):
+        notFoundFile[data["id"]] = {
+            "Youtube Search Link": searchLink,
+            "Spotify Track Link": data["external_urls"]["spotify"],
+            "Video link": videoId,
+            "Platform": platform
+        }
+    
+        WriteJSON(convertPath('Data/notFoundTracks.json'), notFoundFile, 'w')
