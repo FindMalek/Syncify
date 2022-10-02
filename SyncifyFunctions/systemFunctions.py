@@ -98,7 +98,7 @@ def SettingUp():
             "Format": "MP3",
             "Sleep": 1.25,
             "Time Difference": 15,
-            "Search Accuracy": 8,
+            "Search Accuracy": 6,
             "Download Order": ["Playlists", "Albums", "Tracks"],
             "Paths": {
                 "Downloads": "",
@@ -256,6 +256,8 @@ def notFoundTracks(searchLink, data, platform, videoId=None):
         WriteJSON(convertPath('Data/notFoundTracks.json'), notFoundFile, 'w')
 
 #Will convert a string with parenthese to a string without them
-#Example " Invincible (feat. Joe Pringle)" -> "Invincible"
+#Example "Invincible (feat. Joe Pringle)" -> "Invincible"
 def removeExtras(string):
+    if ('-' in string):
+        string = string[:string.find('-')]
     return re.sub(r'\([\s\S]*\)', '', string).replace('"', "").replace("'", "").strip()

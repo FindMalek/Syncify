@@ -1,0 +1,245 @@
+[2022-09-19 19:54:27,509] - [//] - (DEBUG) - (Syncify): Function - SettingUp & & Prepaths are set.
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Syncify downloadHandler module is imported.
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Imported all modules and packages.
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Getting (CLIENT_ID, CLIENT_SECRET)...
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Getting Token Access...
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Converted the CLIENT_ID and CLIENT_SECRET to Base 64.
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - (Syncify): Sending a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess...
+[2022-09-19 19:54:27,558] - [//] - (DEBUG) - Starting new HTTPS connection (1): accounts.spotify.com:443
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - https://accounts.spotify.com:443 "POST /api/token HTTP/1.1" 200 None
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Sent a POST REQUEST to https://accounts.spotify.com/api/token for Token Acess.
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Got (CLIENT_ID, CLIENT_SECRET).
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Deleting temporary files...
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Deleted '.mp4' and '.mp3' files.
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Deleted temporary files.
+[2022-09-19 19:54:27,805] - [//] - (DEBUG) - (Syncify): Selecting command...
+[2022-09-19 19:54:28,318] - [//] - (DEBUG) - (Syncify): downloadPath = C:\Users\malek\Music
+[2022-09-19 19:54:28,318] - [//] - (DEBUG) - (Syncify): > Downloading Playlists began...
+[2022-09-19 19:54:28,318] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:28,805] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/playlists/4pHEKBhijhHl8KAo855Bot HTTP/1.1" 200 None
+[2022-09-19 19:54:28,869] - [//] - (WARNING) - (Syncify): Failed to search data for Episode, will be fixed in the near future.
+[2022-09-19 19:54:28,869] - [//] - (INFO) - (Syncify): Downloading from : I feel in love
+[2022-09-19 19:54:28,869] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:29,074] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3JfR7VLGOcl6ZdCGa7ciID HTTP/1.1" 200 None
+[2022-09-19 19:54:29,074] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:29,371] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3JfR7VLGOcl6ZdCGa7ciID HTTP/1.1" 200 None
+[2022-09-19 19:54:29,392] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:29,396] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:29,596] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4NZKQIAbpUPd0jn0CzvRpS HTTP/1.1" 200 None
+[2022-09-19 19:54:29,596] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:29,801] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4NZKQIAbpUPd0jn0CzvRpS HTTP/1.1" 200 None
+[2022-09-19 19:54:29,801] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:29,816] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:30,018] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3jjsRKEsF42ccXf8kWR3nu HTTP/1.1" 200 None
+[2022-09-19 19:54:30,018] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:30,246] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3jjsRKEsF42ccXf8kWR3nu HTTP/1.1" 200 None
+[2022-09-19 19:54:30,246] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:30,246] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:30,482] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0Tt3no2EnhX6Uf03Qq2BVg HTTP/1.1" 200 None
+[2022-09-19 19:54:30,497] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:30,796] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0Tt3no2EnhX6Uf03Qq2BVg HTTP/1.1" 200 None
+[2022-09-19 19:54:30,811] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:30,811] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:31,015] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0KBmyn8jDx4t4H1N5gKNUu HTTP/1.1" 200 None
+[2022-09-19 19:54:31,031] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:31,251] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0KBmyn8jDx4t4H1N5gKNUu HTTP/1.1" 200 None
+[2022-09-19 19:54:31,251] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:31,251] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:31,566] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2Za7Yhteh4XcUXnNYxTIHH HTTP/1.1" 200 None
+[2022-09-19 19:54:31,566] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:31,770] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2Za7Yhteh4XcUXnNYxTIHH HTTP/1.1" 200 None
+[2022-09-19 19:54:31,785] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:31,785] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:31,990] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2vtmY2mSccRzKGjtcHSzI3 HTTP/1.1" 200 None
+[2022-09-19 19:54:32,005] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:32,240] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2vtmY2mSccRzKGjtcHSzI3 HTTP/1.1" 200 None
+[2022-09-19 19:54:32,256] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:32,256] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:32,476] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7yFMhCJOsH7khgpdnyrZAZ HTTP/1.1" 200 None
+[2022-09-19 19:54:32,476] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:32,696] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7yFMhCJOsH7khgpdnyrZAZ HTTP/1.1" 200 None
+[2022-09-19 19:54:32,696] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:32,696] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:32,915] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7E8A5k5VOhPmt6pGPDJhxQ HTTP/1.1" 200 None
+[2022-09-19 19:54:32,931] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:33,151] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7E8A5k5VOhPmt6pGPDJhxQ HTTP/1.1" 200 None
+[2022-09-19 19:54:33,170] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:33,170] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:33,418] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/18UsAG7SfOQ5sxJEdjAMH0 HTTP/1.1" 200 None
+[2022-09-19 19:54:33,433] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:33,637] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/18UsAG7SfOQ5sxJEdjAMH0 HTTP/1.1" 200 None
+[2022-09-19 19:54:33,653] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:33,653] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:33,862] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2hIsd0F6ZGfHCC1xa7vSad HTTP/1.1" 200 None
+[2022-09-19 19:54:33,872] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:34,082] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/2hIsd0F6ZGfHCC1xa7vSad HTTP/1.1" 200 None
+[2022-09-19 19:54:34,098] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:34,098] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:34,317] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0yc6Gst2xkRu0eMLeRMGCX HTTP/1.1" 200 None
+[2022-09-19 19:54:34,333] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:34,553] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0yc6Gst2xkRu0eMLeRMGCX HTTP/1.1" 200 None
+[2022-09-19 19:54:34,553] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:34,553] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:34,789] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3VSYkAf6f46i5ZkXOHORq1 HTTP/1.1" 200 None
+[2022-09-19 19:54:34,804] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:35,001] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3VSYkAf6f46i5ZkXOHORq1 HTTP/1.1" 200 None
+[2022-09-19 19:54:35,016] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:35,016] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:35,236] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5lsqoAqRnzpkDze5iy3VxL HTTP/1.1" 200 None
+[2022-09-19 19:54:35,236] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:35,456] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/5lsqoAqRnzpkDze5iy3VxL HTTP/1.1" 200 None
+[2022-09-19 19:54:35,471] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:35,475] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:35,676] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6K6OCvFQ4i7KKfGJsOAqY1 HTTP/1.1" 200 None
+[2022-09-19 19:54:35,691] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:35,895] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/6K6OCvFQ4i7KKfGJsOAqY1 HTTP/1.1" 200 None
+[2022-09-19 19:54:35,911] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:35,927] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:36,131] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0flo3KqhjkcuoB1G6Mhq7s HTTP/1.1" 200 None
+[2022-09-19 19:54:36,131] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:36,351] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0flo3KqhjkcuoB1G6Mhq7s HTTP/1.1" 200 None
+[2022-09-19 19:54:36,351] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:36,351] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:36,578] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3dYD57lRAUcMHufyqn9GcI HTTP/1.1" 200 None
+[2022-09-19 19:54:36,587] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:36,807] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3dYD57lRAUcMHufyqn9GcI HTTP/1.1" 200 None
+[2022-09-19 19:54:36,822] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:36,822] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:37,057] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/15ZBpYcjtqCaD7EKCQ7tdN HTTP/1.1" 200 None
+[2022-09-19 19:54:37,057] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:37,261] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/15ZBpYcjtqCaD7EKCQ7tdN HTTP/1.1" 200 None
+[2022-09-19 19:54:37,280] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:37,280] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:37,482] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4PUT0cH2iggaje5hTJZeGe HTTP/1.1" 200 None
+[2022-09-19 19:54:37,497] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:37,702] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/4PUT0cH2iggaje5hTJZeGe HTTP/1.1" 200 None
+[2022-09-19 19:54:37,717] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:37,717] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:37,937] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0j7QYBbQA2aB0FXVa5n1U8 HTTP/1.1" 200 None
+[2022-09-19 19:54:37,937] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:38,173] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/0j7QYBbQA2aB0FXVa5n1U8 HTTP/1.1" 200 None
+[2022-09-19 19:54:38,189] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:38,189] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:38,409] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3JvKfv6T31zO0ini8iNItO HTTP/1.1" 200 None
+[2022-09-19 19:54:38,409] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:38,628] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/3JvKfv6T31zO0ini8iNItO HTTP/1.1" 200 None
+[2022-09-19 19:54:38,628] - [//] - (DEBUG) - (Syncify): Track already exists in your Music Library.
+[2022-09-19 19:54:38,644] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:38,853] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7kjsCbksOZotNNHOvKsJJh HTTP/1.1" 200 None
+[2022-09-19 19:54:38,853] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:54:39,073] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7kjsCbksOZotNNHOvKsJJh HTTP/1.1" 200 None
+[2022-09-19 19:54:39,089] - [//] - (DEBUG) - (Syncify): (Youtube/Request) - Searching for spotify:track:7kjsCbksOZotNNHOvKsJJh... 'youtubeDownloader' will search and download the track if found.
+[2022-09-19 19:54:39,387] - [//] - (DEBUG) - (Syncify): Requesting https://www.youtube.com/results?search_query=Scorpions+-+Still+Loving+You+-+audio.
+[2022-09-19 19:54:39,387] - [//] - (DEBUG) - (Syncify): (Youtube/Regex): Searching began for Video Ids...
+[2022-09-19 19:54:40,747] - [//] - (DEBUG) - (Syncify): (Youtube/Regex): Found 6 Video Ids : ['Kwq4WNgxy4Y', 'Ouil4aWZbkI', 'FywkdijLj_E', 'CtDurWIauoE', 'OT2bxfGC4UA', 'bKDbzOmhqOQ'] .
+[2022-09-19 19:54:40,747] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Started with 6 Video Id...
+[2022-09-19 19:54:40,747] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:41,245] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=Kwq4WNgxy4Y approved.
+[2022-09-19 19:54:41,245] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=Kwq4WNgxy4Y approved.
+[2022-09-19 19:54:41,246] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Duration - Video link https://www.youtube.com/watch?v=Kwq4WNgxy4Y approved.
+[2022-09-19 19:54:41,246] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Most Views - Video link https://www.youtube.com/watch?v=Kwq4WNgxy4Y approved.
+[2022-09-19 19:54:43,129] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Age Restriction - Video link https://www.youtube.com/watch?v=Kwq4WNgxy4Y approved.
+[2022-09-19 19:54:43,129] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:43,565] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=Ouil4aWZbkI approved.
+[2022-09-19 19:54:43,566] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:44,006] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=FywkdijLj_E approved.
+[2022-09-19 19:54:44,006] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=FywkdijLj_E approved.
+[2022-09-19 19:54:44,007] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:44,510] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:44,510] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:44,510] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Duration - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:44,510] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Most Views - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:46,448] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Age Restriction - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:46,448] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:46,981] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=OT2bxfGC4UA approved.
+[2022-09-19 19:54:46,981] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=OT2bxfGC4UA approved.
+[2022-09-19 19:54:46,981] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=bKDbzOmhqOQ approved.
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=bKDbzOmhqOQ approved.
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Result with 2 Video Id.
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Most Reliable - Video link https://www.youtube.com/watch?v=CtDurWIauoE approved.
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Request) - Response recieved about the search request of spotify:track:7kjsCbksOZotNNHOvKsJJh.
+[2022-09-19 19:54:47,659] - [//] - (INFO) - (Syncify): Downloading > Scorpions - Still Loving You...
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - (Syncify): (Youtube/Download) - spotify:track:7kjsCbksOZotNNHOvKsJJh exists in ID: CtDurWIauoE and downloading is about to start...
+[2022-09-19 19:54:47,659] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:54:51,202] - [//] - (DEBUG) - applying descrambler
+[2022-09-19 19:54:51,202] - [//] - (DEBUG) - finding initial function name
+[2022-09-19 19:54:51,202] - [//] - (DEBUG) - Pattern failed: ytplayer\.config\s*=\s*
+[2022-09-19 19:54:51,202] - [//] - (DEBUG) - Could not parse object.
+[2022-09-19 19:54:51,218] - [//] - (DEBUG) - finished regex search, matched: (/s/player/[\w\d]+/[\w\d_/.]+/base\.js)
+[2022-09-19 19:54:57,001] - [//] - (DEBUG) - finding initial function name
+[2022-09-19 19:54:57,271] - [//] - (DEBUG) - finished regex search, matched: (?P<sig>[a-zA-Z0-9$]+)\s*=\s*function\(\s*a\s*\)\s*{\s*a\s*=\s*a\.split\(\s*""\s*\)
+[2022-09-19 19:54:57,271] - [//] - (DEBUG) - getting transform plan
+[2022-09-19 19:54:57,271] - [//] - (DEBUG) - matched regex search: bwa=function\(\w\){[a-z=\.\(\"\)]*;(.*);(?:.+)}
+[2022-09-19 19:54:57,271] - [//] - (DEBUG) - getting transform object
+[2022-09-19 19:54:57,273] - [//] - (DEBUG) - Finding throttling function name
+[2022-09-19 19:54:57,274] - [//] - (DEBUG) - finished regex search, matched: a\.[a-zA-Z]\s*&&\s*\([a-z]\s*=\s*a\.get\("n"\)\)\s*&&\s*\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])?\([a-z]\)
+[2022-09-19 19:54:57,278] - [//] - (DEBUG) - Finding throttling function name
+[2022-09-19 19:54:57,279] - [//] - (DEBUG) - finished regex search, matched: a\.[a-zA-Z]\s*&&\s*\([a-z]\s*=\s*a\.get\("n"\)\)\s*&&\s*\([a-z]\s*=\s*([a-zA-Z0-9$]+)(\[\d+\])?\([a-z]\)
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,285] - [//] - (DEBUG) - signature found, skip decipher
+[2022-09-19 19:54:57,287] - [//] - (DEBUG) - downloading (6158822 total bytes) file to D:\Zebla\Projects\Syncify\Syncify-main\Syncify\Data\Scorpions & Vanessa-Mae - Still Loving You (Taratata 28 Apr 1996).mp4
+[2022-09-19 19:55:13,591] - [//] - (DEBUG) - download remaining: 0
+[2022-09-19 19:55:13,591] - [//] - (DEBUG) - download finished
+[2022-09-19 19:55:13,592] - [//] - (DEBUG) - (Syncify): (Youtube/Download) - spotify:track:7kjsCbksOZotNNHOvKsJJh is downloaded in Data\Scorpions & Vanessa-Mae - Still Loving You (Taratata, 28 Apr 1996).mp4.
+[2022-09-19 19:55:13,592] - [//] - (DEBUG) - (Syncify): Converting Data\Scorpions & Vanessa-Mae - Still Loving You (Taratata, 28 Apr 1996).mp4 to MP3 file...
+[2022-09-19 19:55:20,368] - [//] - (DEBUG) - (Syncify): Converted and renamed Data\Scorpions - Still Loving You.mp3 to MP3 file.
+[2022-09-19 19:55:20,368] - [//] - (DEBUG) - (Syncify): Updating the metadata of Data\Scorpions - Still Loving You.mp3...
+[2022-09-19 19:55:20,373] - [//] - (DEBUG) - (Syncify): Updated he metadata of Data\Scorpions - Still Loving You.mp3.
+[2022-09-19 19:55:20,373] - [//] - (DEBUG) - (Syncify): Setting the artwork of Data\Scorpions - Still Loving You.mp3...
+[2022-09-19 19:55:20,373] - [//] - (DEBUG) - (Syncify): Downloaded the artwork of Data\Scorpions - Still Loving You.mp3...
+[2022-09-19 19:55:20,375] - [//] - (DEBUG) - Starting new HTTPS connection (1): i.scdn.co:443
+[2022-09-19 19:55:21,098] - [//] - (DEBUG) - https://i.scdn.co:443 "GET /image/ab67616d0000b273926764eed4da16a86b9ce33e HTTP/1.1" 200 116540
+[2022-09-19 19:55:21,382] - [//] - (DEBUG) - (Syncify): Downloaded the artwork of Data\Scorpions - Still Loving You.mp3...
+[2022-09-19 19:55:21,400] - [//] - (DEBUG) - (Syncify): Art work is set of Data\Scorpions - Still Loving You.mp3.
+[2022-09-19 19:55:21,401] - [//] - (DEBUG) - (Syncify): Moving Data\Scorpions - Still Loving You.mp3 to C:\Users\malek\Music...
+[2022-09-19 19:55:21,411] - [//] - (DEBUG) - (Syncify): Moved Data\Scorpions - Still Loving You.mp3 to C:\Users\malek\Music.
+[2022-09-19 19:55:21,411] - [//] - (INFO) - (Syncify): Downloaded -> Scorpions - Still Loving You.
+[2022-09-19 19:55:21,412] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:55:21,622] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7MtVPRGtZl6rPjMfLoI3Lh HTTP/1.1" 200 None
+[2022-09-19 19:55:21,630] - [//] - (DEBUG) - Starting new HTTPS connection (1): api.spotify.com:443
+[2022-09-19 19:55:21,840] - [//] - (DEBUG) - https://api.spotify.com:443 "GET /v1/tracks/7MtVPRGtZl6rPjMfLoI3Lh HTTP/1.1" 200 None
+[2022-09-19 19:55:21,854] - [//] - (DEBUG) - (Syncify): (Youtube/Request) - Searching for spotify:track:7MtVPRGtZl6rPjMfLoI3Lh... 'youtubeDownloader' will search and download the track if found.
+[2022-09-19 19:55:22,081] - [//] - (DEBUG) - (Syncify): Requesting https://www.youtube.com/results?search_query=Lana+Del+Rey+-+Fuck+it+I+love+you+-+audio.
+[2022-09-19 19:55:22,081] - [//] - (DEBUG) - (Syncify): (Youtube/Regex): Searching began for Video Ids...
+[2022-09-19 19:55:23,569] - [//] - (DEBUG) - (Syncify): (Youtube/Regex): Found 4 Video Ids : ['LrSX_OcpeJg', 'AH2XfAaESu4', 'vhvzwIZZZ3A', '1Auk9HyshNI'] .
+[2022-09-19 19:55:23,569] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Started with 4 Video Id...
+[2022-09-19 19:55:23,569] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:55:24,224] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=LrSX_OcpeJg approved.
+[2022-09-19 19:55:24,224] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=LrSX_OcpeJg approved.
+[2022-09-19 19:55:24,226] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:55:25,226] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=AH2XfAaESu4 approved.
+[2022-09-19 19:55:25,226] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:55:25,718] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Artist - Video link https://www.youtube.com/watch?v=vhvzwIZZZ3A approved.
+[2022-09-19 19:55:25,718] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Title: Track name - Video link https://www.youtube.com/watch?v=vhvzwIZZZ3A approved.
+[2022-09-19 19:55:25,719] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Duration - Video link https://www.youtube.com/watch?v=vhvzwIZZZ3A approved.
+[2022-09-19 19:55:25,719] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Filter by Most Views - Video link https://www.youtube.com/watch?v=vhvzwIZZZ3A approved.
+[2022-09-19 19:55:27,545] - [//] - (DEBUG) - matched regex search: og:restrictions:age
+[2022-09-19 19:55:27,546] - [//] - (DEBUG) - matched regex search: (?:v=|\/)([0-9A-Za-z_-]{11}).*
+[2022-09-19 19:55:27,952] - [//] - (DEBUG) - (Syncify): (Youtube/Filtering): Result with 1 Video Id.
+[2022-09-19 19:55:27,952] - [//] - (WARNING) - (Syncify): (Youtube/Filtering): Video link: https://www.youtube.com/watch?v=vhvzwIZZZ3A, is Age-Restricted.
+[2022-09-19 19:55:27,953] - [//] - (DEBUG) - (Syncify): (Not-Found-Track): Spotify ID spotify:track:7MtVPRGtZl6rPjMfLoI3Lh is not found in Youtube, added to 'notFoundTracks.json' for the Syncify Community.

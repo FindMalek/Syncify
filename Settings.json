@@ -1,0 +1,20 @@
+{
+    "System Os": "Windows",
+    "Settings": {
+        "Quality": "BEST",
+        "Format": "MP3",
+        "Sleep": 1.25,
+        "Time Difference": 15,
+        "Search Accuracy": 6,
+        "Download Order": [
+            "Playlists",
+            "Albums",
+            "Tracks"
+        ],
+        "Paths": {
+            "Downloads": "C:\\Users\\malek\\Music",
+            "Playlist": "C:\\Users\\malek\\Music\\Playlists",
+            "Temporary Downloads": "D:\\Zebla\\Projects\\Syncify\\Syncify\\Data"
+        }
+    }
+}

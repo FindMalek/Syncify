@@ -34,7 +34,14 @@
         When downloading an Album, Syncify will only download the Cover Art once.
         Because it used to download the cover art everytime it's downloading a 
         track from an Album.
-    
+        
+        7. (Solved partially) Downloading Episodes.
+        I will implimant this feature secretly, just to download 'Episodes' as in 'Tracks'.
+        
+        8. (No progress) Correct the track
+        Implimant this feature, to correct wrong downloaded tracks such as 
+        'https://www.youtube.com/watch?v=CtDurWIauoE'
+           
     BUGS:
     
         1. (No progress) In playlist creation.
@@ -45,12 +52,18 @@
         1. (No progress) Failed to convert Video to Audio.
         'MoviePy error: FFMPEG encountered the following error while writing file', This occured while converting from
         the file '.mp4' to '.mp3'.
+        
+        2. (Solved partially) Syncify must differeniate between Tracks and Episodes.
+        'https://open.spotify.com/episode'
+        
+        3. (In progress) False Age-Restricted 
+        'PyTube' says some of the videos are Age-Restricted while they are not.
 """
 
 __title__ = "Syncify"
 __author__ = "Malek Gara-Hellal"
 __email__ = 'malekgarahellalbus@gmail.com'
-__version__ = '1.1.3.4'
+__version__ = '1.1.3.5'
 
 
 #importing systemFunctions

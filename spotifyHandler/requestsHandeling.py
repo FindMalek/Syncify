@@ -52,6 +52,10 @@ def playlist(token, id):
 def track(token, id):
     return spotifyInformations(token, "tracks", id)    
 
+#Gets Episodes result
+def episode(token, id):
+    return spotifyInformations(token, "episodes", id)
+
 #Downloads the art of an Object
 def downloadArt(link):
     response = requests.get(link, stream=True)

@@ -1,0 +1,179 @@
+{
+    "Playlists": [
+        {
+            "I feel in love": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b27310697f19b51a5e4bba540050ab67616d0000b2736ed86023946bb3829c26938bab67616d0000b273a3a2cbd848c826ebe90d33e0ab67616d0000b273c428f67b4a9b7e1114dfc117",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4pHEKBhijhHl8KAo855Bot",
+                    "ID": "4pHEKBhijhHl8KAo855Bot"
+                }
+            }
+        },
+        {
+            "just the mood to be sad": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b273113009b1a5f04ed0f04c3fc7ab67616d0000b2731624590458126fc8b8c64c2fab67616d0000b27367291695d95d55b5504156f1ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/2kPyOGqApBFu5CuuJBsRfA",
+                    "ID": "2kPyOGqApBFu5CuuJBsRfA"
+                }
+            }
+        },
+        {
+            "heavy chill": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2738a2f9fa2bcc0c93703978a52ab67616d0000b273a49eff6d64cafc2551553380ab67616d0000b273a7e4d2b8e3514866dd34720bab67616d0000b273d6eb84f2391f9206d00f0660",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/4uau55EZrUw4hrQf4La32i",
+                    "ID": "4uau55EZrUw4hrQf4La32i"
+                }
+            }
+        },
+        {
+            "just dark metal": {
+                "Image": "https://mosaic.scdn.co/640/ab67616d0000b2737cf2fa22321c862465e237daab67616d0000b2738d529980602b892735c091c7ab67616d0000b273f01ff2ac22f31e1dc480fb0bab67616d0000b273faf17a6ceb9fe1feada91ef0",
+                "Links": {
+                    "URL": "https://open.spotify.com/playlist/7vjXezNk8qMwCsW4Xcg1Ll",
+                    "ID": "7vjXezNk8qMwCsW4Xcg1Ll"
+                }
+            }
+        }
+    ],
+    "Albums": [
+        {
+            "Honeymoon": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273a3b3f48ca81acacb3ad4ec8a",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/2DpEBrjCur1ythIZ10gJWw",
+                    "ID": "2DpEBrjCur1ythIZ10gJWw"
+                }
+            }
+        },
+        {
+            "Elephants...Teeth Sinking Into Heart (Standard Version)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273cb588b45086aa9865d6b8a2b",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/6KzK9fDNmj7GHFbcE4gVJD",
+                    "ID": "6KzK9fDNmj7GHFbcE4gVJD"
+                }
+            }
+        },
+        {
+            "The Heartbeat of the Devil": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273e0f9fe1e53c6587b4e54fe54",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/6nGOjvVF9K7PZFM2dCYNxT",
+                    "ID": "6nGOjvVF9K7PZFM2dCYNxT"
+                }
+            }
+        },
+        {
+            "Distant Satellites": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273711f022fbd1c80b831555e4e",
+                "Links": {
+                    "URL": "https://open.spotify.com/album/4fs94SISHR2Ycv5dvzMqYy",
+                    "ID": "4fs94SISHR2Ycv5dvzMqYy"
+                }
+            }
+        }
+    ],
+    "Tracks": [
+        {
+            "All Good Things - Invincible (feat. Joe Pringle)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273efcfcf2ccbb319b4634f39ef",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/00i49TYR0vvV8JPtgQ3ICB",
+                    "ID": "00i49TYR0vvV8JPtgQ3ICB"
+                }
+            }
+        },
+        {
+            "Opeth - Benighted (Remastered)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736d4ab9bf3bdea52371415ad6",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/31sCixHTcZyEGjjmKHcG5B",
+                    "ID": "31sCixHTcZyEGjjmKHcG5B"
+                }
+            }
+        },
+        {
+            "Opeth - Serenity Painted Death (Remastered)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736d4ab9bf3bdea52371415ad6",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/1ltBhiP2wDvuxkkAfvZvkJ",
+                    "ID": "1ltBhiP2wDvuxkkAfvZvkJ"
+                }
+            }
+        },
+        {
+            "Anathema - Deep - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0kfe9dDMNl5q8b6TjfZ76u",
+                    "ID": "0kfe9dDMNl5q8b6TjfZ76u"
+                }
+            }
+        },
+        {
+            "Anathema - One Last Goodbye - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0jQxDAN0CBuIdAqbR4OnzV",
+                    "ID": "0jQxDAN0CBuIdAqbR4OnzV"
+                }
+            }
+        },
+        {
+            "Anathema - One Last Goodbye - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0jQxDAN0CBuIdAqbR4OnzV",
+                    "ID": "0jQxDAN0CBuIdAqbR4OnzV"
+                }
+            }
+        },
+        {
+            "Katatonia - Day - Live": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273fbe365a8274438e49764bba3",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/63ptUYad90SWUQz8eukxUo",
+                    "ID": "63ptUYad90SWUQz8eukxUo"
+                }
+            }
+        },
+        {
+            "Antimatter - What Do You Want Me to Do?": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273e1103b34ab45b2baf399e6d2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/1ByXb82EFIBDt8O9y1GV5X",
+                    "ID": "1ByXb82EFIBDt8O9y1GV5X"
+                }
+            }
+        },
+        {
+            "Vast - You Should Have Know I Would Leave": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736edf3c30a38b00f201cb0887",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/6VLF84iLHntXvegPYeMvjs",
+                    "ID": "6VLF84iLHntXvegPYeMvjs"
+                }
+            }
+        },
+        {
+            "Clouds - A Glimpse of Sorrow": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273eba45014a51f6b975a33592b",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/3K2cZJbPo2KX9n9MptiyXC",
+                    "ID": "3K2cZJbPo2KX9n9MptiyXC"
+                }
+            }
+        },
+        {
+            "b\u00f4a - Fool": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2739e030b804258dc2017ad859f",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/5PQwmOZwMhhV8q8QMpCRAZ",
+                    "ID": "5PQwmOZwMhhV8q8QMpCRAZ"
+                }
+            }
+        }
+    ]
+}

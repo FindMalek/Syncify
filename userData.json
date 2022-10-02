@@ -1,0 +1,87 @@
+{
+    "Playlists": [],
+    "Albums": [],
+    "Tracks": [
+        {
+            "All Good Things - Invincible (feat. Joe Pringle)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273efcfcf2ccbb319b4634f39ef",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/00i49TYR0vvV8JPtgQ3ICB",
+                    "ID": "00i49TYR0vvV8JPtgQ3ICB"
+                }
+            }
+        },
+        {
+            "Opeth - Benighted (Remastered)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736d4ab9bf3bdea52371415ad6",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/31sCixHTcZyEGjjmKHcG5B",
+                    "ID": "31sCixHTcZyEGjjmKHcG5B"
+                }
+            }
+        },
+        {
+            "Opeth - Serenity Painted Death (Remastered)": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736d4ab9bf3bdea52371415ad6",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/1ltBhiP2wDvuxkkAfvZvkJ",
+                    "ID": "1ltBhiP2wDvuxkkAfvZvkJ"
+                }
+            }
+        },
+        {
+            "Anathema - Deep - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0kfe9dDMNl5q8b6TjfZ76u",
+                    "ID": "0kfe9dDMNl5q8b6TjfZ76u"
+                }
+            }
+        },
+        {
+            "Anathema - One Last Goodbye - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0jQxDAN0CBuIdAqbR4OnzV",
+                    "ID": "0jQxDAN0CBuIdAqbR4OnzV"
+                }
+            }
+        },
+        {
+            "Anathema - One Last Goodbye - Remastered": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273039c7b3731b8197fbf73bbc2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/0jQxDAN0CBuIdAqbR4OnzV",
+                    "ID": "0jQxDAN0CBuIdAqbR4OnzV"
+                }
+            }
+        },
+        {
+            "Katatonia - Day - Live": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273fbe365a8274438e49764bba3",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/63ptUYad90SWUQz8eukxUo",
+                    "ID": "63ptUYad90SWUQz8eukxUo"
+                }
+            }
+        },
+        {
+            "Antimatter - What Do You Want Me to Do?": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b273e1103b34ab45b2baf399e6d2",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/1ByXb82EFIBDt8O9y1GV5X",
+                    "ID": "1ByXb82EFIBDt8O9y1GV5X"
+                }
+            }
+        },
+        {
+            "Vast - You Should Have Know I Would Leave": {
+                "Image": "https://i.scdn.co/image/ab67616d0000b2736edf3c30a38b00f201cb0887",
+                "Links": {
+                    "URL": "https://open.spotify.com/track/6VLF84iLHntXvegPYeMvjs",
+                    "ID": "6VLF84iLHntXvegPYeMvjs"
+                }
+            }
+        }
+    ]
+}

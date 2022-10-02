@@ -28,6 +28,7 @@ def trackInformation(syncifyToken, trackLink):
 
 #Returns playlist songs in whatever order
 def getTracks(syncifyToken, objId, objURL):
+    """ Fix: https://open.spotify.com/episode, Syncify must differeniate between Tracks and Episodes """
     track_links = []
     if(whatIsLink(objURL) == "Album"):
         while True:
@@ -67,9 +68,12 @@ def getTracks(syncifyToken, objId, objURL):
             if(whatIsLink(objURL) == "Album"):
                 track_links.append(item["external_urls"]["spotify"])
             elif(whatIsLink(objURL) == "Playlist"):
-                track_links.append(item["track"]["external_urls"]["spotify"])
+                try:
+                    track_links.append(item["track"]["external_urls"]["spotify"])
+                except TypeError:
+                    logsSyncify.warning(f"Failed to search data for Episode, will be fixed in the near future.") 
         except KeyError:
-            logsSyncify.critical(f"Error in getting track_links") 
+            logsSyncify.critical(f"Error in getting track_links.") 
             quit()
         
     return track_links
